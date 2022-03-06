@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/06 16:24:56 by jiskim           ###   ########.fr       */
+/*   Created: 2021/05/10 16:35:19 by jiskim            #+#    #+#             */
+/*   Updated: 2021/05/10 17:01:32 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-// typedef	enum	s_builtin
-// {
-// 	ECHO,
-// }	e_builtin
-
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <sys/errno.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include "libft.h"
-
-void	parse_line(char *line_read);
-char    **ft_split(char const *str, char c);
-
-#endif
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	if (n == 0)
+		return (0);
+	while (n--)
+	{
+		if (*(unsigned char *)s1 != *(unsigned char *)s2)
+			return (*(unsigned char *)s1 - *(unsigned char *)s2);
+		s1++;
+		s2++;
+	}
+	return (0);
+}

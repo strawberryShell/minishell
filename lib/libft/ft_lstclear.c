@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/06 16:24:56 by jiskim           ###   ########.fr       */
+/*   Created: 2021/05/17 13:19:10 by jiskim            #+#    #+#             */
+/*   Updated: 2021/05/31 18:09:55 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-// typedef	enum	s_builtin
-// {
-// 	ECHO,
-// }	e_builtin
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*tmp;
 
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <sys/errno.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include "libft.h"
-
-void	parse_line(char *line_read);
-char    **ft_split(char const *str, char c);
-
-#endif
+	if (!lst)
+		return ;
+	while (*lst)
+	{
+		tmp = *lst;
+		del(tmp->content);
+		*lst = (*lst)->next;
+		free(tmp);
+	}
+}

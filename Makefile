@@ -6,21 +6,31 @@ SRCS = $(addprefix $(SRCS_DIR), \
 			)
 OBJS = $(SRCS:.c=.o)
 
-CC = gcc
-RM = rm -rf
-CFLAGS = -Wall -Wextra -Werror 
-INCLUDE = -I./includes/
-RLFLAG = -lreadline
+CC		=	gcc
+RM		=	rm -rf
+CFLAGS	=	-Wall -Wextra -Werror
+INCLUDE	=	-I./includes/
+LIBINC	=
+RLFLAG	=	-lreadline
+
+INCDIR	=	./includes
+LIBDIR	=	./lib/libft/
+LIBINC	=	./lib/libft/includes
+LIB		=	$(LIBDIR)libft.a
 
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDE) -g3 -fsanitize=address -o $@ -c $<
+	$(CC) $(CFLAGS) -I$(INCDIR) -I$(LIBINC) -o $@ -c $<
 
-$(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDE) $(RLFLAG) -g3 -fsanitize=address -o $@ $^
+$(NAME) : $(OBJS) $(LIB)
+	$(CC) $(CFLAGS) $(RLFLAG) $(LIB) -o $@ $^
+
+$(LIB)	:
+	@make -C $(LIBDIR)
 
 clean:
+	@make -C $(LIBDIR) fclean
 	$(RM) $(OBJS)
 
 fclean: clean

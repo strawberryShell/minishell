@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/06 16:24:56 by jiskim           ###   ########.fr       */
+/*   Created: 2021/05/11 14:55:35 by jiskim            #+#    #+#             */
+/*   Updated: 2021/05/17 17:45:20 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-// typedef	enum	s_builtin
-// {
-// 	ECHO,
-// }	e_builtin
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	*s1_cast;
+	unsigned char	*s2_cast;
 
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <sys/errno.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include "libft.h"
-
-void	parse_line(char *line_read);
-char    **ft_split(char const *str, char c);
-
-#endif
+	s1_cast = (unsigned char *)s1;
+	s2_cast = (unsigned char *)s2;
+	while ((*s1_cast && *s2_cast) && n)
+	{
+		if (*s1_cast != *s2_cast)
+			return (*s1_cast - *s2_cast);
+		s1_cast++;
+		s2_cast++;
+		n--;
+	}
+	if (n > 0)
+		return (*s1_cast - *s2_cast);
+	return (0);
+}
