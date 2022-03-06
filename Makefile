@@ -2,7 +2,7 @@ NAME = minishell
 
 SRCS_DIR = ./srcs/
 SRCS = $(addprefix $(SRCS_DIR), \
-			parse_line.c ft_split.c main.c \
+			parse_line.c main.c \
 			)
 OBJS = $(SRCS:.c=.o)
 
@@ -10,7 +10,6 @@ CC		=	gcc
 RM		=	rm -rf
 CFLAGS	=	-Wall -Wextra -Werror
 INCLUDE	=	-I./includes/
-LIBINC	=
 RLFLAG	=	-lreadline
 
 INCDIR	=	./includes
