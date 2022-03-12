@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/12 14:43:16 by jiskim           ###   ########.fr       */
+/*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
+/*   Updated: 2022/03/12 19:05:40 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <sys/errno.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "readline/history.h"
-# include "readline/readline.h"
-# include "libft.h"
+void	parse(char *line)
+{
+	char	*start;
+	char	*end;
+	int
 
-void	parse_line(char *line_read);
-
-#endif
+	line = start;
+	end = start;
+	while (*start)
+	{
+		while (*end || ft_isprint)
+			end++;
+		if (complete)
+			break;
+		start = end;
+	}
+	// syntax
+	// heredoc
+	// tree
+}
