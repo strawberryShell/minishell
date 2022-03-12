@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/12 19:06:54 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/12 20:44:43 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,17 @@ enum e_type{
 	NAME,
 	ARGV,
 	ARG,
-	WORD
+	WORD,
+	SYMBOL
 };
 
-struct	s_ast
+typedef struct	s_ast
 {
 	e_type	type;
-	void	*data;
+	char	*data;
 	s_ast	*left;
 	s_ast	*right;
-};
+}t_ast;
 
 typedef struct s_token
 {
