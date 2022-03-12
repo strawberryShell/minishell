@@ -1,14 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
+/*   Updated: 2022/03/12 16:16:59 by jiskim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int main(int argc, char **argv)
 {
 	char	*line_read;
 
+	ft_putendl_fd(strerror(errno), 2);
 	line_read = (char *)NULL;
 	if (argc > 1)
-    {	
+    {
 		printf("딸기쉘🍓: %s: %s\n", argv[1], strerror(ENOENT));
-		exit (127);
+		exit(127);
 	}
 	while (1)
 	{
@@ -22,7 +35,7 @@ int main(int argc, char **argv)
 			printf("null returned.");
 		if (line_read && *line_read)
 		{
-			if (!strcmp(line_read, "exit"))
+			if (!ft_strncmp(line_read, "exit", 5))
 				break ;
 			add_history(line_read);
 			printf("%s\n", line_read);
