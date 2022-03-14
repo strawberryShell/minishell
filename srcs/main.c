@@ -6,13 +6,13 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/12 16:16:59 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/14 22:19:14 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
 	char	*line_read;
 
@@ -38,8 +38,8 @@ int main(int argc, char **argv)
 			if (!ft_strncmp(line_read, "exit", 5))
 				break ;
 			add_history(line_read);
-			printf("%s\n", line_read);
-			parse_line(line_read);
+			// printf("%s\n", line_read);
+			parse(line_read, envp);
 		}
 	}
 	free(line_read);

@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/12 19:06:54 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/14 22:27:42 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
  *	(null)		(null)
  */
 
-enum e_type{
+typedef enum e_type
+{
 	PIPESEQ = 0,
 	CMD,
 	RDR,
@@ -37,22 +38,28 @@ enum e_type{
 	NAME,
 	ARGV,
 	ARG,
-	WORD
-};
+}t_type;
 
-struct	s_ast
+typedef enum e_ttype
 {
-	e_type	type;
-	void	*data;
-	s_ast	*left;
-	s_ast	*right;
-};
+	WORD,
+	SYMBOL,
+	SQ_WORD,
+}t_ttype;
+
+typedef struct	s_ast
+{
+	t_type	type;
+	char	*data;
+	struct s_ast	*left;
+	struct s_ast	*right;
+}t_ast;
 
 typedef struct s_token
 {
-	e_type	type;
-	char	*str;
-	s_token	*next;
+	t_type	type;
+	char	*data;
+	struct s_token	*next;
 }t_token;
 
 #endif

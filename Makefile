@@ -6,7 +6,7 @@
 #    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/12 14:49:00 by jiskim           ###   ########.fr        #
+#    Updated: 2022/03/14 20:03:47 by jiskim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,19 @@ NAME = minishell
 
 SRCS_DIR = ./srcs/
 SRCS = $(addprefix $(SRCS_DIR), \
-			parse_line.c main.c \
+			parse_line.c main.c parse/parse.c\
 			)
 OBJS = $(SRCS:.c=.o)
 
+ifdef DEBUG
+	CFLAGS = -g3 -fsanitize=address
+else
+	CFLAGS = -Wall -Wextra -Werror
+endif
+
 CC		=	gcc
 RM		=	rm -rf
-CFLAGS	=	-Wall -Wextra -Werror
 RLFLAG	=	-lreadline
-
 LIBDIR	=	./lib/libft/
 LIB		=	$(LIBDIR)libft.a
 INCDIR	=	-I./includes
@@ -50,7 +54,7 @@ $(NAME) : $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(RDLN_LFLAGS) $(LIB) $^ -o $@
 
 $(LIB)	:
-	@make -C $(LIBDIR)
+	@make -C $(LIBDIR) bonus
 
 clean:
 	@make -C $(LIBDIR) fclean
@@ -61,4 +65,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+debug : fclean
+	make DEBUG=1
+
+.PHONY: all clean fclean re debug
