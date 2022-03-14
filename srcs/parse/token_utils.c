@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/14 22:19:25 by jiskim           ###   ########.fr       */
+/*   Created: 2022/03/14 22:00:14 by jiskim            #+#    #+#             */
+/*   Updated: 2022/03/14 22:21:59 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "parse.h"
+#include "libft.h"
 
-# include <sys/errno.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "readline/history.h"
-# include "readline/readline.h"
-# include "libft.h"
-# include "parse.h"
+t_token	*new_token(char	*data, t_token_type type)
+{
+	t_token	*new;
 
-#endif
+	if (!data)
+		return (NULL);
+	new = ft_calloc(1, sizeof(t_token));
+	new->data = data;
+}
