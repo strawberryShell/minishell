@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/12 14:43:16 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/14 15:13:42 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 # include "libft.h"
 
 void	parse_line(char *line_read);
+void	parse(char *line);
 
 #endif

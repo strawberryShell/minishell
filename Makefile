@@ -6,7 +6,7 @@
 #    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/12 14:49:00 by jiskim           ###   ########.fr        #
+#    Updated: 2022/03/14 15:50:02 by jiskim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,13 @@ NAME = minishell
 
 SRCS_DIR = ./srcs/
 SRCS = $(addprefix $(SRCS_DIR), \
-			parse_line.c main.c \
+			parse_line.c main.c parse/parse.c\
 			)
 OBJS = $(SRCS:.c=.o)
 
 CC		=	gcc
 RM		=	rm -rf
-CFLAGS	=	-Wall -Wextra -Werror
+# CFLAGS	=	-Wall -Wextra -Werror
 RLFLAG	=	-lreadline
 
 LIBDIR	=	./lib/libft/
