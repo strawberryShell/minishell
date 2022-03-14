@@ -3,19 +3,35 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/12 14:49:00 by jiskim           ###   ########.fr        #
+#    Updated: 2022/03/14 17:05:34 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS_DIR = ./srcs/
-SRCS = $(addprefix $(SRCS_DIR), \
-			parse_line.c main.c \
-			)
+SRCS_DIR 		= ./srcs/
+SRCS_BLTIN_DIR 	= ./srcs/builtin/
+SRCS_PARSE_DIR 	= ./srcs/parse/
+SRCS_UTILS_DIR	= ./srcs/utils/
+
+SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
+				builtin_export.c \
+				builtin_unset.c \
+				env.c \
+				)
+SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
+				)
+SRCS_UTILS	= $(addprefix $(SRCS_UTILS_DIR), \
+				is_same_key.c \
+				print_err_msg.c \
+				)
+SRCS		= $(addprefix $(SRCS_DIR), \
+				main.c \
+				)
+SRCS 		+= $(SRCS_BLTIN) $(SRCS_PARSE) $(SRCS_UTILS)
 OBJS = $(SRCS:.c=.o)
 
 CC		=	gcc
@@ -50,7 +66,7 @@ $(NAME) : $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(RDLN_LFLAGS) $(LIB) $^ -o $@
 
 $(LIB)	:
-	@make -C $(LIBDIR)
+	@make -C $(LIBDIR) bonus
 
 clean:
 	@make -C $(LIBDIR) fclean

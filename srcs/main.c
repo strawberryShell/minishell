@@ -3,19 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/12 16:16:59 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/14 16:19:50 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char **argv)
+// 프로그램 끝날때 env_lst free해주기
+// 빌트인: $_ 바꾸기
+int main(int argc, char **argv, char **envp)
 {
 	char	*line_read;
+	t_list	*env_lst;
 
+	// env 리스트 초기화
+	initiate_env_lst(&env_lst, envp);
 	ft_putendl_fd(strerror(errno), 2);
 	line_read = (char *)NULL;
 	if (argc > 1)
@@ -39,7 +44,6 @@ int main(int argc, char **argv)
 				break ;
 			add_history(line_read);
 			printf("%s\n", line_read);
-			parse_line(line_read);
 		}
 	}
 	free(line_read);
