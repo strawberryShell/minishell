@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/15 20:43:09 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/15 20:46:55 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef enum e_ttype
 
 typedef struct s_ast
 {
-	t_type			type;
+	t_ttype			type;
 	char			*data;
 	struct s_ast	*left;
 	struct s_ast	*right;
@@ -62,5 +62,19 @@ typedef struct s_token
 	char			*data;
 	struct s_token	*next;
 }t_token;
+
+typedef	struct s_box
+{
+	t_list	*env_lst;
+	int		num_of_cmd;
+	int		**pipe_fds;
+	pid_t	*child_pids;
+}	t_box;
+
+enum	e_pipe
+{
+	PIPE_RD_FD = 0,
+	PIPE_WR_FD
+};
 
 #endif

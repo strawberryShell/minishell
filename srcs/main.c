@@ -6,16 +6,18 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/15 18:04:36 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/15 20:46:42 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
+	t_box	box;
 	char	*line_read;
 
+	initiate_env_lst(&(box.env_lst), envp);
 	line_read = (char *)NULL;
 	if (argc > 1)
     {
