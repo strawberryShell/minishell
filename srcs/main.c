@@ -6,17 +6,16 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/14 22:19:14 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/15 18:04:36 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char **argv, char **envp)
+int main(int argc, char **argv)
 {
 	char	*line_read;
 
-	ft_putendl_fd(strerror(errno), 2);
 	line_read = (char *)NULL;
 	if (argc > 1)
     {
@@ -38,8 +37,7 @@ int main(int argc, char **argv, char **envp)
 			if (!ft_strncmp(line_read, "exit", 5))
 				break ;
 			add_history(line_read);
-			// printf("%s\n", line_read);
-			parse(line_read, envp);
+			parse(line_read);
 		}
 	}
 	free(line_read);

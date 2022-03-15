@@ -6,7 +6,7 @@
 #    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/14 20:03:47 by jiskim           ###   ########.fr        #
+#    Updated: 2022/03/15 20:42:38 by jiskim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 SRCS_DIR = ./srcs/
 SRCS = $(addprefix $(SRCS_DIR), \
-			parse_line.c main.c parse/parse.c\
+			parse_line.c main.c parse/parse.c parse/token_utils.c\
 			)
 OBJS = $(SRCS:.c=.o)
 

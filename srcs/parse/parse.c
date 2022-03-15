@@ -6,49 +6,48 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/14 22:29:53 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/15 20:41:51 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*make_str(char *start, char *end, char **envp)
-{
-	char	*result;
-	int		i;
-	char	quote;
-	t_ttype	type;
+// t_token	*make_str(char *start, char *end)
+// {
+// 	char	*result;
+// 	int		i;
+// 	char	quote;
+// 	t_ttype	type;
 
-	result = (char *)ft_calloc((end - start) + 1, 1);
-	i = 0;
-	quote = 0;
-	type = WORD;
-	if (ft_strchr("<>", *start))
-		type = SYMBOL;
-	while (start != end)
-	{
-		if (ft_strchr("'\"", *start))
-		{
-			if (!quote)
-			{
-				type = SQ_WORD;
-				quote = *start;
-			}
-			else if (quote == *start)
-				quote = 0;
-			else
-				result[i++] = *start;
-		}
-		else
-		{
-			result[i++] = *start;
-		}
-		start++;
-	}
-	return (result); //return new node(string, type)
-}
+// 	result = (char *)ft_calloc((end - start) + 1, 1);
+// 	i = 0;
+// 	quote = 0;
+// 	type = WORD;
+// 	if (ft_strchr("<>", *start))
+// 		type = SYMBOL;
+// 	while (start != end)
+// 	{
+// 		if (ft_strchr("'\"", *start))
+// 		{
+// 			if (!quote)
+// 			{
+// 				if (quote == '\'')
+// 					type = SQ_WORD;
+// 				quote = *start;
+// 			}
+// 			else if (quote == *start)
+// 				quote = 0;
+// 			else
+// 				result[i++] = *start;
+// 		}
+// 		else
+// 			result[i++] = *start;
+// 		start++;
+// 	}
+// 	return (new_token(result, type)); //return new node(string, type)
+// }
 
-void	parse(char *line, char **envp)
+void	parse(char *line)
 {
 	char	*start;
 	char	*end;
@@ -79,20 +78,19 @@ void	parse(char *line, char **envp)
 					quote = 0;
 				}
 			}
-			if (*start == '|')
-				break;
-			if (ft_strchr("<>", *start))
+			if (ft_strchr("<>|", *start))
 			{
-				if (*start == *end)
+				if (*start == *end && *start != '|')
 					end++;
 				break;
 			}
 			if (ft_strchr("<>|", *end))
 				break;
 		}
-		printf("%s\n", make_str(start, end));
+		add_token(&token_list, new_token(ft_substr(start, 0, (end - start))));
 		start = end;
 	}
+	print_token(token_list);
 	if (quote)
 		ft_putendl_fd("Syntax error", 2);
 	// syntax
