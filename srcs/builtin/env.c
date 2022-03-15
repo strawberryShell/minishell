@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:20:24 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/15 08:20:52 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/15 16:09:01 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void    initiate_env_lst(t_list **env_lst, char **envp)
 	*env_lst = NULL;
 	while(*envp)
     {
-		// 질문: strdup(*envp)가 필요한가?
 		ft_lstadd_back(env_lst, ft_lstnew(ft_strdup(*envp)));
 		envp++;
     }
@@ -37,14 +36,11 @@ char	*get_env_value(t_list *env_lst, char *key)
 
 void	builtin_env(t_list *env_lst)
 {
-	char	*equal_ptr;
-	
 	if (!env_lst)
 		return ;
 	while(env_lst)
 	{
-		equal_ptr = ft_strchr(env_lst->content, '=');
-		if (equal_ptr)
+		if (ft_strchr(env_lst->content, '='))
 			printf("%s\n", (char*)env_lst->content);
 		env_lst = env_lst->next;
 	}

@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/15 08:34:24 by sehhong          ###   ########.fr        #
+#    Updated: 2022/03/15 16:57:31 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
 				builtin_unset.c \
 				env.c \
 				utils.c \
+				print_blt_err.c \
 				)
 
 SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
@@ -30,7 +31,6 @@ SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
 
 SRCS		= $(addprefix $(SRCS_DIR), \
 				main.c \
-				print_err_msg.c \
 				)
 
 SRCS 		+= $(SRCS_BLTIN) $(SRCS_PARSE)

@@ -6,13 +6,24 @@
 /*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:21:08 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/15 08:21:10 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/15 16:44:18 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	void	delete_target_node(t_list **env_lst, char *key)
+static	void	free_node(t_list *ptr)
+{
+	if (ptr)
+	{
+		free(ptr->content);
+		ptr->content =NULL;
+		free(ptr);
+		ptr = NULL;
+	}
+}
+
+static	void	delete_node(t_list **env_lst, char *key)
 {
 	t_list	*curr;
 	t_list	*del_node;
@@ -24,8 +35,7 @@ static	void	delete_target_node(t_list **env_lst, char *key)
 	if (is_same_key(curr->content, key))
 	{
 		env_lst = &(curr->next);
-		free(curr->content);
-		free(curr);
+		free_node(curr);
 		return ;
 	}
 	while (curr->next)
@@ -39,8 +49,7 @@ static	void	delete_target_node(t_list **env_lst, char *key)
 			// 마지막 노드가 찾는 key의 노드일때
 			else
 				curr->next = NULL;
-			free(del_node->content);
-			free(del_node);
+			free_node(del_node);
 			return ;
 		}
 		curr = curr->next;
@@ -58,10 +67,10 @@ void	builtin_unset(t_list **env_lst, char **argv)
 		// 해당 문자열 유효한 key인가? 유효하지 않음 -> 에러메세지
 		equal_ptr = ft_strchr(*argv, '=');
 		if (equal_ptr)	// '='가 있음
-			print_err_msg("unset", *argv, "invalid parameter name");
+			print_blt_err("unset", *argv, "invalid parameter name");
 		// '='가 없음 (유효함) -> 해당 노드 찾아 지우기
 		else
-			delete_target_node(env_lst, *argv);
+			delete_node(env_lst, *argv);
 		argv++;
 	}
 }
