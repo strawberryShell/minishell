@@ -3,19 +3,37 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/14 20:03:47 by jiskim           ###   ########.fr        #
+#    Updated: 2022/03/15 16:57:31 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS_DIR = ./srcs/
-SRCS = $(addprefix $(SRCS_DIR), \
-			parse_line.c main.c parse/parse.c\
-			)
+SRCS_DIR 		= ./srcs/
+SRCS_BLTIN_DIR 	= ./srcs/builtin/
+SRCS_PARSE_DIR 	= ./srcs/parse/
+
+SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
+				builtin_export.c \
+				builtin_unset.c \
+				env.c \
+				utils.c \
+				print_blt_err.c \
+				)
+
+SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
+				parse.c \
+				token_utils.c \
+				)
+
+SRCS		= $(addprefix $(SRCS_DIR), \
+				main.c \
+				)
+
+SRCS 		+= $(SRCS_BLTIN) $(SRCS_PARSE)
 OBJS = $(SRCS:.c=.o)
 
 ifdef DEBUG

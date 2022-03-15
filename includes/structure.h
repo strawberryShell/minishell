@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/14 22:27:42 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/15 17:04:11 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,19 @@ typedef struct s_token
 	char	*data;
 	struct s_token	*next;
 }t_token;
+
+typedef	struct s_box
+{
+	t_list	*env_lst;
+	int		num_of_cmd;
+	int		**pipe_fds;
+	pid_t	*child_pids;
+}	t_box;
+
+enum	e_pipe
+{
+	PIPE_RD_FD = 0,
+	PIPE_WR_FD
+};
 
 #endif

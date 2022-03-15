@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/14 22:19:14 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/15 17:12:27 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int main(int argc, char **argv, char **envp)
 {
+	t_box	box;
 	char	*line_read;
 
+	initiate_env_lst(&(box.env_lst), envp);
 	ft_putendl_fd(strerror(errno), 2);
 	line_read = (char *)NULL;
 	if (argc > 1)
