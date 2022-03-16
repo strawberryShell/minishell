@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 22:00:14 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/15 20:45:12 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/16 20:34:30 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,12 @@ void	add_token(t_token **list, t_token *new)
 	tmp->next = new;
 }
 
-void	print_token(t_token *list)
+void	token_iterate(t_token *list, void (*f)(t_token *))
 {
-	t_token	*tmp;
-
-	tmp = list;
-	while (tmp)
+	while (list)
 	{
-		printf("(%d %s)->", tmp->type, tmp->data);
-		tmp = tmp->next;
+		printf("(%d %s)->", list->type, list->data);
+		f(list);
+		list = list->next;
 	}
 }

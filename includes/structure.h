@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/15 20:46:55 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/16 17:18:40 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef enum e_ttype
 
 typedef struct s_ast
 {
-	t_ttype			type;
+	t_type			type;
 	char			*data;
 	struct s_ast	*left;
 	struct s_ast	*right;
