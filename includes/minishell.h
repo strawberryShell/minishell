@@ -21,14 +21,6 @@
 # include "readline/readline.h"
 # include "libft.h"
 # include "parse.h"
-
-// builtin 
-void	builtin_export(t_list **env_lst, char **argv);
-void	builtin_unset(t_list **env_lst, char **argv);
-void    initiate_env_lst(t_list **env_lst, char **envp);
-char	*get_env_value(t_list *env_lst, char *key);
-void	builtin_env(t_list *env_lst);
-int	    is_same_key(char *str, char *key);
-void	print_blt_err(char *cmd, char *str1, char *str2);
+# include "builtin.h"
 
 #endif

@@ -99,7 +99,7 @@ void	builtin_export(t_list **env_lst, char **argv)
 	}
 	while (*argv)
 	{
-		if (**argv == '=')
+		if (!ft_isalpha(**argv))
 		{
 			ft_putstr_fd("딸기쉘🍓: ", STDERR_FILENO);
 			print_blt_err("export", *argv, "not a valid identifier\n");

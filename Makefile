@@ -17,7 +17,10 @@ SRCS_BLTIN_DIR 	= ./srcs/builtin/
 SRCS_PARSE_DIR 	= ./srcs/parse/
 
 SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
+				builtin_cd.c \
+				builtin_echo.c \
 				builtin_export.c \
+			 	builtin_pwd.c \
 				builtin_unset.c \
 				env.c \
 				utils.c \
@@ -25,8 +28,6 @@ SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
 				)
 
 SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
-				parse.c \
-				token_utils.c \
 				)
 
 SRCS		= $(addprefix $(SRCS_DIR), \

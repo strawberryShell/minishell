@@ -15,6 +15,6 @@
 
 #include "structure.h"
 
-void	parse(char *line, char **envp);
+// void	parse(char *line, char **envp);
 
 #endif
