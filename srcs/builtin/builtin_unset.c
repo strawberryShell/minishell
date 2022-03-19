@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:21:08 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/15 16:44:18 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/17 17:24:55 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	builtin_unset(t_list **env_lst, char **argv)
 		// 해당 문자열 유효한 key인가? 유효하지 않음 -> 에러메세지
 		equal_ptr = ft_strchr(*argv, '=');
 		if (equal_ptr)	// '='가 있음
-			print_blt_err("unset", *argv, "invalid parameter name");
+			print_err("unset", *argv, "invalid parameter name");
 		// '='가 없음 (유효함) -> 해당 노드 찾아 지우기
 		else
 			delete_node(env_lst, *argv);

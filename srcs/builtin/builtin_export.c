@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:20:06 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/15 17:00:35 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/17 17:24:45 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	builtin_export(t_list **env_lst, char **argv)
 		if (**argv == '=')
 		{
 			ft_putstr_fd("딸기쉘🍓: ", STDERR_FILENO);
-			print_blt_err("export", *argv, "not a valid identifier\n");
+			print_err("export", *argv, "not a valid identifier\n");
 		}
 		else
 			export_with_arg(env_lst, *argv);

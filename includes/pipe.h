@@ -1,20 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   pipe.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 22:02:01 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/19 14:18:48 by sehhong          ###   ########.fr       */
+/*   Created: 2022/03/15 17:23:02 by sehhong           #+#    #+#             */
+/*   Updated: 2022/03/17 13:04:01 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef PIPE_H
+# define PIPE_H
 
-#include "structure.h"
-
-// void	parse(char *line, char **envp);
 
 #endif

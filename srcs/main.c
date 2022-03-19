@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/15 17:12:27 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/16 08:55:16 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,9 @@ int main(int argc, char **argv, char **envp)
 	char	*line_read;
 
 	initiate_env_lst(&(box.env_lst), envp);
-	ft_putendl_fd(strerror(errno), 2);
 	line_read = (char *)NULL;
 	if (argc > 1)
-    {
-		printf("딸기쉘🍓: %s: %s\n", argv[1], strerror(ENOENT));
-		exit(127);
-	}
+		exit_with_err(argv[1], strerror(ENOENT), 127);
 	while (1)
 	{
 		if (line_read)

@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:20:24 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/15 16:09:01 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/19 23:15:22 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void    initiate_env_lst(t_list **env_lst, char **envp)
-{
-	*env_lst = NULL;
-	while(*envp)
-    {
-		ft_lstadd_back(env_lst, ft_lstnew(ft_strdup(*envp)));
-		envp++;
-    }
-}
 
 // 환경변수(key)에 상응하는 value를 반환하는 함수 
 char	*get_env_value(t_list *env_lst, char *key)

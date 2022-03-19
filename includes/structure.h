@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/15 17:04:11 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/19 22:25:07 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
+
+# include "libft.h"
 
 /**
  * 											PIPESEQ
@@ -29,7 +31,7 @@ typedef enum e_type
 	RDR,
 	SIMPLE_CMD,
 	IO_HERE,
-	IO_REDI,
+	IO_RDR,
 	SYMBOL_L,
 	SYMBOL_G,
 	SYMBOL_DL,
@@ -64,16 +66,34 @@ typedef struct s_token
 
 typedef	struct s_box
 {
+	int		status;
 	t_list	*env_lst;
-	int		num_of_cmd;
-	int		**pipe_fds;
-	pid_t	*child_pids;
+	t_list	*cmd_lst;
 }	t_box;
 
 enum	e_pipe
 {
-	PIPE_RD_FD = 0,
-	PIPE_WR_FD
+	RD_FD = 0,
+	WR_FD
 };
+typedef	struct s_cmd
+{
+	int		fds[2];
+	pid_t	pid;
+	char	*final_path;
+	char	**argv;
+}	t_cmd;
+
+typedef	enum s_builtin
+{
+	CD = 0,
+	ECHO,
+	ENV,
+	EXIT,
+	EXPORT,
+	PWD,
+	UNSET,
+	NON_BUILTIN,
+}	t_builtin;
 
 #endif

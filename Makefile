@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+         #
+#    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/15 16:57:31 by sehhong          ###   ########.fr        #
+#    Updated: 2022/03/19 14:19:17 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
 				builtin_unset.c \
 				env.c \
 				utils.c \
-				print_blt_err.c \
+				print_err.c \
 				)
 
 SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \

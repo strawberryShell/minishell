@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   free_ptr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 22:02:01 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/19 14:18:48 by sehhong          ###   ########.fr       */
+/*   Created: 2022/03/19 20:18:41 by sehhong           #+#    #+#             */
+/*   Updated: 2022/03/19 20:19:16 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+# include "minishell.h"
 
-#include "structure.h"
-
-// void	parse(char *line, char **envp);
-
-#endif
+void    free_ptr(void *ptr)
+{
+    if (ptr)
+    {
+        free(ptr);
+        ptr = 0;
+    }
+}

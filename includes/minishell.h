@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/15 16:58:46 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/17 18:46:28 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@
 # include "readline/readline.h"
 # include "libft.h"
 # include "parse.h"
+# include "pipe.h"
+# include "builtin.h"
+# include "structure.h"
 
-// builtin 
-void	builtin_export(t_list **env_lst, char **argv);
-void	builtin_unset(t_list **env_lst, char **argv);
-void    initiate_env_lst(t_list **env_lst, char **envp);
-char	*get_env_value(t_list *env_lst, char *key);
-void	builtin_env(t_list *env_lst);
-int	    is_same_key(char *str, char *key);
-void	print_blt_err(char *cmd, char *str1, char *str2);
+//ast_ex
+void	enum_into_str(t_type type);
+void    print_preorder(t_ast *tree);
+t_ast   *my_ast(void);
+
+void   exit_with_err(char *str1, char *str2, int exit_code);
 
 #endif
