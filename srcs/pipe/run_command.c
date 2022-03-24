@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 12:00:24 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/19 23:41:15 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/24 14:44:27 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ static  void    close_pipes(t_cmd *prev_cmd)
 	}
 }
 
-static	t_cmd	*get_new_tcmd(void)
+static	t_cmd	*get_new_tcmd(t_box *box)
 {
-	t_cmd	*ret_tcmd;
+	t_cmd	*new_tcmd;
 
-	ret_tcmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
-	ret_tcmd->argv = (char **)ft_calloc(1, sizeof(char *));
-	return (ret_tcmd);
+	new_tcmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+	new_tcmd->argv = (char **)ft_calloc(1, sizeof(char *));
+	ft_lstadd_back(&(box->cmd_lst), ft_lstnew(new_tcmd));
+	return (new_tcmd);
 }
 
 void	run_command(t_box *box, t_ast *tree)
@@ -37,10 +38,9 @@ void	run_command(t_box *box, t_ast *tree)
 
 	if (tree)
 	{
-		prev_cmd = ft_lstlast(box->cmd_lst);
-		curr_cmd = get_new_tcmd();
-		ft_lstadd_back(&(box->cmd_lst), ft_lstnew(curr_cmd));
-		// builtin 한개일때 처리
+		prev_cmd = (t_cmd*)(ft_lstlast(box->cmd_lst)->content);
+		curr_cmd = get_new_tcmd(box);
+		// builtin 한개일때 또는 cmd가 아예 없을때 처리 : 포크안뜨고 처리한다.
 		if (tree->right)
 			ft_pipe(curr_cmd->fds);
 		curr_cmd->pid = ft_fork();
@@ -48,7 +48,7 @@ void	run_command(t_box *box, t_ast *tree)
 		{
 			connect_pipes(prev_cmd, curr_cmd);
 			adjust_command(box, tree->left);	
-			execute_command();
+			execute_command(box, tree->left->data);
 		}
 		close_pipes(prev_cmd);
 		run_command(box, tree->right);

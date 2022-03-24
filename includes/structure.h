@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/19 22:25:07 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/24 15:07:31 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef	struct s_cmd
 {
 	int		fds[2];
 	pid_t	pid;
-	char	*final_path;
+	char	*abs_path;
 	char	**argv;
 }	t_cmd;
 
@@ -93,7 +93,8 @@ typedef	enum s_builtin
 	EXPORT,
 	PWD,
 	UNSET,
-	NON_BUILTIN,
+	GENERAL,
+	NONE,
 }	t_builtin;
 
 #endif

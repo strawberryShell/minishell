@@ -6,13 +6,13 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 22:21:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/19 22:21:57 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/24 13:05:13 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	void	redirect_r_files(char *fname)
+static	void	redirect_r_file(char *fname)
 {
 	int	f_fd;
 
@@ -37,12 +37,11 @@ void    redirect_files(t_ast *io)
 {
     char	*symbol;
 	char	*fname;
-	int		f_fd;
 
 	symbol = (char *)(io->left->data);
 	fname = (char *)(io->right->data);
 	if (*symbol == '<')		// < , <<
-		redirect_r_fd(fname);
+		redirect_r_file(fname);
 	else	// > , >>
-		redirect_w_fd(symbol, fname);
+		redirect_w_file(symbol, fname);
 }

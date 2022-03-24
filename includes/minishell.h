@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/17 18:46:28 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/24 17:15:38 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,16 @@
 # include "builtin.h"
 # include "structure.h"
 
-//ast_ex
 void	enum_into_str(t_type type);
 void    print_preorder(t_ast *tree);
 t_ast   *my_ast(void);
 
-void   exit_with_err(char *str1, char *str2, int exit_code);
+void	exit_with_err(char *str1, char *str2, int exit_code);
+void	free_ptr(void *ptr);
+int		ft_open(char *fname, int oflag, int mode);
+void	ft_close(int fd);
+void	ft_dup2(int fd1, int fd2);
+void    ft_pipe(int *fds);
+pid_t	ft_fork(void);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/19 14:19:17 by sehhong          ###   ########.fr        #
+#    Updated: 2022/03/24 17:03:29 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = minishell
 SRCS_DIR 		= ./srcs/
 SRCS_BLTIN_DIR 	= ./srcs/builtin/
 SRCS_PARSE_DIR 	= ./srcs/parse/
+SRCS_PIPE_DIR	= ./srcs/pipe/
 
 SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
 				builtin_export.c \
@@ -25,15 +26,27 @@ SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
 				)
 
 SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
-				parse.c \
-				token_utils.c \
+				)
+			
+SRCS_PIPE	= $(addprefix $(SRCS_PIPE_DIR), \
+				adjust_command.c \
+				connect_pipes.c \
+				execute_command.c \
+				extend_argv.c \
+				make_argv.c \
+				redirect_files.c \
+				run_command.c \
 				)
 
 SRCS		= $(addprefix $(SRCS_DIR), \
-				main.c \
+				ast_ex.c \
+				exit_with_err.c \
+				free_ptr.c \
+				system_calls.c \
+				test.c \
 				)
 
-SRCS 		+= $(SRCS_BLTIN) $(SRCS_PARSE)
+SRCS 		+= $(SRCS_BLTIN) $(SRCS_PARSE) $(SRCS_PIPE)
 OBJS = $(SRCS:.c=.o)
 
 ifdef DEBUG
