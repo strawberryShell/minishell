@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/16 08:55:16 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/24 17:38:28 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int main(int argc, char **argv, char **envp)
 	t_box	box;
 	char	*line_read;
 
+	if (!argc)
+		argv[0] = "no";
 	initiate_env_lst(&(box.env_lst), envp);
 	line_read = (char *)NULL;
 	if (argc > 1)

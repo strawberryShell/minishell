@@ -6,14 +6,18 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:24:10 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/17 17:25:10 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/24 17:45:04 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
+void    builtin_cd(t_list *env_lst, char **argv);
+void    builtin_echo(char **argv);
+void    builtin_exit(char **argv);
 void	builtin_export(t_list **env_lst, char **argv);
+void    builtin_pwd(void);
 void	builtin_unset(t_list **env_lst, char **argv);
 void    initiate_env_lst(t_list **env_lst, char **envp);
 char	*get_env_value(t_list *env_lst, char *key);

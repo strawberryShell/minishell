@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/24 17:03:29 by sehhong          ###   ########.fr        #
+#    Updated: 2022/03/24 17:46:39 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,10 @@ SRCS_PARSE_DIR 	= ./srcs/parse/
 SRCS_PIPE_DIR	= ./srcs/pipe/
 
 SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
+				builtin_cd.c \
+				builtin_echo.c \
 				builtin_export.c \
+			 	builtin_pwd.c \
 				builtin_unset.c \
 				env.c \
 				utils.c \
