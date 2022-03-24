@@ -6,7 +6,7 @@
 #    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/15 20:47:55 by jiskim           ###   ########.fr        #
+#    Updated: 2022/03/24 20:12:06 by jiskim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = minishell
 SRCS_DIR 		= ./srcs/
 SRCS_BLTIN_DIR 	= ./srcs/builtin/
 SRCS_PARSE_DIR 	= ./srcs/parse/
+SRCS_AST_DIR	= ./srcs/ast/
 
 SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
 				builtin_export.c \
@@ -27,14 +28,18 @@ SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
 SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
 				parse.c \
 				token_utils.c \
+				check_syntax.c \
 				)
+
+SRCS_AST	= $(addprefix $(SRCS_AST_DIR),\
+				ast_utils.c)
 
 SRCS		= $(addprefix $(SRCS_DIR), \
 				main.c \
 				)
 
-SRCS 		+= $(SRCS_BLTIN) $(SRCS_PARSE)
-OBJS = $(SRCS:.c=.o)
+SRCS		+= $(SRCS_BLTIN) $(SRCS_PARSE) $(SRCS_AST)
+OBJS		= $(SRCS:.c=.o)
 
 ifdef DEBUG
 	CFLAGS = -g3 -fsanitize=address

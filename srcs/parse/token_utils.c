@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 22:00:14 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/16 20:34:30 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/24 20:58:21 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_token	*new_token(char *data)
 			new->type = SYMBOL_HERE;
 		else
 			new->type = SYMBOL;
-		free(data);
+		new->data = data;
 	}
 	else
 	{
@@ -59,12 +59,18 @@ void	add_token(t_token **list, t_token *new)
 	tmp->next = new;
 }
 
-void	token_iterate(t_token *list, void (*f)(t_token *))
+void	token_iterate(t_token *list, void (*f)(t_token **, t_ast **))
 {
+	t_ast	*root;
+	t_ast	*ptr;
+
+	root = subtree_pipeseq();
+	ptr = root->left;
 	while (list)
 	{
-		printf("(%d %s)->", list->type, list->data);
-		f(list);
+		// printf("(%d %s)->", list->type, list->data);
+		f(&list, &ptr);
 		list = list->next;
 	}
+	preorder_ast(root, 1);
 }

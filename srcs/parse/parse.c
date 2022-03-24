@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/15 20:41:51 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/24 18:31:19 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	parse(char *line)
 		add_token(&token_list, new_token(ft_substr(start, 0, (end - start))));
 		start = end;
 	}
-	print_token(token_list);
+	token_iterate(token_list, check_syntax);
 	if (quote)
 		ft_putendl_fd("Syntax error", 2);
 	// syntax
