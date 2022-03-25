@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/15 16:58:46 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/16 20:36:46 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 # include "readline/readline.h"
 # include "libft.h"
 # include "parse.h"
+# include "ast.h"
 
-// builtin 
+// builtin
 void	builtin_export(t_list **env_lst, char **argv);
 void	builtin_unset(t_list **env_lst, char **argv);
 void    initiate_env_lst(t_list **env_lst, char **envp);

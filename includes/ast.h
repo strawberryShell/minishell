@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 22:02:01 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/24 20:36:44 by jiskim           ###   ########.fr       */
+/*   Created: 2022/03/16 20:32:36 by jiskim            #+#    #+#             */
+/*   Updated: 2022/03/24 20:58:12 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef AST_H
+# define AST_H
 
-# include "structure.h"
-
-void	parse(char *line);
-
-t_token	*new_token(char *data);
-void	add_token(t_token **list, t_token *new);
-void	token_iterate(t_token *list, void (*f)(t_token **, t_ast **));
-void	check_syntax(t_token **head, t_ast **ptr);
+t_ast	*subtree_pipeseq(void);
+t_ast	*subtree_rdr(t_ttype symbol_type, char *symbol, char *filename);
+t_ast	*subtree_simple_command(t_type cmd, char *word);
+void	preorder_ast(t_ast *node, int index);
 
 #endif

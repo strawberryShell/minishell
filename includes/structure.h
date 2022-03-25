@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/15 17:04:11 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/16 17:18:40 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
 
-/**
+/*
  * 											PIPESEQ
  * 								CMD							PIPESEQ
  * 					RDR						SIMPLE_CMD					(omit)
@@ -29,7 +29,7 @@ typedef enum e_type
 	RDR,
 	SIMPLE_CMD,
 	IO_HERE,
-	IO_REDI,
+	IO_RDR,
 	SYMBOL_L,
 	SYMBOL_G,
 	SYMBOL_DL,
@@ -37,28 +37,29 @@ typedef enum e_type
 	FNAME,
 	NAME,
 	ARGV,
-	ARG,
+	ARG
 }t_type;
 
 typedef enum e_ttype
 {
-	WORD,
+	WORD = 0,
+	PIPE,
 	SYMBOL,
-	SQ_WORD,
+	SYMBOL_HERE
 }t_ttype;
 
-typedef struct	s_ast
+typedef struct s_ast
 {
-	t_type	type;
-	char	*data;
+	t_type			type;
+	char			*data;
 	struct s_ast	*left;
 	struct s_ast	*right;
 }t_ast;
 
 typedef struct s_token
 {
-	t_type	type;
-	char	*data;
+	t_ttype			type;
+	char			*data;
 	struct s_token	*next;
 }t_token;
 
