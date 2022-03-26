@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/26 16:50:49 by sehhong           #+#    #+#             */
+/*   Updated: 2022/03/26 16:54:16 by sehhong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void    builtin_pwd(void)
+int	builtin_pwd(void)
 {
     char    *cwd;
 
@@ -8,9 +20,10 @@ void    builtin_pwd(void)
     if (!cwd)
     {
         print_err("pwd", NULL, strerror(errno));
-        exit(EXIT_FAILURE);
+        return (EXIT_FAILURE);
     }
     ft_putendl_fd(cwd, STDOUT_FILENO);
     free(cwd);
     cwd = NULL;
+	return (EXIT_SUCCESS);
 }

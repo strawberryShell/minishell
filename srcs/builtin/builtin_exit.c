@@ -1,6 +1,18 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/26 16:33:01 by sehhong           #+#    #+#             */
+/*   Updated: 2022/03/26 16:45:30 by sehhong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int     is_number(char *str)
+#include "builtin.h"
+
+static  int     is_number(char *str)
 {
     int ret;
 
@@ -13,7 +25,7 @@ int     is_number(char *str)
     return (1);
 }
 
-void    builtin_exit(char **argv)
+int    builtin_exit(char **argv)
 {
     int exit_code;
     
@@ -21,26 +33,25 @@ void    builtin_exit(char **argv)
     argv++;
     if (!*argv)
     {
-        ft_putendl_fd("exit", STDOUT_FILENO);
-        exit(EXIT_SUCCESS);
+        ft_putendl_fd("exit", STDERR_FILENO);
+        return (EXIT_SUCCESS);
     }
     if (!is_number(*argv))
     {
-        ft_putendl_fd("exit");
-        print_blt_err("exit", *argv, "numeric argument required");
-        exit(255);
+        ft_putendl_fd("exit", STDERR_FILENO);
+        print_err("exit", *argv, "numeric argument required");
+        return (255);
     }
 	exit_code = ft_atoi(*argv) % 256;
     argv++;
     if (*argv)
     {
-        ft_putendl_fd("exit");
-        print_blt_err("exit", NULL, "too many arguments");
-        // $? = EXIT_FAILURE로 바꿔놓기
-        return ;
+        ft_putendl_fd("exit", STDOUT_FILENO);
+        print_err("exit", NULL, "too many arguments");
+        return (EXIT_FAILURE);
     }
-    ft_putendl_fd("exit");
-    exit(exit_code);
+    ft_putendl_fd("exit", STDOUT_FILENO);
+    return (exit_code);
 }
 
 /* 첫 인자가 숫자가 아닐때(exit abc 1 2 3 4)

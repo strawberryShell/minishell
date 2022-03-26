@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 12:51:10 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 14:44:41 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/26 18:21:24 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static	void	wait_children(t_box *box)
 	while (child_pid != -1)
 	{
 		child_pid = waitpid(-1, &status, 0);
-		if (child_pid == ((t_cmd*)(ft_lstlast(box->cmd_lst)->content))->pid)
+		if (child_pid == last_pid)
 			last_status = status;
 	}
 	if (WIFEXITED(last_status))

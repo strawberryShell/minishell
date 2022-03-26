@@ -6,13 +6,13 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:48:39 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 14:39:49 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/26 16:58:21 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	char	**get_envp(t_list *env_lst)
+static	char	**make_envp(t_list *env_lst)
 {
 	char	**new_envp;
 
@@ -52,30 +52,26 @@ static	t_builtin test_builtin(char *name)
     return (ret);
 }
 
-// static	void    run_builtin(t_box *box, t_builtin b_type)
-// {
-//     t_list	*env_lst;
-// 	char	**argv;
-// 	int		exit_code;
+void    execute_builtin(t_list *env_lst, char **argv, t_builtin b_type)
+{
+	int		exit_code;
 
-// 	env_lst = box->env_lst;
-// 	argv = box->cmd_lst->content->argv;
-// 	if (b_type == CD)
-// 		exit_code = builtin_cd();
-// 	else if (b_type == ECHO)
-// 		exit_code = builtin_echo();
-// 	else if (b_type == ENV)
-// 		exit_code = builtin_exit();
-// 	else if (b_type == EXIT)
-// 		exit_code = builtin_exit();
-// 	else if (b_type == EXPORT)
-// 		exit_code = builtin_export();
-// 	else if (b_type == PWD)
-// 		exit_code = builtin_pwd();
-// 	else
-// 		exit_code = builtin_unset();
-// 	exit(exit_code);
-// }
+	if (b_type == CD)
+		exit_code = builtin_cd(env_lst, argv);
+	else if (b_type == ECHO)
+		exit_code = builtin_echo(argv);
+	else if (b_type == ENV)
+		exit_code = builtin_env(env_lst);
+	else if (b_type == EXIT)
+		exit_code = builtin_exit(argv);
+	else if (b_type == EXPORT)
+		exit_code = builtin_export(env_lst, argv);
+	else if (b_type == PWD)
+		exit_code = builtin_pwd();
+	else
+		exit_code = builtin_unset();
+	exit(exit_code);
+}
 
 static	void	execute_command(t_list *env_lst, char *abs_path, char **argv)
 {
@@ -83,22 +79,22 @@ static	void	execute_command(t_list *env_lst, char *abs_path, char **argv)
 	int			i;
 
 	b_type = test_builtin(argv[0]);
-	// if (b_type == NONE)
-	// 	exit(EXIT_SUCCESS);
-	if (b_type == GENERAL)
+	if (b_type == NONE)
+		exit(EXIT_SUCCESS);
+	else if (b_type == GENERAL)
 	{
 		ft_putendl_fd(abs_path, 2);
 		i = 0;
 		while (argv[i])
 			ft_putendl_fd(argv[i++], 2);
 		ft_putendl_fd("-------------", 2);
-		execve(abs_path, argv, get_envp(env_lst));
+		execve(abs_path, argv, make_envp(env_lst));
 		if (errno == ENOENT)
 			exit_with_err(argv[0], "command not found", 127);
 		exit_with_err(argv[0], strerror(errno), EXIT_FAILURE);
 	}
-	// else
-		// run_builtin();
+	else
+		execute_builtin(env_lst, argv, b_type);
 }
 
 void	run_command(t_box *box, t_ast *scmd)
