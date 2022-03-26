@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:24:10 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 15:41:59 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/27 00:08:46 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ char	*get_env_value(t_list *env_lst, char *key);
 int	builtin_env(t_list *env_lst);
 int	is_same_key(char *str, char *key);
 void	print_err(char *cmd, char *str1, char *str2);
+void	print_err2(char *cmd, char *str1, char *str2);
+int	is_special_var(char *var);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:48:39 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 16:58:21 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/26 23:28:52 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void    execute_builtin(t_list *env_lst, char **argv, t_builtin b_type)
 	else if (b_type == PWD)
 		exit_code = builtin_pwd();
 	else
-		exit_code = builtin_unset();
+		exit_code = builtin_unset(env_lst, argv);
 	exit(exit_code);
 }
 

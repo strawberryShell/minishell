@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:23:26 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 17:19:53 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/27 00:06:42 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,23 @@ int	is_same_key(char *str, char *key)
 	key_len = ft_strlen(key);
 	if (!ft_strncmp(str, key, key_len) && str[key_len] == '=')
 		return (1);
+	return (0);
+}
+
+int	is_special_var(char *var)
+{
+	char	*sp_str;
+
+	sp_str = "!#$@?-*_0123456789";
+	if (*var == '$')
+	{
+		var++;
+		while (*sp_str)
+		{
+			if (*sp_str == *var)
+				return (1);
+			sp_str++;
+		}
+	}
 	return (0);
 }

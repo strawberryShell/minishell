@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:33:20 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 16:34:18 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/26 23:57:11 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ int    builtin_cd(t_list *env_lst, char **argv)
 
 	if (argv[1])	// {"cd", "dir", 0} -> cmd: cd dir (dir로 간다)
 	{
+		if (is_special_var(argv[1]))
+		{
+			print_err("cd", argv[1], "invalid syntax");
+			return (EXIT_FAILURE);
+		}
 		ret = chdir(argv[1]);
 		if (ret < 0)
 		{
