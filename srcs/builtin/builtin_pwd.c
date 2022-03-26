@@ -7,7 +7,7 @@ void    builtin_pwd(void)
     cwd = getcwd(NULL, 0);
     if (!cwd)
     {
-        print_blt_err("pwd", NULL, strerror(errno));
+        print_err("pwd", NULL, strerror(errno));
         exit(EXIT_FAILURE);
     }
     ft_putendl_fd(cwd, STDOUT_FILENO);

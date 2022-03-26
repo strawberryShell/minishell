@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:29:08 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/16 08:47:54 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/26 11:53:52 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ static  t_ast	*create_scmd_subtree(char **cmd_argv)
 	return (s_cmd);
 }
 
-static  t_ast	*create_psq_subtree(char **rdr, char **scmd)
+static  t_ast	*create_psq_subtree(char **rdr, char **scmd, char *cmd_type)
 {
     t_ast	*root;
 
 	root = (t_ast *)malloc(sizeof(t_ast));
     root->type = PIPESEQ;
-	root->left = create_node(CMD, NULL);
+	root->left = create_node(CMD, cmd_type);
     root->right = 0;
 	root->data = NULL;
 	root->left->left = create_rdr_subtree(rdr);
@@ -116,19 +116,19 @@ t_ast   *my_ast(void)
 	t_ast	*cmd2;
 	t_ast	*cmd3;
 	t_ast	*cmd4;
-	char	*cmd1_rdr[] = {"<<", "lim1", "<", "a", "<<","lim2", 0};
-	char	*cmd1_scmd[] = {"echo", "-n", "a     b c", "d", "e", 0};
-	char	*cmd2_rdr[] = {">", "b", 0};
-	char	*cmd2_scmd[] = {"grep", "target", 0};
-	char	*cmd3_rdr[] = {"<", "c", "<<", "lim3", 0};
+	char	*cmd1_rdr[] = {"<", "a", 0};
+	char	*cmd1_scmd[] = {"lll", 0};
+	char	*cmd2_rdr[] = {">", "b", ">", "c", 0};
+	char	*cmd2_scmd[] = {"pppp", "hi", 0};
+	char	*cmd3_rdr[] = {"<", "a", 0};
 	char	*cmd3_scmd[] = {"ls", "-al", 0};
 	char	*cmd4_rdr[] = {">", "d", ">", "e", 0};
-	char	*cmd4_scmd[] = {"grep", "target2", 0};
+	char	*cmd4_scmd[] = {"grep", "lib", 0};
 
-	cmd1 = create_psq_subtree(cmd1_rdr, cmd1_scmd);
-	cmd2 = create_psq_subtree(cmd2_rdr, cmd2_scmd);
-	cmd3 = create_psq_subtree(cmd3_rdr, cmd3_scmd);
-	cmd4 = create_psq_subtree(cmd4_rdr, cmd4_scmd);
+	cmd1 = create_psq_subtree(cmd1_rdr, cmd1_scmd, "lll");
+	cmd2 = create_psq_subtree(cmd2_rdr, cmd2_scmd, "pppp");
+	cmd3 = create_psq_subtree(cmd3_rdr, cmd3_scmd, "ls");
+	cmd4 = create_psq_subtree(cmd4_rdr, cmd4_scmd, "grep");
 	cmd1->right = cmd2;
 	cmd2->right = cmd3;
 	cmd3->right = cmd4;

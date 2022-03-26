@@ -6,17 +6,17 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 20:18:41 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/19 20:19:16 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/24 21:20:19 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
 
-void    free_ptr(void *ptr)
+void    free_ptr(void **ptr)
 {
-    if (ptr)
+    if (*ptr)
     {
-        free(ptr);
-        ptr = 0;
+        free(*ptr);
+        *ptr = 0;
     }
 }

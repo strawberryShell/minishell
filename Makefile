@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/24 17:46:39 by sehhong          ###   ########.fr        #
+#    Updated: 2022/03/26 14:43:51 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,13 +32,12 @@ SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
 				)
 			
 SRCS_PIPE	= $(addprefix $(SRCS_PIPE_DIR), \
-				adjust_command.c \
 				connect_pipes.c \
-				execute_command.c \
-				extend_argv.c \
+				run_command.c \
 				make_argv.c \
 				redirect_files.c \
-				run_command.c \
+				build_pipes.c \
+				find_abs_path.c \
 				)
 
 SRCS		= $(addprefix $(SRCS_DIR), \

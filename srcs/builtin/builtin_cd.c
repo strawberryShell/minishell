@@ -9,7 +9,7 @@ void    builtin_cd(t_list *env_lst, char **argv)
 		ret = chdir(argv[1]);
 		if (ret < 0)
 		{
-			print_blt_err("cd", argv[1], strerror(errno));
+			print_err("cd", argv[1], strerror(errno));
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -18,7 +18,7 @@ void    builtin_cd(t_list *env_lst, char **argv)
 		ret = chdir(get_env_value(env_lst, "HOME"));
 		if (ret < 0)
 		{
-			print_blt_err("cd", NULL, "HOME not set");
+			print_err("cd", NULL, "HOME not set");
 			exit(EXIT_FAILURE);
 		}
 	}

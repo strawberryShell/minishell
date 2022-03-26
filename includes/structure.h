@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/24 15:07:31 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/26 12:52:30 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ typedef	struct s_cmd
 {
 	int		fds[2];
 	pid_t	pid;
-	char	*abs_path;
-	char	**argv;
 }	t_cmd;
 
 typedef	enum s_builtin
