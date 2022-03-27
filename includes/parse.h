@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 22:02:01 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/24 20:36:44 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/27 23:11:00 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	parse(char *line);
 
 t_token	*new_token(char *data);
 void	add_token(t_token **list, t_token *new);
-void	token_iterate(t_token *list, void (*f)(t_token **, t_ast **));
-void	check_syntax(t_token **head, t_ast **ptr);
+t_ast	*syntax_analysis(t_token *list);
+void	free_token_list(t_token *list);
+int		check_syntax(t_token **head, t_ast **ptr);
 
 #endif

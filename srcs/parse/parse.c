@@ -6,46 +6,11 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/24 18:31:19 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/28 02:37:17 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// t_token	*make_str(char *start, char *end)
-// {
-// 	char	*result;
-// 	int		i;
-// 	char	quote;
-// 	t_ttype	type;
-
-// 	result = (char *)ft_calloc((end - start) + 1, 1);
-// 	i = 0;
-// 	quote = 0;
-// 	type = WORD;
-// 	if (ft_strchr("<>", *start))
-// 		type = SYMBOL;
-// 	while (start != end)
-// 	{
-// 		if (ft_strchr("'\"", *start))
-// 		{
-// 			if (!quote)
-// 			{
-// 				if (quote == '\'')
-// 					type = SQ_WORD;
-// 				quote = *start;
-// 			}
-// 			else if (quote == *start)
-// 				quote = 0;
-// 			else
-// 				result[i++] = *start;
-// 		}
-// 		else
-// 			result[i++] = *start;
-// 		start++;
-// 	}
-// 	return (new_token(result, type)); //return new node(string, type)
-// }
 
 void	parse(char *line)
 {
@@ -53,6 +18,7 @@ void	parse(char *line)
 	char	*end;
 	char	quote;
 	t_token	*token_list;
+	t_ast	*root;
 
 	start = line;
 	end = start;
@@ -87,13 +53,13 @@ void	parse(char *line)
 			if (ft_strchr("<>|", *end))
 				break;
 		}
-		add_token(&token_list, new_token(ft_substr(start, 0, (end - start))));
+		if (start < end)
+			add_token(&token_list, new_token(ft_substr(start, 0, (end - start))));
 		start = end;
 	}
-	token_iterate(token_list, check_syntax);
 	if (quote)
 		ft_putendl_fd("Syntax error", 2);
-	// syntax
-	// heredoc
-	// tree
+	root = syntax_analysis(token_list);
+	free_token_list(token_list);
+	free_ast(root);
 }

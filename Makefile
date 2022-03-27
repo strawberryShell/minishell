@@ -6,7 +6,7 @@
 #    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/24 20:12:06 by jiskim           ###   ########.fr        #
+#    Updated: 2022/03/27 23:36:30 by jiskim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,9 @@ SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
 				)
 
 SRCS_AST	= $(addprefix $(SRCS_AST_DIR),\
-				ast_utils.c)
+				ast_utils.c \
+				subtree.c \
+				)
 
 SRCS		= $(addprefix $(SRCS_DIR), \
 				main.c \
