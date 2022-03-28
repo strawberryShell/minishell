@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/26 12:52:30 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/28 16:29:31 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,29 @@ typedef enum e_type
 	FNAME,
 	NAME,
 	ARGV,
-	ARG,
+	ARG
 }t_type;
 
 typedef enum e_ttype
 {
-	WORD,
+	WORD = 0,
+	PIPE,
 	SYMBOL,
-	SQ_WORD,
+	SYMBOL_HERE
 }t_ttype;
 
-typedef struct	s_ast
+typedef struct s_ast
 {
-	t_type	type;
-	char	*data;
+	t_type			type;
+	char			*data;
 	struct s_ast	*left;
 	struct s_ast	*right;
 }t_ast;
 
 typedef struct s_token
 {
-	t_type	type;
-	char	*data;
+	t_ttype			type;
+	char			*data;
 	struct s_token	*next;
 }t_token;
 
@@ -82,7 +83,7 @@ typedef	struct s_cmd
 	pid_t	pid;
 }	t_cmd;
 
-typedef	enum s_builtin
+typedef	enum s_ctype
 {
 	CD = 0,
 	ECHO,
@@ -93,6 +94,6 @@ typedef	enum s_builtin
 	UNSET,
 	GENERAL,
 	NONE,
-}	t_builtin;
+}	t_ctype;
 
 #endif

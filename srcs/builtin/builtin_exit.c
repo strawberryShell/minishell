@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:33:01 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 16:45:30 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/28 09:59:42 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static  int     is_number(char *str)
 {
-    int ret;
-
     while (*str)
     {
         if (*str < '0' || *str > '9')

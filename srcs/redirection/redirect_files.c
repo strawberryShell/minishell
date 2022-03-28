@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 22:21:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 13:25:22 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/28 13:58:06 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static	void	redirect_w_file(t_type symbol, char *fname)
 	ft_close(f_fd);
 }
 
-void	redirect_files(t_box *box, t_ast *rdr)
+void	redirect_files(t_ast *rdr)
 {
 	t_type	symbol;
 	char	*fname;
@@ -49,6 +49,6 @@ void	redirect_files(t_box *box, t_ast *rdr)
 		else
 			redirect_w_file(symbol, fname);
 	}
-	redirect_files(box, rdr->left);
-	redirect_files(box, rdr->right);
+	redirect_files(rdr->left);
+	redirect_files(rdr->right);
 }

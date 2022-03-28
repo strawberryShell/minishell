@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:29:08 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 11:53:52 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/28 08:24:02 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ t_ast   *my_ast(void)
 	t_ast	*cmd3;
 	t_ast	*cmd4;
 	char	*cmd1_rdr[] = {"<", "a", 0};
-	char	*cmd1_scmd[] = {"lll", 0};
+	char	*cmd1_scmd[] = {"ls", 0};
 	char	*cmd2_rdr[] = {">", "b", ">", "c", 0};
 	char	*cmd2_scmd[] = {"pppp", "hi", 0};
 	char	*cmd3_rdr[] = {"<", "a", 0};
@@ -125,7 +125,7 @@ t_ast   *my_ast(void)
 	char	*cmd4_rdr[] = {">", "d", ">", "e", 0};
 	char	*cmd4_scmd[] = {"grep", "lib", 0};
 
-	cmd1 = create_psq_subtree(cmd1_rdr, cmd1_scmd, "lll");
+	cmd1 = create_psq_subtree(cmd1_rdr, cmd1_scmd, "ls");
 	cmd2 = create_psq_subtree(cmd2_rdr, cmd2_scmd, "pppp");
 	cmd3 = create_psq_subtree(cmd3_rdr, cmd3_scmd, "ls");
 	cmd4 = create_psq_subtree(cmd4_rdr, cmd4_scmd, "grep");

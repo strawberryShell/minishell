@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 16:19:31 by jiskim            #+#    #+#             */
-/*   Updated: 2021/05/12 22:18:05 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/15 18:06:59 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		result_len = ft_strlen(&s[start]);
 	else
 		result_len = len;
-	result = (char *)malloc(sizeof(char) * (result_len + 1));
-	if (!result)
-		return (NULL);
+	result = (char *)ft_calloc(result_len + 1, 1);
 	s += start;
 	tmp = result;
 	while (len-- && *s)
