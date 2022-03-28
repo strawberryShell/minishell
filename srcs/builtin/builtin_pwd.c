@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 22:02:01 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 16:52:12 by sehhong          ###   ########.fr       */
+/*   Created: 2022/03/26 16:50:49 by sehhong           #+#    #+#             */
+/*   Updated: 2022/03/26 16:54:16 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#include "minishell.h"
 
-# include "structure.h"
+int	builtin_pwd(void)
+{
+    char    *cwd;
 
-void	parse(char *line);
-
-t_token	*new_token(char *data);
-void	add_token(t_token **list, t_token *new);
-void	token_iterate(t_token *list, void (*f)(t_token **, t_ast **));
-void	check_syntax(t_token **head, t_ast **ptr);
-
-#endif
+    cwd = getcwd(NULL, 0);
+    if (!cwd)
+    {
+        print_err("pwd", NULL, strerror(errno));
+        return (EXIT_FAILURE);
+    }
+    ft_putendl_fd(cwd, STDOUT_FILENO);
+    free(cwd);
+    cwd = NULL;
+	return (EXIT_SUCCESS);
+}

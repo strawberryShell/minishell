@@ -3,27 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/15 20:46:42 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/28 16:52:59 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	initiate_box(t_box **box, char **envp)
+{
+	*box = (t_box *)ft_calloc(1, sizeof(t_box));
+	while (*envp)
+	{
+		ft_lstadd_back(&((*box)->env_lst), ft_lstnew(ft_strdup(*envp)));
+		envp++;
+	}
+}
+
 int main(int argc, char **argv, char **envp)
 {
-	t_box	box;
+	t_box	*box;
 	char	*line_read;
 
-	initiate_env_lst(&(box.env_lst), envp);
+	initiate_box(&box, envp);
 	line_read = (char *)NULL;
 	if (argc > 1)
-    {
-		printf("딸기쉘🍓: %s: %s\n", argv[1], strerror(ENOENT));
-		exit(127);
-	}
+		exit_with_err(argv[1], strerror(ENOENT), 127);
 	while (1)
 	{
 		if (line_read)
@@ -39,7 +46,9 @@ int main(int argc, char **argv, char **envp)
 			if (!ft_strncmp(line_read, "exit", 5))
 				break ;
 			add_history(line_read);
+			// printf("%s\n", line_read);
 			parse(line_read);
+			// read_ast(box, ast);
 		}
 	}
 	free(line_read);

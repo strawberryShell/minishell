@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/24 20:12:06 by jiskim           ###   ########.fr        #
+#    Updated: 2022/03/28 17:00:05 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,37 @@ NAME = minishell
 
 SRCS_DIR 		= ./srcs/
 SRCS_BLTIN_DIR 	= ./srcs/builtin/
+SRCS_EXEC_DIR	= ./srcs/execute/
+SRCS_FORK_DIR	= ./srcs/fork/
 SRCS_PARSE_DIR 	= ./srcs/parse/
+SRCS_RDR_DIR	= ./srcs/redirection/
 SRCS_AST_DIR	= ./srcs/ast/
 
 SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
+				builtin_cd.c \
+				builtin_echo.c \
+				builtin_env.c \
+				builtin_exit.c \
 				builtin_export.c \
+			 	builtin_pwd.c \
 				builtin_unset.c \
-				env.c \
+				print_err.c \
 				utils.c \
-				print_blt_err.c \
+				)
+
+SRCS_EXEC	= $(addprefix $(SRCS_EXEC_DIR), \
+				execute_builtin.c \
+				execute_command.c \
+				find_abs_path.c \
+				make_argv.c \
+				which_cmd_type.c \
+				)
+
+SRCS_FORK	= $(addprefix $(SRCS_FORK_DIR), \
+				fork_child.c \
+				need_fork.c \
+				run_without_fork.c \
+				wait_children.c \
 				)
 
 SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
@@ -30,16 +52,26 @@ SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
 				token_utils.c \
 				check_syntax.c \
 				)
+			
+SRCS_RDR	= $(addprefix $(SRCS_RDR_DIR), \
+				connect_pipes.c \
+				redirect_files.c \
+				)
 
 SRCS_AST	= $(addprefix $(SRCS_AST_DIR),\
 				ast_utils.c)
 
 SRCS		= $(addprefix $(SRCS_DIR), \
+				ast_ex.c \
+				exit_with_err.c \
+				free_ptr.c \
+				system_calls.c \
+				read_ast.c \
 				main.c \
 				)
 
-SRCS		+= $(SRCS_BLTIN) $(SRCS_PARSE) $(SRCS_AST)
-OBJS		= $(SRCS:.c=.o)
+SRCS 		+= $(SRCS_BLTIN) $(SRCS_EXEC) $(SRCS_FORK) $(SRCS_PARSE) $(SRCS_RDR) $(SRCS_AST)
+OBJS 		= $(SRCS:.c=.o)
 
 ifdef DEBUG
 	CFLAGS = -g3 -fsanitize=address

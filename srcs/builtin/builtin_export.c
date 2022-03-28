@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:20:06 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/15 17:00:35 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/27 00:06:50 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ static void	export_no_arg(t_list *env_lst)
 	{
 		ptr = (char*)env_lst->content;
 		equal_ptr = ft_strchr(ptr, '=');
-		printf("declare -x ");
-		while (*ptr != '=' && *ptr)
+		while (*ptr && *ptr != '=')
 		{	
 			write(STDOUT_FILENO, ptr, 1);
 			ptr++;
 		}
 		if (equal_ptr)
 			printf("=\"%s\"", ++ptr);
-		printf("\n");
+		write(STDOUT_FILENO, "\n", 1);
 		env_lst = env_lst->next;
 	}
 }
@@ -89,23 +88,24 @@ static	void	export_with_arg(t_list **env_lst, char *arg)
 		ft_lstadd_back(env_lst, ft_lstnew(ft_strdup(arg)));
 }
 
-void	builtin_export(t_list **env_lst, char **argv)
+int	builtin_export(t_list **env_lst, char **argv)
 {
 	argv++;
 	if (!*argv)
 	{
 		export_no_arg(*env_lst);
-		return ;
+		return (EXIT_SUCCESS);
 	}
 	while (*argv)
 	{
-		if (**argv == '=')
-		{
-			ft_putstr_fd("딸기쉘🍓: ", STDERR_FILENO);
-			print_blt_err("export", *argv, "not a valid identifier\n");
+		if (!ft_isalpha(**argv))
+		{	
+			print_err2("export", *argv, "not a valid identifier");
+			return (EXIT_FAILURE);
 		}
 		else
 			export_with_arg(env_lst, *argv);
 		argv++;
 	}
+	return (EXIT_SUCCESS);
 }
