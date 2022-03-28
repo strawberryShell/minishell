@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 22:02:01 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 16:25:11 by sehhong          ###   ########.fr       */
+/*   Created: 2022/03/28 16:09:09 by sehhong           #+#    #+#             */
+/*   Updated: 2022/03/28 16:10:49 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef REDIRECTION_H
+# define REDIRECTION_H
 
-#include "structure.h"
-
-void	parse(char *line, char **envp);
+void	connect_pipes(t_cmd *prev_cmd, t_cmd *curr_cmd);
+void	redirect_files(t_ast *rdr);
 
 #endif

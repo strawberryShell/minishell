@@ -21,7 +21,7 @@ int main(int argc, char **argv, char **envp)
 	// exit_code= 127의 의미는? 어디서 가져오지?
 	if (argc > 1)
 		exit_with_err(argv[1], strerror(ENOENT), 127);
-	build_pipes(box, ast);
+	read_ast(box, ast);
 	return (0);
 }
 

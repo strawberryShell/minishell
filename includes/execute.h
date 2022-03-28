@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 22:02:01 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 16:25:11 by sehhong          ###   ########.fr       */
+/*   Created: 2022/03/28 16:07:18 by sehhong           #+#    #+#             */
+/*   Updated: 2022/03/28 16:21:08 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef EXECUTE_H
+# define EXECUTE_H
 
-#include "structure.h"
-
-void	parse(char *line, char **envp);
+int	execute_builtin(t_list *env_lst, char **argv, t_ctype cmd_type);
+void	execute_command(t_list *env_lst, t_ast *scmd);
+char	*find_abs_path(t_list *env_lst, char *name);
+void	make_argv(char ***argv, t_ast *argv_tree);
+t_ctype which_cmd_type(char *name);
 
 #endif

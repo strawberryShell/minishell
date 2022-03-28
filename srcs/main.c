@@ -6,20 +6,28 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/24 17:38:28 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/28 16:24:59 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	initiate_box(t_box **box, char **envp)
+{
+	*box = (t_box *)ft_calloc(1, sizeof(t_box));
+	while (*envp)
+	{
+		ft_lstadd_back(&((*box)->env_lst), ft_lstnew(ft_strdup(*envp)));
+		envp++;
+	}
+}
+
 int main(int argc, char **argv, char **envp)
 {
-	t_box	box;
+	t_box	*box;
 	char	*line_read;
 
-	if (!argc)
-		argv[0] = "no";
-	initiate_env_lst(&(box.env_lst), envp);
+	initiate_box(&box, envp);
 	line_read = (char *)NULL;
 	if (argc > 1)
 		exit_with_err(argv[1], strerror(ENOENT), 127);
@@ -40,6 +48,7 @@ int main(int argc, char **argv, char **envp)
 			add_history(line_read);
 			// printf("%s\n", line_read);
 			parse(line_read, envp);
+			// read_ast(box, ast);
 		}
 	}
 	free(line_read);

@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/26 12:52:30 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/28 15:59:14 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef	struct s_cmd
 	pid_t	pid;
 }	t_cmd;
 
-typedef	enum s_builtin
+typedef	enum s_ctype
 {
 	CD = 0,
 	ECHO,
@@ -93,6 +93,6 @@ typedef	enum s_builtin
 	UNSET,
 	GENERAL,
 	NONE,
-}	t_builtin;
+}	t_ctype;
 
 #endif
