@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/28 16:53:41 by sehhong          ###   ########.fr        #
+#    Updated: 2022/03/28 17:00:05 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,13 +70,8 @@ SRCS		= $(addprefix $(SRCS_DIR), \
 				main.c \
 				)
 
-<<<<<<< HEAD
 SRCS 		+= $(SRCS_BLTIN) $(SRCS_EXEC) $(SRCS_FORK) $(SRCS_PARSE) $(SRCS_RDR) $(SRCS_AST)
 OBJS 		= $(SRCS:.c=.o)
-=======
-SRCS		+= $(SRCS_BLTIN) $(SRCS_PARSE) $(SRCS_AST)
-OBJS		= $(SRCS:.c=.o)
->>>>>>> d8b0bfe8efeae052fa467804774c0c819b97f9e2
 
 ifdef DEBUG
 	CFLAGS = -g3 -fsanitize=address
