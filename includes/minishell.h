@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
 /*   Updated: 2022/03/28 16:28:47 by sehhong          ###   ########.fr       */
+=======
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
+/*   Updated: 2022/03/16 20:36:46 by jiskim           ###   ########.fr       */
+>>>>>>> d8b0bfe8efeae052fa467804774c0c819b97f9e2
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +26,7 @@
 # include <fcntl.h>
 # include "readline/history.h"
 # include "readline/readline.h"
+# include "ast.h"
 # include "libft.h"
 # include "parse.h"
 # include "builtin.h"
