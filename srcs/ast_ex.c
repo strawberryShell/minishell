@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_ex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:29:08 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/28 08:24:02 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/28 17:44:09 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static  t_ast	*create_node(t_type type, char *data)
 static  t_type	cmp_type(char *str)
 {
 	int	type;
-	
+
 	if (!ft_strncmp(str, ">",2))
 		type = SYMBOL_G;
 	else if (!strncmp(str, "<", 2))
@@ -106,7 +106,7 @@ void	print_preorder(t_ast *tree)
 	{
 		printf("type: %d, data %s\n", tree->type, (char*)tree->data);
 		print_preorder(tree->left);
-		print_preorder(tree->right);	
+		print_preorder(tree->right);
 	}
 }
 

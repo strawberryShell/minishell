@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/28 17:00:05 by sehhong          ###   ########.fr        #
+#    Updated: 2022/03/28 18:39:41 by jiskim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,21 +52,22 @@ SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
 				token_utils.c \
 				check_syntax.c \
 				)
-			
+
 SRCS_RDR	= $(addprefix $(SRCS_RDR_DIR), \
 				connect_pipes.c \
 				redirect_files.c \
 				)
 
 SRCS_AST	= $(addprefix $(SRCS_AST_DIR),\
-				ast_utils.c)
+				ast_utils.c \
+				subtree.c \
+				read_ast.c \
+				)
 
 SRCS		= $(addprefix $(SRCS_DIR), \
-				ast_ex.c \
 				exit_with_err.c \
 				free_ptr.c \
 				system_calls.c \
-				read_ast.c \
 				main.c \
 				)
 

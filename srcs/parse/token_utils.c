@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 22:00:14 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/24 20:58:21 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/28 18:25:38 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
  * @brief
  *
  * @param data nullable
- * @param type WORD, SYMBOL
  * @return t_token*
  *
  * << >> < > | 그 외
@@ -44,6 +43,28 @@ t_token	*new_token(char *data)
 	return (new);
 }
 
+/**
+ * data는 ast에서 그대로 사용되므로 free하지 않습니다.
+ */
+void	free_token_list(t_token *list)
+{
+	t_token *tmp;
+
+	tmp = list;
+	while (list)
+	{
+		tmp = list->next;
+		if (list->data)
+		{
+			free(list->data);
+			list->data = NULL;
+		}
+		free(list);
+		list = tmp;
+	}
+	list = NULL;
+}
+
 void	add_token(t_token **list, t_token *new)
 {
 	t_token	*tmp;
@@ -57,20 +78,4 @@ void	add_token(t_token **list, t_token *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
-}
-
-void	token_iterate(t_token *list, void (*f)(t_token **, t_ast **))
-{
-	t_ast	*root;
-	t_ast	*ptr;
-
-	root = subtree_pipeseq();
-	ptr = root->left;
-	while (list)
-	{
-		// printf("(%d %s)->", list->type, list->data);
-		f(&list, &ptr);
-		list = list->next;
-	}
-	preorder_ast(root, 1);
 }

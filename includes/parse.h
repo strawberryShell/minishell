@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 22:02:01 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 16:52:12 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/28 17:51:48 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # include "structure.h"
 
-void	parse(char *line);
+void	parse(t_box *box, char *line);
 
 t_token	*new_token(char *data);
 void	add_token(t_token **list, t_token *new);
-void	token_iterate(t_token *list, void (*f)(t_token **, t_ast **));
-void	check_syntax(t_token **head, t_ast **ptr);
+void	free_token_list(t_token *list);
+int		check_syntax(t_token **head, t_ast **ptr);
 
 #endif

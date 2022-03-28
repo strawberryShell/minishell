@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 16:52:59 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/28 18:19:15 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ int main(int argc, char **argv, char **envp)
 			if (!ft_strncmp(line_read, "exit", 5))
 				break ;
 			add_history(line_read);
-			// printf("%s\n", line_read);
-			parse(line_read);
-			// read_ast(box, ast);
+			parse(box, line_read);
 		}
 	}
 	free(line_read);
