@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 18:21:42 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/28 18:48:39 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ void	parse(t_box *box, char *line)
 		return ;
 	}
 	root = syntax_analysis(token_list);
-	read_ast(box, root);
+	if (root)
+		read_ast(box, root);
 	free_token_list(token_list);
 	free_ast(root);
 }
