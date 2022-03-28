@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:36:55 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 17:29:57 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/28 18:13:21 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ int	check_rdr(t_token *token, t_ast *ptr)
 	if (!(token->next) || token->next->type != WORD)
 		return (-1);
 	// $ 처리 (<< 제외 모두) 및 "", '' 처리
-	while (ptr->left != NULL)
-		ptr = ptr->left;
+	while (ptr != NULL)
+		ptr = ptr->right;
 	word = remove_quote(token->type, token->next->data);
 	if (token->type == SYMBOL_HERE)
 		printf("heredoc 처리하고 word를 filename으로 치환");
-	ptr->left = subtree_rdr(token->data, word);
+	ptr = subtree_rdr(token->data, word);
 	return (0);
 }
 
@@ -92,7 +92,7 @@ int	check_word(t_token *token, t_ast *ptr)
 {
 	char	*word;
 
-		// $ 처리 및 "" '' 처리
+	// $ 처리 및 "" '' 처리
 	while (ptr->right != NULL)
 		ptr = ptr->right;
 	word = remove_quote(token->type, token->data);
@@ -113,15 +113,15 @@ int	check_syntax(t_token **head, t_ast **ptr)
 	if ((*head)->type == PIPE)
 	{
 		result = check_pipe(*head, *ptr);
-		*ptr = (*ptr)->right->left;
+		*ptr = (*ptr)->right; //next pipe
 	}
 	else if ((*head)->type == SYMBOL || (*head)->type == SYMBOL_HERE)
 	{
-		result = check_rdr(*head, *ptr);
+		result = check_rdr(*head, (*ptr)->left->left); // PIPESEQ -> CMD -> (RDR - nullable)
 		if (!result)
 			*head = (*head)->next;
 	}
 	else
-		result = check_word(*head, *ptr);
+		result = check_word(*head, (*ptr)->left); // PIPESEQ -> CMD
 	return (result);
 }

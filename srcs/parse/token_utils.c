@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 22:00:14 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 17:10:43 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/28 18:25:38 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	free_token_list(t_token *list)
 		free(list);
 		list = tmp;
 	}
+	list = NULL;
 }
 
 void	add_token(t_token **list, t_token *new)

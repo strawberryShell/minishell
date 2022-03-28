@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 16:56:35 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/28 18:21:42 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_ast	*syntax_analysis(t_token *list)
 	t_ast	*ptr;
 
 	root = subtree_pipeseq();
-	ptr = root->left;
+	ptr = root;
 	while (list)
 	{
 		printf("(%d %s)->", list->type, list->data);
@@ -42,7 +42,7 @@ t_ast	*syntax_analysis(t_token *list)
 	return (root);
 }
 
-void	parse(char *line)
+void	parse(t_box *box, char *line)
 {
 	char	*start;
 	char	*end;
@@ -88,8 +88,13 @@ void	parse(char *line)
 		start = end;
 	}
 	if (quote)
+	{
 		ft_putendl_fd("Syntax error", 2);
+		free_token_list(token_list);
+		return ;
+	}
 	root = syntax_analysis(token_list);
+	read_ast(box, root);
 	free_token_list(token_list);
 	free_ast(root);
 }

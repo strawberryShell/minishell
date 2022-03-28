@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/16 20:36:46 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/28 18:39:25 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,22 @@
 # include <fcntl.h>
 # include "readline/history.h"
 # include "readline/readline.h"
+# include "ast.h"
 # include "libft.h"
 # include "parse.h"
-# include "ast.h"
+# include "builtin.h"
+# include "execute.h"
+# include "fork.h"
+# include "redirection.h"
+# include "structure.h"
 
-// builtin
-void	builtin_export(t_list **env_lst, char **argv);
-void	builtin_unset(t_list **env_lst, char **argv);
-void    initiate_env_lst(t_list **env_lst, char **envp);
-char	*get_env_value(t_list *env_lst, char *key);
-void	builtin_env(t_list *env_lst);
-int	    is_same_key(char *str, char *key);
-void	print_blt_err(char *cmd, char *str1, char *str2);
+void	enum_into_str(t_type type);
+void	exit_with_err(char *str1, char *str2, int exit_code);
+void	free_ptr(void **ptr);
+int		ft_open(char *fname, int oflag, int mode);
+void	ft_close(int fd);
+void	ft_dup2(int fd1, int fd2);
+void    ft_pipe(int *fds);
+pid_t	ft_fork(void);
 
 #endif

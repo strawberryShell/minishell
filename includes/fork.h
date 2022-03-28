@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   fork.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 22:02:01 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 17:51:48 by jiskim           ###   ########.fr       */
+/*   Created: 2022/03/28 16:03:33 by sehhong           #+#    #+#             */
+/*   Updated: 2022/03/28 16:06:39 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef FORK_H
+# define FORK_H
 
 # include "structure.h"
 
-void	parse(t_box *box, char *line);
-
-t_token	*new_token(char *data);
-void	add_token(t_token **list, t_token *new);
-void	free_token_list(t_token *list);
-int		check_syntax(t_token **head, t_ast **ptr);
+void	fork_child(t_box *box, t_ast *tree, t_cmd *prev_cmd);
+int	need_fork(t_cmd *prev_cmd, t_ast *tree);
+void	run_without_fork(t_box *box, t_ast *cmd, t_ctype cmd_type);
+void	wait_children(t_box *box);
 
 #endif
