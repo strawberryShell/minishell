@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/28 16:24:26 by sehhong          ###   ########.fr        #
+#    Updated: 2022/03/28 16:30:21 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,12 +49,16 @@ SRCS_FORK	= $(addprefix $(SRCS_FORK_DIR), \
 SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
 				parse.c \
 				token_utils.c \
+				check_syntax.c \
 				)
 			
 SRCS_RDR	= $(addprefix $(SRCS_RDR_DIR), \
 				connect_pipes.c \
 				redirect_files.c \
 				)
+
+SRCS_AST	= $(addprefix $(SRCS_AST_DIR),\
+				ast_utils.c)
 
 SRCS		= $(addprefix $(SRCS_DIR), \
 				ast_ex.c \
@@ -66,7 +70,7 @@ SRCS		= $(addprefix $(SRCS_DIR), \
 				)
 
 SRCS 		+= $(SRCS_BLTIN) $(SRCS_EXEC) $(SRCS_FORK) $(SRCS_PARSE) $(SRCS_RDR)
-OBJS = $(SRCS:.c=.o)
+OBJS 		= $(SRCS:.c=.o)
 
 ifdef DEBUG
 	CFLAGS = -g3 -fsanitize=address
