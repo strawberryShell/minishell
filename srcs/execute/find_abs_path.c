@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 22:22:17 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 14:41:51 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/29 17:20:26 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static	char	*find_in_env(t_list *env_lst, char *name)
 	char	*abs_path;
 	int		fd;
 
-	paths = ft_split(get_env_value(env_lst, "PATH"), ':');
+	paths = ft_split(get_env(env_lst, "PATH"), ':');
 	if (!paths)
 		return (name);
 	while (*paths)

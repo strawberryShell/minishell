@@ -6,14 +6,14 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:23:26 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/27 00:06:42 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/29 17:49:22 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // 환경변수(key)에 상응하는 value를 반환하는 함수 
-char	*get_env_value(t_list *env_lst, char *key)
+char	*get_env(t_list *env_lst, char *key)
 {
 	while(env_lst)
 	{

@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:45:00 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/28 16:18:33 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/29 17:35:41 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,21 @@ static  t_cmd *get_last_cmd(t_box *box)
     else   
 		last_cmd = NULL;
 	return (last_cmd);
+}
+
+static	void	free_cmd_lst(t_box *box)
+{
+	t_list	*curr_cmd;
+	
+	if (!box->cmd_lst)
+		return ;
+	while (box->cmd_lst)
+	{
+		curr_cmd = box->cmd_lst;
+		box->cmd_lst = (box->cmd_lst)->next;
+		free_ptr((void**)&(curr_cmd->content));
+		free_ptr((void**)&curr_cmd);
+	}
 }
 
 void	read_ast(t_box *box, t_ast *tree)
@@ -45,7 +60,8 @@ void	read_ast(t_box *box, t_ast *tree)
 	else
 	{	
 		wait_children(box);
-		// 1) 각종 free 및 NULL복귀 2) tmp file제거
+		free_cmd_lst(box);
+		delete_tmpfiles();
 		return ;
 	}
 }

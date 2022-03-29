@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:03:44 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 17:09:50 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/29 14:31:57 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_ast(t_ast *node)
 		return ;
 	free_ast(node->left);
 	free_ast(node->right);
-	if (!node->data)
+	if (node->data)
 	{
 		free(node->data);
 		node->data = NULL;

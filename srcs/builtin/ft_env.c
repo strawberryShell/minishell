@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/26 16:50:49 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 16:54:16 by sehhong          ###   ########.fr       */
+/*   Created: 2022/03/15 08:20:24 by sehhong           #+#    #+#             */
+/*   Updated: 2022/03/29 17:15:45 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	builtin_pwd(void)
+int	ft_env(t_list *env_lst)
 {
-    char    *cwd;
-
-    cwd = getcwd(NULL, 0);
-    if (!cwd)
-    {
-        print_err("pwd", NULL, strerror(errno));
-        return (EXIT_FAILURE);
-    }
-    ft_putendl_fd(cwd, STDOUT_FILENO);
-    free(cwd);
-    cwd = NULL;
+	if (!env_lst)
+		return (EXIT_SUCCESS);
+	while(env_lst)
+	{
+		if (ft_strchr(env_lst->content, '='))
+			printf("%s\n", (char*)env_lst->content);
+		env_lst = env_lst->next;
+	}
 	return (EXIT_SUCCESS);
 }

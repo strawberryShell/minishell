@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:33:20 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 23:57:11 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/29 17:19:03 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int    builtin_cd(t_list *env_lst, char **argv)
+int	ft_cd(t_list *env_lst, char **argv)
 {
     int		ret;
 	char	*home_value;
@@ -33,7 +33,7 @@ int    builtin_cd(t_list *env_lst, char **argv)
 	}
 	else	// {"cd", 0} -> cmd: cd (home으로 간다)
 	{
-		home_value = get_env_value(env_lst, "HOME");
+		home_value = get_env(env_lst, "HOME");
 		if (!home_value)
 		{
 			print_err("cd", NULL, "HOME not set");

@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 08:20:24 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 17:20:08 by sehhong          ###   ########.fr       */
+/*   Created: 2022/03/26 16:33:09 by sehhong           #+#    #+#             */
+/*   Updated: 2022/03/29 17:36:11 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	builtin_env(t_list *env_lst)
+// TODO 아직 에러 상황을 발견하지 못함.
+int	ft_echo(char **argv)
 {
-	if (!env_lst)
-		return (EXIT_SUCCESS);
-	while(env_lst)
+    int	nflag;
+	int	i;
+    
+	nflag = 0;
+	argv++;
+	if (!ft_strncmp(*argv, "-n", 3))
 	{
-		if (ft_strchr(env_lst->content, '='))
-			printf("%s\n", (char*)env_lst->content);
-		env_lst = env_lst->next;
+		nflag = 1;
+		argv++;
 	}
+	i = 0;
+	while (argv[i])
+	{
+		ft_putstr_fd(argv[i], STDOUT_FILENO);
+		if (argv[i + 1])
+			ft_putchar_fd(' ', STDOUT_FILENO);
+		i++;
+	}
+	if (!nflag)
+		write(STDOUT_FILENO, "\n", 1);
 	return (EXIT_SUCCESS);
 }
