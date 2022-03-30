@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 22:00:14 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/31 00:24:48 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/31 01:46:08 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ t_token	*new_token(char *data)
 }
 
 /**
- * word의 data는 ast에서 그대로 사용되므로 free하지 않습니다.
+ * 수정된 코드는 모든 data를 그대로 사용하지 않으므로 무조건 free 해줍니다.
+ * WORD type도 ast에 들어갈 때 realloc으로 새로운 문자열이 만들어집니다.
  */
 void	free_token_list(t_token *list)
 {
@@ -54,15 +55,11 @@ void	free_token_list(t_token *list)
 	while (list)
 	{
 		tmp = list->next;
-		if (list->type != WORD)
-		{
-			free(list->data);
-			list->data = NULL;
-		}
+		free(list->data);
+		list->data = NULL;
 		free(list);
 		list = tmp;
 	}
-	list = NULL;
 }
 
 void	add_token(t_token **list, t_token *new)
