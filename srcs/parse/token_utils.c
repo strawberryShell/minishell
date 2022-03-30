@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 22:00:14 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 18:25:38 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/31 00:24:48 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_token	*new_token(char *data)
 }
 
 /**
- * data는 ast에서 그대로 사용되므로 free하지 않습니다.
+ * word의 data는 ast에서 그대로 사용되므로 free하지 않습니다.
  */
 void	free_token_list(t_token *list)
 {
@@ -54,7 +54,7 @@ void	free_token_list(t_token *list)
 	while (list)
 	{
 		tmp = list->next;
-		if (list->data)
+		if (list->type != WORD)
 		{
 			free(list->data);
 			list->data = NULL;
