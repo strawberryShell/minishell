@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:32:27 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/29 17:36:47 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/31 14:35:11 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static	void	recover_std_fds(int stdin_fd, int stdout_fd)
 
 static	void	exit_without_fork(t_box *box, char **argv)
 {
-	int	not_exit;
+	int	if_exit;
 
-	not_exit = 0;
+	if_exit = 1;
 	ft_putendl_fd("exit", STDERR_FILENO);
-	box->status = ft_exit(argv, &not_exit);
+	box->status = ft_exit(argv, &if_exit);
 	// 특정 exit의 상황일 경우, minishell process를 끝낸다.
-	if (!not_exit)
+	if (if_exit)
 	{
 		delete_tmpfiles();
 		exit(box->status);

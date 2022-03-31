@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:33:01 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/29 17:16:03 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/31 14:39:21 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static  int     is_number(char *str)
     return (1);
 }
 
-int    ft_exit(char **argv, int *not_exit)
+int    ft_exit(char **argv, int *if_exit)
 {
     int exit_code;
     
@@ -41,8 +41,8 @@ int    ft_exit(char **argv, int *not_exit)
     if (*argv)
     {
         print_err("exit", NULL, "too many arguments");
-        if (not_exit)
-            *not_exit = 1;
+        if (if_exit)
+            *if_exit = 0;
         return (EXIT_FAILURE);
     }
     return (exit_code);

@@ -6,13 +6,12 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:08:48 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/29 17:34:40 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/31 14:23:17 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// TODO 임시파일 작명과 위치에 대해서는 토의가 필요함.
 static  char    *get_tmpfile_name(void)
 {
     static  int i;
@@ -20,8 +19,8 @@ static  char    *get_tmpfile_name(void)
     char        *num_str;
 
     num_str = ft_itoa(i);
-    // TODO tmp 저장위치 -> 절대경로로... (논의필요)
-    tmp_fname = ft_strjoin(".tmp/tmpfile-", num_str);
+    // TODO tmp 저장위치 및 작명법 -> 논의필요
+    tmp_fname = ft_strjoin("/tmp/tmpfile-", num_str);
     free_ptr((void**)&num_str);
     return (tmp_fname);
 }
