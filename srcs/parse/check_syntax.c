@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:36:55 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 18:13:21 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/03/31 01:42:41 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ char	*ft_realloc(int len, char *prev, char word)
 	return (new);
 }
 
+/**
+ * ''와 ""를 제거하고 $를 치환해준다. (<< 제외)
+ */
 char	*remove_quote(t_ttype type, char *word)
 {
 	char	*result;
@@ -78,13 +81,18 @@ int	check_rdr(t_token *token, t_ast *ptr)
 
 	if (!(token->next) || token->next->type != WORD)
 		return (-1);
-	// $ 처리 (<< 제외 모두) 및 "", '' 처리
-	while (ptr != NULL)
-		ptr = ptr->right;
 	word = remove_quote(token->type, token->next->data);
 	if (token->type == SYMBOL_HERE)
-		printf("heredoc 처리하고 word를 filename으로 치환");
-	ptr = subtree_rdr(token->data, word);
+		printf("heredoc 처리하고 word를 filename으로 치환"); //token, word전달
+	if (ptr->left) //RDR이 이미 있는 경우
+	{
+		ptr = ptr->left; //첫번째 RDR..
+		while (ptr->right != NULL)
+			ptr = ptr->right;
+		ptr->right = subtree_rdr(token->data, word);
+	}
+	else
+		ptr->left = subtree_rdr(token->data, word);
 	return (0);
 }
 
@@ -92,10 +100,9 @@ int	check_word(t_token *token, t_ast *ptr)
 {
 	char	*word;
 
-	// $ 처리 및 "" '' 처리
+	word = remove_quote(token->type, token->data);
 	while (ptr->right != NULL)
 		ptr = ptr->right;
-	word = remove_quote(token->type, token->data);
 	if (ptr->type == CMD)
 	{
 		ptr->data = word; //builtin 구분을 위한 data 설정
@@ -117,7 +124,7 @@ int	check_syntax(t_token **head, t_ast **ptr)
 	}
 	else if ((*head)->type == SYMBOL || (*head)->type == SYMBOL_HERE)
 	{
-		result = check_rdr(*head, (*ptr)->left->left); // PIPESEQ -> CMD -> (RDR - nullable)
+		result = check_rdr(*head, (*ptr)->left); // PIPESEQ -> CMD
 		if (!result)
 			*head = (*head)->next;
 	}
