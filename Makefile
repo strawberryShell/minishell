@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/29 17:17:24 by sehhong          ###   ########.fr        #
+#    Updated: 2022/03/31 12:04:20 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS_BLTIN_DIR 	= ./srcs/builtin/
 SRCS_EXEC_DIR	= ./srcs/execute/
 SRCS_FORK_DIR	= ./srcs/fork/
 SRCS_PARSE_DIR 	= ./srcs/parse/
-SRCS_RDR_DIR	= ./srcs/redirection/
+SRCS_RDR_DIR	= ./srcs/redirect/
 SRCS_AST_DIR	= ./srcs/ast/
 
 SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
