@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:03:44 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/29 14:31:57 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/31 14:11:17 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_ast(t_ast *node)
 		return ;
 	free_ast(node->left);
 	free_ast(node->right);
-	if (node->data)
+	if (node->data && node->type != CMD)
 	{
 		free(node->data);
 		node->data = NULL;
@@ -27,11 +27,11 @@ void	free_ast(t_ast *node)
 	node = NULL;
 }
 
-void	preorder_ast(t_ast *node, int index)
+void	preorder_ast(t_ast *node, int index ,int height)
 {
 	if (node == NULL)
 		return ;
-	printf("(%d, (type = %d, data = %s)\n", index, node->type, node->data);
-	preorder_ast(node->left, index * 2);
-	preorder_ast(node->right, index * 2 + 1);
+	printf("(%d, (%d, %s)\n", index, node->type, node->data);
+	preorder_ast(node->left, index * 2, height + 1);
+	preorder_ast(node->right, index * 2 + 1, height + 1);
 }
