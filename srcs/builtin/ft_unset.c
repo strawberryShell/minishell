@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_unset.c                                    :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:21:08 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/28 10:00:00 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/29 17:16:56 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static	void	delete_node(t_list **env_lst, char *key)
 	// head_node->next == NULL이면 그냥 끝남
 }
 
-int	builtin_unset(t_list **env_lst, char **argv)
+int	ft_unset(t_list **env_lst, char **argv)
 {
 	char	*equal_ptr;
 	int		exit_code;

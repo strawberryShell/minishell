@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/28 18:39:41 by jiskim           ###   ########.fr        #
+#    Updated: 2022/03/31 14:08:06 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,18 +16,20 @@ SRCS_DIR 		= ./srcs/
 SRCS_BLTIN_DIR 	= ./srcs/builtin/
 SRCS_EXEC_DIR	= ./srcs/execute/
 SRCS_FORK_DIR	= ./srcs/fork/
+SRCS_HERE_DIR	= ./srcs/heredoc/
 SRCS_PARSE_DIR 	= ./srcs/parse/
-SRCS_RDR_DIR	= ./srcs/redirection/
+SRCS_RDR_DIR	= ./srcs/redirect/
 SRCS_AST_DIR	= ./srcs/ast/
+SRCS_UTIL_DIR	= ./srcs/utils/
 
 SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
-				builtin_cd.c \
-				builtin_echo.c \
-				builtin_env.c \
-				builtin_exit.c \
-				builtin_export.c \
-			 	builtin_pwd.c \
-				builtin_unset.c \
+				ft_cd.c \
+				ft_echo.c \
+				ft_env.c \
+				ft_exit.c \
+				ft_export.c \
+			 	ft_pwd.c \
+				ft_unset.c \
 				print_err.c \
 				utils.c \
 				)
@@ -47,6 +49,11 @@ SRCS_FORK	= $(addprefix $(SRCS_FORK_DIR), \
 				wait_children.c \
 				)
 
+SRCS_HERE	= $(addprefix $(SRCS_HERE_DIR), \
+				create_tmpfile.c \
+				delete_tmpfiles.c \
+				)
+
 SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
 				parse.c \
 				token_utils.c \
@@ -64,14 +71,19 @@ SRCS_AST	= $(addprefix $(SRCS_AST_DIR),\
 				read_ast.c \
 				)
 
-SRCS		= $(addprefix $(SRCS_DIR), \
+SRCS_UTIL	= $(addprefix $(SRCS_UTIL_DIR), \
 				exit_with_err.c \
 				free_ptr.c \
 				system_calls.c \
+				)
+
+SRCS		= $(addprefix $(SRCS_DIR), \
 				main.c \
 				)
 
-SRCS 		+= $(SRCS_BLTIN) $(SRCS_EXEC) $(SRCS_FORK) $(SRCS_PARSE) $(SRCS_RDR) $(SRCS_AST)
+SRCS 		+= $(SRCS_BLTIN) $(SRCS_EXEC) $(SRCS_FORK) $(SRCS_HERE) \
+				$(SRCS_PARSE) $(SRCS_RDR) $(SRCS_AST) $(SRCS_UTIL)
+
 OBJS 		= $(SRCS:.c=.o)
 
 ifdef DEBUG

@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/28 16:52:15 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/28 23:30:54 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ enum	e_pipe
 	RD_FD = 0,
 	WR_FD
 };
+
 typedef	struct s_cmd
 {
 	int		fds[2];

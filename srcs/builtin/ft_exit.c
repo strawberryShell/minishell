@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:33:01 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/28 09:59:42 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/03/31 14:39:21 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,16 @@ static  int     is_number(char *str)
     return (1);
 }
 
-int    builtin_exit(char **argv)
+int    ft_exit(char **argv, int *if_exit)
 {
     int exit_code;
     
     exit_code = 0;
     argv++;
     if (!*argv)
-    {
-        ft_putendl_fd("exit", STDERR_FILENO);
         return (EXIT_SUCCESS);
-    }
     if (!is_number(*argv))
     {
-        ft_putendl_fd("exit", STDERR_FILENO);
         print_err("exit", *argv, "numeric argument required");
         return (255);
     }
@@ -44,11 +40,11 @@ int    builtin_exit(char **argv)
     argv++;
     if (*argv)
     {
-        ft_putendl_fd("exit", STDOUT_FILENO);
         print_err("exit", NULL, "too many arguments");
+        if (if_exit)
+            *if_exit = 0;
         return (EXIT_FAILURE);
     }
-    ft_putendl_fd("exit", STDOUT_FILENO);
     return (exit_code);
 }
 
