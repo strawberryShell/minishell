@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.h                                          :+:      :+:    :+:   */
+/*   delete_tmpfile.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 16:07:18 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/03 01:04:08 by sehhong          ###   ########.fr       */
+/*   Created: 2022/03/29 09:47:13 by sehhong           #+#    #+#             */
+/*   Updated: 2022/04/02 14:49:38 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_H
-# define EXECUTE_H
+#include "minishell.h"
 
-int	execute_builtin(t_box *box, char **argv, t_ctype cmd_type);
-void	execute_command(t_box *box, t_ast *scmd);
-char	*find_abs_path(t_list *env_list, char *name);
-void	make_argv(char ***argv, t_ast *argv_tree);
-t_ctype which_cmd_type(char *name);
-
-#endif
+void	delete_tmpfile(t_ast *rdr)
+{
+	if (!rdr || rdr->type == SIMPLE_CMD)
+		return ;
+	if (rdr->type == IO_HERE)
+		unlink(rdr->right->data);
+	delete_tmpfile(rdr->left);
+	delete_tmpfile(rdr->right);
+}

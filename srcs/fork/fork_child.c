@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:51:54 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/28 23:26:16 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/01 19:32:39 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	fork_child(t_box *box, t_ast *tree, t_cmd *prev_cmd)
 	t_cmd	*curr_cmd;
     
 	curr_cmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
-	ft_lstadd_back(&(box->cmd_lst), ft_lstnew(curr_cmd));
+	ft_lstadd_back(&(box->cmd_list), ft_lstnew(curr_cmd));
     if (tree->right)
 		ft_pipe(curr_cmd->fds);
 	curr_cmd->pid = ft_fork();
@@ -34,7 +34,7 @@ void	fork_child(t_box *box, t_ast *tree, t_cmd *prev_cmd)
 	{
 		connect_pipes(prev_cmd, curr_cmd);
 		redirect_files(tree->left->left);
-		execute_command(box->env_lst, tree->left->right);
+		execute_command(box, tree->left->right);
 	}
 	close_pipes(prev_cmd);
 }
