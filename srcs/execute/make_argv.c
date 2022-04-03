@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   make_argv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:30:37 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/26 14:40:19 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 03:54:44 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static  int	count_arg(char **argv)
+static	int	count_arg(char **argv)
 {
 	int	num_arg;
 	int	i;
@@ -27,11 +27,12 @@ static  int	count_arg(char **argv)
 	return (num_arg + 1);
 }
 
+//TODO builtin에서 leak 발생
 void	make_argv(char ***argv, t_ast *argv_tree)
 {
 	char	**new_argv;
 	int		i;
-	
+
 	if (!argv_tree)
 		return ;
 	if (argv_tree->type == ARG)
