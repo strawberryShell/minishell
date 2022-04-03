@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:36:55 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/01 22:55:45 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/04 03:08:36 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,17 @@ static char	*ft_realloc(int len, char *prev, char word)
 	return (new);
 }
 
+/**
+ * @brief str($로 시작하는 parameter의 syntax check.)
+ * 알파벳과 숫자, 소수의 special parameter가 아닌 경우 0을 리턴한다.
+ * $로만 끝나는 경우도 0을 리턴한다.
+ */
+static int	check_param(char *str)
+{
+	str++;
+	return (*str && (ft_isalnum(*str) || ft_strchr("!#$*-?@_", *str)));
+}
+
 char	*substitute_env(t_list *env_list, char **start, char *str)
 {
 	char	*end;
@@ -39,15 +50,17 @@ char	*substitute_env(t_list *env_list, char **start, char *str)
 	char	*value;
 
 /**
- * @brief 숫자면 0~9 까지만 끊는다. (한글자만)
- * 일부를 제외한 특수문자면 그대로 출력 (아무것도 하면 안됨)
+ * @brief 숫자거나 special varable이면 한글자까지만 끊는다.
  */
 	end = ++(*start);
-	if (ft_isdigit(*end))
+	if (ft_isdigit(*end) || ft_strchr("!#$*-?@_", *end))
 		end++;
 	else
 	{
-		while (*end && !ft_strchr("\t\n\v\f\r '\"", *end))
+		/**
+		 * @brief 알파벳, 숫자, _가 아닌 문자를 만나면 끊는다. 언더바 정말 .똘아이네요
+		 */
+		while (*end && (ft_isalnum(*end) || *end == '_'))
 			end++;
 	}
 	env = ft_substr(*start, 0, end - *start);
@@ -78,8 +91,7 @@ char	*remove_quote(t_list *env_list, t_ttype type, char *word)
 			quote = 0;
 		else
 		{
-			if (type != SYMBOL_HERE && *word == '$' && quote != '\''
-				&& *(word + 1) && !ft_strchr("-=", *(word + 1))) //FIXME 케이스 따지기
+			if (type != SYMBOL_HERE && *word == '$' && quote != '\'' && check_param(word))
 				result = substitute_env(env_list, &word, result);
 			else
 				result = ft_realloc(len++, result, *word);
@@ -106,10 +118,10 @@ int	check_rdr(t_list *env_list, t_token *token, t_ast *ptr)
 		return (-1);
 	word = remove_quote(env_list, token->type, token->next->data);
 	if (token->type == SYMBOL_HERE)
-		printf("heredoc 처리하고 word를 filename으로 치환"); //token, word전달
-	if (ptr->left) //RDR이 이미 있는 경우
+		printf("heredoc 처리하고 word를 filename으로 치환");
+	if (ptr->left)
 	{
-		ptr = ptr->left; //첫번째 RDR..
+		ptr = ptr->left;
 		while (ptr->right != NULL)
 			ptr = ptr->right;
 		ptr->right = subtree_rdr(token->data, word);
