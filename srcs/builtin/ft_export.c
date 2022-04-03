@@ -6,20 +6,20 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:20:06 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/29 17:16:20 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/03 00:56:32 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	export_no_arg(t_list *env_lst)
+static void	export_no_arg(t_list *env_list)
 {
 	char	*equal_ptr;
 	char	*ptr;
 
-	while(env_lst)
+	while (env_list)
 	{
-		ptr = (char*)env_lst->content;
+		ptr = (char*)env_list->content;
 		equal_ptr = ft_strchr(ptr, '=');
 		while (*ptr && *ptr != '=')
 		{	
@@ -27,9 +27,14 @@ static void	export_no_arg(t_list *env_lst)
 			ptr++;
 		}
 		if (equal_ptr)
-			printf("=\"%s\"", ++ptr);
+		{
+			ptr++;
+			write(STDOUT_FILENO, "=\"", 2);
+			write(STDOUT_FILENO, ptr, ft_strlen(ptr));
+			write(STDOUT_FILENO, "\"", 1);
+		}
 		write(STDOUT_FILENO, "\n", 1);
-		env_lst = env_lst->next;
+		env_list = env_list->next;
 	}
 }
 
@@ -62,14 +67,14 @@ static	int	cmp_after_key(char *data, char *arg, int key_len)
 	return (0);
 }
 
-static	void	export_with_arg(t_list **env_lst, char *arg)
+static	void	export_with_arg(t_list **env_list, char *arg)
 {
 	t_list	*curr;
 	int		key_len;
 	char	*data;
 
 	key_len = get_keylen(arg);
-	curr = *env_lst;
+	curr = *env_list;
 	while (curr)
 	{
 		data =(char *)curr->content;
@@ -83,19 +88,23 @@ static	void	export_with_arg(t_list **env_lst, char *arg)
 			}
 			break ;
 		}
+		curr = curr->next;
 	}
 	if (!curr)
-		ft_lstadd_back(env_lst, ft_lstnew(ft_strdup(arg)));
+		ft_lstadd_back(env_list, ft_lstnew(ft_strdup(arg)));
 }
 
-int	ft_export(t_list **env_lst, char **argv)
+// TODO 특수기호 $ 최종확인 필요
+int	ft_export(t_list **env_list, char **argv)
 {
 	argv++;
 	if (!*argv)
 	{
-		export_no_arg(*env_lst);
+		export_no_arg(*env_list);
 		return (EXIT_SUCCESS);
 	}
+	if (is_option(*argv, "export"))
+		return (2);
 	while (*argv)
 	{
 		if (!ft_isalpha(**argv))
@@ -104,7 +113,7 @@ int	ft_export(t_list **env_lst, char **argv)
 			return (EXIT_FAILURE);
 		}
 		else
-			export_with_arg(env_lst, *argv);
+			export_with_arg(env_list, *argv);
 		argv++;
 	}
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/03/31 14:08:06 by sehhong          ###   ########.fr        #
+#    Updated: 2022/04/02 14:51:50 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,8 +50,8 @@ SRCS_FORK	= $(addprefix $(SRCS_FORK_DIR), \
 				)
 
 SRCS_HERE	= $(addprefix $(SRCS_HERE_DIR), \
-				create_tmpfile.c \
-				delete_tmpfiles.c \
+				delete_tmpfile.c \
+				launch_heredoc.c \
 				)
 
 SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
