@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/01 20:48:53 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/04 02:09:03 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	parse(t_box *box, char *line)
 	root = syntax_analysis(box->env_lst, token_list);
 	if (root)
 		read_ast(box, root);
+	// tmp 파일들 지우기 -> free_ast랑 합칠까...?
+	delete_tmpfile(root);
 	free_token_list(token_list);
 	free_ast(root);
 }

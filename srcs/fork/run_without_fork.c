@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:32:27 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/31 14:35:11 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/02 15:52:37 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ static	void	recover_std_fds(int stdin_fd, int stdout_fd)
 	ft_close(stdout_fd);
 }
 
-static	void	exit_without_fork(t_box *box, char **argv)
+static	void	exit_without_fork(t_box *box, t_ast *cmd, char **argv)
 {
 	int	if_exit;
 
 	if_exit = 1;
 	ft_putendl_fd("exit", STDERR_FILENO);
-	box->status = ft_exit(argv, &if_exit);
+	box->status = ft_exit(box, argv, &if_exit);
 	// 특정 exit의 상황일 경우, minishell process를 끝낸다.
 	if (if_exit)
 	{
-		delete_tmpfiles();
+		delete_tmpfile(cmd);
 		exit(box->status);
 	}	
 }
@@ -56,8 +56,8 @@ void	run_without_fork(t_box *box, t_ast *cmd, t_ctype cmd_type)
 	if (cmd_type == NONE)
 		box->status = EXIT_SUCCESS;
 	else if (cmd_type == EXIT)
-		exit_without_fork(box, argv);
+		exit_without_fork(box, cmd, argv);
 	else
-		box->status = execute_builtin(box->env_lst, argv, cmd_type);
+		box->status = execute_builtin(box, argv, cmd_type);
 	recover_std_fds(stdin_backup, stdout_backup);
 }

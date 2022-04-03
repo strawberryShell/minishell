@@ -6,25 +6,35 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:33:09 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/29 17:36:11 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/03 01:00:19 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// TODO 아직 에러 상황을 발견하지 못함.
+static	int	is_nflag(char *str)
+{
+	if (!ft_strncmp(str, "-n", 2))
+	{
+		str += 2;
+		while (*str == 'n')
+			str++;
+		if (!*str)
+			return (1);
+	}
+	return (0);
+}
+
+// The return status is 0 unless a write error occurs.
 int	ft_echo(char **argv)
 {
     int	nflag;
 	int	i;
     
-	nflag = 0;
 	argv++;
-	if (!ft_strncmp(*argv, "-n", 3))
-	{
-		nflag = 1;
+	nflag = is_nflag(*argv);
+	if (nflag)
 		argv++;
-	}
 	i = 0;
 	while (argv[i])
 	{

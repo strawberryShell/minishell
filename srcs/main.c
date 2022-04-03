@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/29 09:22:58 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/02 16:30:27 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	initiate_box(t_box **box, char **envp)
 	*box = (t_box *)ft_calloc(1, sizeof(t_box));
 	while (*envp)
 	{
-		ft_lstadd_back(&((*box)->env_lst), ft_lstnew(ft_strdup(*envp)));
+		ft_lstadd_back(&((*box)->env_list), ft_lstnew(ft_strdup(*envp)));
 		envp++;
 	}
 }

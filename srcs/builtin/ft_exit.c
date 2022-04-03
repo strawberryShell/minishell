@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:33:01 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/01 22:41:21 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/04 02:08:54 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static  int     is_number(char *str)
     return (1);
 }
 
-int    ft_exit(char **argv, int *if_exit)
+int    ft_exit(t_box *box, char **argv, int *if_exit)
 {
     int exit_code;
 
-    exit_code = 0;
+    exit_code = EXIT_SUCCESS;
     argv++;
     if (!*argv)
-        return (EXIT_SUCCESS);
+        return (box->status);
     if (!is_number(*argv))
     {
         print_err("exit", *argv, "numeric argument required");
@@ -47,30 +47,3 @@ int    ft_exit(char **argv, int *if_exit)
     }
     return (exit_code);
 }
-
-/* 첫 인자가 숫자가 아닐때(exit abc 1 2 3 4)
-exit
-bash: exit: abc: numeric argument required
-
-exit_code =  255 (나감)
-*/
-
-/* 첫인자가 숫자일때 (exit 1 a b c) (exit 1 2 3 4)
-exit
-bash: exit: too many arguments
-
-exit_code = 1 (안나감)
-*/
-
-/*첫 인자가 숫자이고 인자가 하나일때  (exit 515)
-exit
-
-exit_code = 3 (ㄴㅏ감)
-*/
-
-/*아무 인자없을 때 (exit)
-exit
-
-exit_code = 0 (나감)
-*/
-
