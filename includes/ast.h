@@ -6,14 +6,12 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:32:36 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/31 01:02:53 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/01 15:47:19 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AST_H
 # define AST_H
-
-#include "structure.h"
 
 t_ast	*subtree_pipeseq(void);
 t_ast	*subtree_rdr(char *symbol, char *filename);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:33:01 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/31 14:39:21 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/01 22:41:21 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "minishell.h"
 
 static  int     is_number(char *str)
 {
@@ -26,7 +26,7 @@ static  int     is_number(char *str)
 int    ft_exit(char **argv, int *if_exit)
 {
     int exit_code;
-    
+
     exit_code = 0;
     argv++;
     if (!*argv)
