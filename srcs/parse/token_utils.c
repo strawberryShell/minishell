@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 22:00:14 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/31 01:46:08 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/04 14:13:32 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_token	*new_token(char *data)
  */
 void	free_token_list(t_token *list)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	tmp = list;
 	while (list)

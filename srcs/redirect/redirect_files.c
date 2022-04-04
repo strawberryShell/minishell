@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 22:21:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/28 13:58:06 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:15:09 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	redirect_files(t_ast *rdr)
 {
 	t_type	symbol;
 	char	*fname;
-	
+
 	if (!rdr)
 		return ;
 	if (rdr->type == IO_RDR || rdr->type == IO_HERE)

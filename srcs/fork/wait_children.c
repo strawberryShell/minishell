@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:34:04 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/01 19:32:53 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:07:46 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	wait_children(t_box *box)
 	pid_t	child_pid;
 	pid_t	last_pid;
 
-	last_pid = ((t_cmd*)(ft_lstlast(box->cmd_list)->content))->pid;
+	last_pid = ((t_cmd *)(ft_lstlast(box->cmd_list)->content))->pid;
 	child_pid = 0;
 	while (child_pid != -1)
 	{
