@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:22:22 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/03 01:00:43 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:00:29 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_err(char *cmd, char *str1, char *str2)
 		ft_putstr_fd(str1, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
 	}
-	ft_putendl_fd(str2, STDERR_FILENO);	
+	ft_putendl_fd(str2, STDERR_FILENO);
 }
 
 void	print_err2(char *cmd, char *str1, char *str2)
@@ -32,5 +32,5 @@ void	print_err2(char *cmd, char *str1, char *str2)
 	ft_putstr_fd(": `", STDERR_FILENO);
 	ft_putstr_fd(str1, STDERR_FILENO);
 	ft_putstr_fd("\': ", STDERR_FILENO);
-	ft_putendl_fd(str2, STDERR_FILENO);	
+	ft_putendl_fd(str2, STDERR_FILENO);
 }

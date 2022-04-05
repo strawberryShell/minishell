@@ -6,20 +6,20 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:21:08 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/03 00:56:26 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 19:20:27 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	void	free_node(t_list *ptr)
+static	void	free_node(t_list **ptr)
 {
-	if (ptr)
+	if (*ptr)
 	{
-		free(ptr->content);
-		ptr->content =NULL;
-		free(ptr);
-		ptr = NULL;
+		free((*ptr)->content);
+		(*ptr)->content = NULL;
+		free(*ptr);
+		*ptr = NULL;
 	}
 }
 
@@ -30,12 +30,11 @@ static	void	delete_node(t_list **env_list, char *key)
 
 	curr = *env_list;
 	if (!*env_list)
-		return;
-	// 첫번째 노드가 찾는 key의 노드일때 -> 지운다
+		return ;
 	if (is_same_key(curr->content, key))
 	{
-		env_list = &(curr->next);
-		free_node(curr);
+		*env_list = curr->next;
+		free_node(&curr);
 		return ;
 	}
 	while (curr->next)
@@ -43,40 +42,30 @@ static	void	delete_node(t_list **env_list, char *key)
 		if (is_same_key(curr->next->content, key))
 		{
 			del_node = curr->next;
-			// 중간 노드가 찾는 key의 노드일때
-			if (del_node->next)
-				curr->next = del_node->next;
-			// 마지막 노드가 찾는 key의 노드일때
-			else
-				curr->next = NULL;
-			free_node(del_node);
+			curr->next = del_node->next;
+			free_node(&del_node);
 			return ;
 		}
 		curr = curr->next;
 	}
-	// head_node->next == NULL이면 그냥 끝남
 }
 
 // TODO 특수기호 $ 최종확인 필요
 int	ft_unset(t_list **env_list, char **argv)
 {
-	char	*equal_ptr;
 	int		exit_code;
 
 	exit_code = EXIT_SUCCESS;
 	argv++;
 	if (*argv && is_option(*argv, "unset"))
 		return (2);
-	while(*argv)
+	while (*argv)
 	{
-		// 해당 문자열 유효한 key인가? 유효하지 않음 -> 에러메세지
-		equal_ptr = ft_strchr(*argv, '=');
-		if (!ft_isalpha(**argv) || equal_ptr)	// '='가 있음
+		if (!is_valid_key(*argv) || ft_strchr(*argv, '='))
 		{	
 			print_err2("unset", *argv, "not a valid identifier");
 			exit_code = EXIT_FAILURE;
 		}
-		// '='가 없음 (유효함) -> 해당 노드 찾아 지우기
 		else
 			delete_node(env_list, *argv);
 		argv++;

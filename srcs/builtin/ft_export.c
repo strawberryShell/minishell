@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:20:06 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/03 00:56:32 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 18:54:14 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	export_no_arg(t_list *env_list)
 
 	while (env_list)
 	{
-		ptr = (char*)env_list->content;
+		ptr = (char *)env_list->content;
 		equal_ptr = ft_strchr(ptr, '=');
 		while (*ptr && *ptr != '=')
 		{	
@@ -38,7 +38,7 @@ static void	export_no_arg(t_list *env_list)
 	}
 }
 
-static  int	get_keylen(char *str)
+static	int	get_keylen(char *str)
 {
 	int	key_len;
 
@@ -77,8 +77,8 @@ static	void	export_with_arg(t_list **env_list, char *arg)
 	curr = *env_list;
 	while (curr)
 	{
-		data =(char *)curr->content;
-		if (!ft_strncmp(data, arg, key_len) 
+		data = (char *)curr->content;
+		if (!ft_strncmp(data, arg, key_len)
 			&& (data[key_len] == '\0' || data[key_len] == '='))
 		{
 			if (arg[key_len] == '=' && cmp_after_key(data, arg, key_len))
@@ -107,7 +107,7 @@ int	ft_export(t_list **env_list, char **argv)
 		return (2);
 	while (*argv)
 	{
-		if (!ft_isalpha(**argv))
+		if (!is_valid_key(*argv))
 		{	
 			print_err2("export", *argv, "not a valid identifier");
 			return (EXIT_FAILURE);

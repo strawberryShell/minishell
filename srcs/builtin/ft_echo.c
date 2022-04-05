@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:33:09 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/03 01:00:19 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 13:50:13 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static	int	is_nflag(char *str)
 {
-	if (!ft_strncmp(str, "-n", 2))
+	if (*str++ == '-')
 	{
-		str += 2;
+		if (!*str)
+			return (0);
 		while (*str == 'n')
 			str++;
 		if (!*str)
@@ -28,9 +29,9 @@ static	int	is_nflag(char *str)
 // The return status is 0 unless a write error occurs.
 int	ft_echo(char **argv)
 {
-    int	nflag;
+	int	nflag;
 	int	i;
-    
+
 	argv++;
 	nflag = is_nflag(*argv);
 	if (nflag)
