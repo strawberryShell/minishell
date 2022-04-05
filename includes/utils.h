@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 14:01:23 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/31 14:01:50 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 13:17:58 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_ptr(void **ptr);
 int		ft_open(char *fname, int oflag, int mode);
 void	ft_close(int fd);
 void	ft_dup2(int fd1, int fd2);
-void    ft_pipe(int *fds);
+void	ft_pipe(int *fds);
 pid_t	ft_fork(void);
 
 #endif

@@ -6,15 +6,15 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 17:04:57 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/17 19:20:40 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:17:53 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int    ft_open(char *fname, int oflag, int mode)
+int	ft_open(char *fname, int oflag, int mode)
 {
-    int fd;
+	int	fd;
 
 	fd = open(fname, oflag, mode);
 	if (fd < 0)
@@ -22,16 +22,16 @@ int    ft_open(char *fname, int oflag, int mode)
 	return (fd);
 }
 
-void    ft_close(int fd)
+void	ft_close(int fd)
 {
-    int ret;
+	int	ret;
 
 	ret = close(fd);
 	if (ret < 0)
 		exit_with_err("close()", strerror(errno), EXIT_FAILURE);
 }
 
-void    ft_dup2(int fd1, int fd2)
+void	ft_dup2(int fd1, int fd2)
 {
 	int	ret;
 
@@ -40,7 +40,7 @@ void    ft_dup2(int fd1, int fd2)
 		exit_with_err("dup2()", strerror(errno), EXIT_FAILURE);
 }
 
-void    ft_pipe(int *fds)
+void	ft_pipe(int *fds)
 {
 	int	ret;
 
@@ -49,7 +49,7 @@ void    ft_pipe(int *fds)
 		exit_with_err("pipe()", strerror(errno), EXIT_FAILURE);
 }
 
-pid_t    ft_fork(void)
+pid_t	ft_fork(void)
 {
 	int	ret;
 

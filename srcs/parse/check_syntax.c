@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:36:55 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/31 01:42:41 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/04 14:12:53 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	check_word(t_token *token, t_ast *ptr)
 	}
 	else
 		ptr->right = subtree_simple_command(ARGV, word);
-	return(0);
+	return (0);
 }
 
 int	check_syntax(t_token **head, t_ast **ptr)

@@ -6,21 +6,21 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:45:00 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/03 00:59:45 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:32:26 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static  t_cmd *get_last_cmd(t_box *box)
+static	t_cmd	*get_last_cmd(t_box *box)
 {
-    t_list	*prev_list;
-    t_cmd	*last_cmd;
+	t_list	*prev_list;
+	t_cmd	*last_cmd;
 
-    prev_list = ft_lstlast(box->cmd_list);
-    if (prev_list)
-		last_cmd = (t_cmd*)(prev_list->content);
-    else   
+	prev_list = ft_lstlast(box->cmd_list);
+	if (prev_list)
+		last_cmd = (t_cmd *)(prev_list->content);
+	else
 		last_cmd = NULL;
 	return (last_cmd);
 }
@@ -28,15 +28,15 @@ static  t_cmd *get_last_cmd(t_box *box)
 static	void	free_cmd_list(t_box *box)
 {
 	t_list	*curr_cmd;
-	
+
 	if (!box->cmd_list)
 		return ;
 	while (box->cmd_list)
 	{
 		curr_cmd = box->cmd_list;
 		box->cmd_list = (box->cmd_list)->next;
-		free_ptr((void**)&(curr_cmd->content));
-		free_ptr((void**)&curr_cmd);
+		free_ptr((void **)&(curr_cmd->content));
+		free_ptr((void **)&curr_cmd);
 	}
 }
 

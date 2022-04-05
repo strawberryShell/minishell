@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/03 01:03:07 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 13:18:33 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_token
 	struct s_token	*next;
 }t_token;
 
-typedef	struct s_box
+typedef struct s_box
 {
 	int		status;
 	t_list	*env_list;
@@ -78,13 +78,13 @@ enum	e_pipe
 	WR_FD
 };
 
-typedef	struct s_cmd
+typedef struct s_cmd
 {
 	int		fds[2];
 	pid_t	pid;
 }	t_cmd;
 
-typedef	enum s_ctype
+typedef enum s_ctype
 {
 	CD = 0,
 	ECHO,

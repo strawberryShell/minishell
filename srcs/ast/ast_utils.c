@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:03:44 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/31 14:11:17 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 13:24:16 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_ast(t_ast *node)
 	node = NULL;
 }
 
-void	preorder_ast(t_ast *node, int index ,int height)
+void	preorder_ast(t_ast *node, int index, int height)
 {
 	if (node == NULL)
 		return ;

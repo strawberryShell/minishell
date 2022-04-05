@@ -6,13 +6,13 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:51:54 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/01 19:32:39 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:06:35 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static  void    close_pipes(t_cmd *prev_cmd)
+static	void	close_pipes(t_cmd *prev_cmd)
 {
 	if (prev_cmd)
 	{
@@ -24,10 +24,10 @@ static  void    close_pipes(t_cmd *prev_cmd)
 void	fork_child(t_box *box, t_ast *tree, t_cmd *prev_cmd)
 {
 	t_cmd	*curr_cmd;
-    
+
 	curr_cmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
 	ft_lstadd_back(&(box->cmd_list), ft_lstnew(curr_cmd));
-    if (tree->right)
+	if (tree->right)
 		ft_pipe(curr_cmd->fds);
 	curr_cmd->pid = ft_fork();
 	if (!curr_cmd->pid)

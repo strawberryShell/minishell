@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/02 15:50:16 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:13:15 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ void	parse(t_box *box, char *line)
 			{
 				if (*start == *end && *start != '|')
 					end++;
-				break;
+				break ;
 			}
 			if (ft_strchr("<>|", *end))
-				break;
+				break ;
 		}
 		if (start < end)
 			add_token(&token_list, new_token(ft_substr(start, 0, (end - start))));
