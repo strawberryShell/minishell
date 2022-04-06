@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:08:48 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/06 22:58:31 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 00:48:26 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static	char	*get_tmpfile_name(char *tmp_dir, int i)
 }
 
 // TODO line_read에서 $(환경변수) get_env로 바꿔야함.
-static	char	*create_tmpfile(t_list *env_list, int *tmp_fd)
+static	char	*create_tmpfile(int *tmp_fd)
 {
 	static int	i;
 	char		*tmp_dir;
 	char		*tmp_fname;
 
-	tmp_dir = get_env(env_list, "TMPDIR");
+	tmp_dir = get_env("TMPDIR");
 	if (!tmp_dir)
 		tmp_dir = "/tmp/";
 	while (*tmp_fd < 0)
@@ -50,7 +50,7 @@ static	char	*create_tmpfile(t_list *env_list, int *tmp_fd)
 	return (tmp_fname);
 }
 
-char	*launch_heredoc(t_list *env_list, char *lim)
+char	*launch_heredoc(char *lim)
 {
 	char	*tmp_fname;
 	int		tmp_fd;
@@ -59,7 +59,7 @@ char	*launch_heredoc(t_list *env_list, char *lim)
 
 	tmp_fd = -1;
 	line_read = NULL;
-	tmp_fname = create_tmpfile(env_list, &tmp_fd);
+	tmp_fname = create_tmpfile(&tmp_fd);
 	while (1)
 	{
 		if (line_read)

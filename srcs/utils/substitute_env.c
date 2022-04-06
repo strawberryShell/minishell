@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   substitute_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 03:16:44 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/04 03:17:05 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 00:51:25 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*substitute_env(t_list *env_list, char **start, char *str)
+char	*substitute_env(char **start, char *str)
 {
 	char	*end;
 	char	*env;
@@ -34,7 +34,7 @@ char	*substitute_env(t_list *env_list, char **start, char *str)
 	}
 	env = ft_substr(*start, 0, end - *start);
 	*start = --end;
-	value = get_env(env_list, env);
+	value = get_env(env);
 	free(env);
 	if (!value)
 		value = "";

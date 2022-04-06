@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:36:55 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/06 16:58:07 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 00:49:43 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ static int	check_pipe(t_token *token, t_ast *ptr)
 	return (0);
 }
 
-static int	check_rdr(t_list *env_list, t_token *token, t_ast *ptr)
+static int	check_rdr(t_token *token, t_ast *ptr)
 {
 	char	*word;
 	char	*filename;
 
 	if (!(token->next) || token->next->type != WORD)
 		return (-1);
-	word = remove_quote(env_list, token->type, token->next->data);
+	word = remove_quote(token->type, token->next->data);
 	if (token->type == SYMBOL_HERE)
 	{
-		filename = launch_heredoc(env_list, word);
+		filename = launch_heredoc(word);
 		free(word);
 		word = filename;
 	}
@@ -47,11 +47,11 @@ static int	check_rdr(t_list *env_list, t_token *token, t_ast *ptr)
 	return (0);
 }
 
-static int	check_word(t_list *env_list, t_token *token, t_ast *ptr)
+static int	check_word(t_token *token, t_ast *ptr)
 {
 	char	*word;
 
-	word = remove_quote(env_list, token->type, token->data);
+	word = remove_quote(token->type, token->data);
 	while (ptr->right != NULL)
 		ptr = ptr->right;
 	if (ptr->type == CMD)
@@ -64,7 +64,7 @@ static int	check_word(t_list *env_list, t_token *token, t_ast *ptr)
 	return (0);
 }
 
-int	check_syntax(t_list *env_list, t_token **head, t_ast **ptr)
+int	check_syntax(t_token **head, t_ast **ptr)
 {
 	int		result;
 
@@ -75,11 +75,11 @@ int	check_syntax(t_list *env_list, t_token **head, t_ast **ptr)
 	}
 	else if ((*head)->type == SYMBOL || (*head)->type == SYMBOL_HERE)
 	{
-		result = check_rdr(env_list, *head, (*ptr)->left);
+		result = check_rdr(*head, (*ptr)->left);
 		if (!result)
 			*head = (*head)->next;
 	}
 	else
-		result = check_word(env_list, *head, (*ptr)->left);
+		result = check_word(*head, (*ptr)->left);
 	return (result);
 }

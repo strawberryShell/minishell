@@ -6,20 +6,20 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:20:06 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/04 18:54:14 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 00:59:04 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	export_no_arg(t_list *env_list)
+static void	export_no_arg(void)
 {
 	char	*equal_ptr;
 	char	*ptr;
 
-	while (env_list)
+	while (g_box->env_list)
 	{
-		ptr = (char *)env_list->content;
+		ptr = (char *)g_box->env_list->content;
 		equal_ptr = ft_strchr(ptr, '=');
 		while (*ptr && *ptr != '=')
 		{	
@@ -34,7 +34,7 @@ static void	export_no_arg(t_list *env_list)
 			write(STDOUT_FILENO, "\"", 1);
 		}
 		write(STDOUT_FILENO, "\n", 1);
-		env_list = env_list->next;
+		g_box->env_list = g_box->env_list->next;
 	}
 }
 
@@ -67,14 +67,14 @@ static	int	cmp_after_key(char *data, char *arg, int key_len)
 	return (0);
 }
 
-static	void	export_with_arg(t_list **env_list, char *arg)
+static	void	export_with_arg(char *arg)
 {
 	t_list	*curr;
 	int		key_len;
 	char	*data;
 
 	key_len = get_keylen(arg);
-	curr = *env_list;
+	curr = g_box->env_list;
 	while (curr)
 	{
 		data = (char *)curr->content;
@@ -91,16 +91,16 @@ static	void	export_with_arg(t_list **env_list, char *arg)
 		curr = curr->next;
 	}
 	if (!curr)
-		ft_lstadd_back(env_list, ft_lstnew(ft_strdup(arg)));
+		ft_lstadd_back(&(g_box->env_list), ft_lstnew(ft_strdup(arg)));
 }
 
 // TODO 특수기호 $ 최종확인 필요
-int	ft_export(t_list **env_list, char **argv)
+int	ft_export(char **argv)
 {
 	argv++;
 	if (!*argv)
 	{
-		export_no_arg(*env_list);
+		export_no_arg();
 		return (EXIT_SUCCESS);
 	}
 	if (is_option(*argv, "export"))
@@ -113,7 +113,7 @@ int	ft_export(t_list **env_list, char **argv)
 			return (EXIT_FAILURE);
 		}
 		else
-			export_with_arg(env_list, *argv);
+			export_with_arg(*argv);
 		argv++;
 	}
 	return (EXIT_SUCCESS);

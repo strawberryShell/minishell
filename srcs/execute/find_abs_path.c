@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 22:22:17 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/04 15:30:36 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 00:53:09 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static	char	*make_full_path(char *path, char *name)
 	return (abs_path);
 }
 
-static	char	*find_in_env(t_list *env_list, char *name)
+static	char	*find_in_env(char *name)
 {
 	char	**paths;
 	char	*abs_path;
 	int		fd;
 
-	paths = ft_split(get_env(env_list, "PATH"), ':');
+	paths = ft_split(get_env("PATH"), ':');
 	if (!paths)
 		return (name);
 	while (*paths)
@@ -50,7 +50,7 @@ static	char	*find_in_env(t_list *env_list, char *name)
 	return (name);
 }
 
-char	*find_abs_path(t_list *env_list, char *name)
+char	*find_abs_path(char *name)
 {
 	int		fd;
 	char	*abs_path;
@@ -62,6 +62,6 @@ char	*find_abs_path(t_list *env_list, char *name)
 		close(fd);
 	}
 	else
-		abs_path = find_in_env(env_list, name);
+		abs_path = find_in_env(name);
 	return (abs_path);
 }

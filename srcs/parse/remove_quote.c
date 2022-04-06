@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 03:22:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/04 03:32:09 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 00:48:51 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	check_param(char *str)
 	return (*str && (ft_isalnum(*str) || ft_strchr("!#$*-?@_", *str)));
 }
 
-char	*remove_quote(t_list *env_list, t_ttype type, char *word)
+char	*remove_quote(t_ttype type, char *word)
 {
 	char	*result;
 	char	quote;
@@ -65,7 +65,7 @@ char	*remove_quote(t_list *env_list, t_ttype type, char *word)
 		{
 			if (type != SYMBOL_HERE && *word == '$' && quote != '\''
 				&& check_param(word))
-				result = substitute_env(env_list, &word, result);
+				result = substitute_env(&word, result);
 			else
 				result = ft_realloc(result, *word);
 		}

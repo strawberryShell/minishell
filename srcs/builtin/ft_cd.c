@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:33:20 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/04 13:42:51 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 00:38:14 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static	int	print_cd_err(char *str, char *err_msg)
 	return (EXIT_FAILURE);
 }
 
-int	ft_cd(t_list *env_list, char **argv)
+int	ft_cd(char **argv)
 {
 	int		ret;
 	char	*home_value;
@@ -33,7 +33,7 @@ int	ft_cd(t_list *env_list, char **argv)
 	}
 	else
 	{
-		home_value = get_env(env_list, "HOME");
+		home_value = get_env("HOME");
 		if (!home_value)
 			return (print_cd_err(NULL, "HOME not set"));
 		ret = chdir(home_value);

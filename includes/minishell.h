@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/06 20:57:11 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 00:58:23 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@
 # include "parse.h"
 # include "redirect.h"
 # include "utils.h"
+
+t_box	*g_box;
 
 #endif
