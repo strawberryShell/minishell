@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:32:27 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/04 14:07:33 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/06 23:57:45 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,16 @@ void	run_without_fork(t_box *box, t_ast *cmd, t_ctype cmd_type)
 
 	backup_std_fds(&stdin_backup, &stdout_backup);
 	redirect_files(cmd->left);
+	if (cmd_type == NONE)
+	{
+		box->status = EXIT_SUCCESS;
+		recover_std_fds(stdin_backup, stdout_backup);
+		return ;
+	}
 	argv = (char **)ft_calloc(2, sizeof(char *));
 	argv[0] = cmd->right->left->data;
 	make_argv(&argv, cmd->right->right);
-	if (cmd_type == NONE)
-		box->status = EXIT_SUCCESS;
-	else if (cmd_type == EXIT)
+	if (cmd_type == EXIT)
 		exit_without_fork(box, cmd->left, argv);
 	else
 		box->status = execute_builtin(box, argv, cmd_type);

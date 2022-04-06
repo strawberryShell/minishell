@@ -3,21 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:33:09 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/06 19:16:49 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 00:03:54 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * @brief when nflag return zero.
- *
- * @param str
- * @return int
- */
 static	int	is_nflag(char *str)
 {
 	if (*str++ == '-')
@@ -32,7 +26,6 @@ static	int	is_nflag(char *str)
 	return (0);
 }
 
-// The return status is 0 unless a write error occurs.
 int	ft_echo(char **argv)
 {
 	int	nflag;
