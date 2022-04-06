@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/04 14:13:15 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/06 19:18:55 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_ast	*syntax_analysis(t_token *list)
+t_ast	*syntax_analysis(t_list *env_list, t_token *list)
 {
 	t_ast	*root;
 	t_ast	*ptr;
@@ -22,9 +22,9 @@ t_ast	*syntax_analysis(t_token *list)
 	while (list)
 	{
 		printf("(%d %s)->", list->type, list->data);
-		if (check_syntax(&list, &ptr) < 0)
+		if (check_syntax(env_list, &list, &ptr) < 0)
 		{
-			ft_putstr_fd("딸기쉘: syntax error near unexpected token `", 2);
+			ft_putstr_fd("딸기쉘🍓: syntax error near unexpected token `", 2);
 			if (list->type == PIPE)
 				ft_putstr_fd(list->data, 2);
 			else if (list->next)
@@ -32,6 +32,7 @@ t_ast	*syntax_analysis(t_token *list)
 			else
 				ft_putstr_fd("newline", 2);
 			ft_putendl_fd("'", 2);
+			// TODO tmp file 지우기
 			free_ast(root);
 			return (NULL);
 		}
@@ -93,10 +94,9 @@ void	parse(t_box *box, char *line)
 		free_token_list(token_list);
 		return ;
 	}
-	root = syntax_analysis(token_list);
+	root = syntax_analysis(box->env_list, token_list);
 	if (root)
 		read_ast(box, root);
-	// tmp 파일들 지우기 -> free_ast랑 합칠까...?
 	delete_tmpfile(root);
 	free_token_list(token_list);
 	free_ast(root);

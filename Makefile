@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/04/02 14:51:50 by sehhong          ###   ########.fr        #
+#    Updated: 2022/04/04 03:23:29 by jiskim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
 				ft_env.c \
 				ft_exit.c \
 				ft_export.c \
-			 	ft_pwd.c \
+				ft_pwd.c \
 				ft_unset.c \
 				print_err.c \
 				utils.c \
@@ -58,6 +58,7 @@ SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
 				parse.c \
 				token_utils.c \
 				check_syntax.c \
+				remove_quote.c \
 				)
 
 SRCS_RDR	= $(addprefix $(SRCS_RDR_DIR), \
@@ -75,6 +76,7 @@ SRCS_UTIL	= $(addprefix $(SRCS_UTIL_DIR), \
 				exit_with_err.c \
 				free_ptr.c \
 				system_calls.c \
+				substitute_env.c \
 				)
 
 SRCS		= $(addprefix $(SRCS_DIR), \

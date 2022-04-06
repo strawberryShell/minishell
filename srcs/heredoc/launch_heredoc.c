@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:08:48 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/04 14:31:17 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:49:04 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static	char	*create_tmpfile(t_list *env_list, int *tmp_fd)
 		tmp_fname = get_tmpfile_name(tmp_dir, i);
 		*tmp_fd = open(tmp_fname, O_WRONLY | O_CREAT | O_EXCL | O_TRUNC, 0600);
 		if (*tmp_fd < 0)
-		{	
+		{
 			free_ptr((void **)&tmp_fname);
 			i++;
 		}
@@ -49,7 +49,6 @@ static	char	*create_tmpfile(t_list *env_list, int *tmp_fd)
 	return (tmp_fname);
 }
 
-// TODO line_read에서 $(환경변수) get_env로 바꿔야함.
 char	*launch_heredoc(t_list *env_list, char *lim)
 {
 	char	*tmp_fname;

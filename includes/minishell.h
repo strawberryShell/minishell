@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/03/31 14:05:01 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/04 02:34:04 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,15 @@
 # include <dirent.h>
 # include "readline/history.h"
 # include "readline/readline.h"
+# include "libft.h"
+# include "structure.h"
 # include "ast.h"
 # include "builtin.h"
 # include "execute.h"
 # include "fork.h"
 # include "heredoc.h"
-# include "libft.h"
 # include "parse.h"
 # include "redirect.h"
-# include "structure.h"
 # include "utils.h"
-
-void	enum_into_str(t_type type);
 
 #endif

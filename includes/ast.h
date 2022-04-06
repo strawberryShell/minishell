@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:32:36 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/04 13:14:56 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:37:22 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AST_H
 # define AST_H
-
-# include "structure.h"
 
 t_ast	*subtree_pipeseq(void);
 t_ast	*subtree_rdr(char *symbol, char *filename);

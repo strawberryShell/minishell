@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:24:10 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/04 18:42:00 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:37:30 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
-
-# include "structure.h"
 
 int		ft_cd(t_list *env_list, char **argv);
 int		ft_echo(char **argv);

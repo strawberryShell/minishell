@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 14:01:23 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/04 13:17:58 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:37:40 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void	ft_close(int fd);
 void	ft_dup2(int fd1, int fd2);
 void	ft_pipe(int *fds);
 pid_t	ft_fork(void);
+char	*substitute_env(t_list *env_list, char **start, char *str);
 
 #endif
