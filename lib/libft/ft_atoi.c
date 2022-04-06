@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:51:02 by jiskim            #+#    #+#             */
-/*   Updated: 2022/03/12 21:16:41 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 00:17:12 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	ft_atoi(const char *str)
 		str++;
 	while (*str >= '0' && *str <= '9')
 		ai = (10 * ai) + (*str++ - '0');
-	if (*str)
-		exit(EXIT_FAILURE);
 	if (ai > 9223372036854775807)
 	{
 		if (sign == -1)

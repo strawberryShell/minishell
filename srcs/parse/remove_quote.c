@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 03:22:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/04 03:32:09 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 00:17:44 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ static char	*ft_realloc(char *prev, char word)
 	return (new);
 }
 
-/**
- * @brief str($로 시작하는 parameter의 syntax check.)
- * 알파벳과 숫자, 소수의 special parameter가 아닌 경우 0을 리턴한다.
- * $로만 끝나는 경우도 0을 리턴한다.
- */
 static int	check_param(char *str)
 {
 	str++;
