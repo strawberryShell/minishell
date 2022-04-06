@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:36:55 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/05 15:36:48 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/06 16:58:07 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@ static int	check_pipe(t_token *token, t_ast *ptr)
 static int	check_rdr(t_list *env_list, t_token *token, t_ast *ptr)
 {
 	char	*word;
+	char	*filename;
 
 	if (!(token->next) || token->next->type != WORD)
 		return (-1);
 	word = remove_quote(env_list, token->type, token->next->data);
 	if (token->type == SYMBOL_HERE)
-		printf("heredoc 처리하고 word를 filename으로 치환");
+	{
+		filename = launch_heredoc(env_list, word);
+		free(word);
+		word = filename;
+	}
 	if (ptr->left)
 	{
 		ptr = ptr->left;
