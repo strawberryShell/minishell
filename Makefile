@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/04/07 18:06:52 by sehhong          ###   ########.fr        #
+#    Updated: 2022/04/07 18:48:39 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,7 @@ SRCS_UTIL	= $(addprefix $(SRCS_UTIL_DIR), \
 				exit_with_err.c \
 				free_ptr.c \
 				system_calls.c \
+				ft_realloc.c \
 				substitute_env.c \
 				)
 

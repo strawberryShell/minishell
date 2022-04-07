@@ -6,36 +6,11 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 03:22:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 17:51:55 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 18:50:07 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*ft_realloc(char *prev, char word)
-{
-	char	*new;
-	int		len;
-	int		i;
-
-	if (!prev)
-		len = 0;
-	else
-		len = ft_strlen(prev);
-	new = ft_calloc(len + 2, 1);
-	i = 0;
-	if (prev)
-	{
-		while (prev[i])
-		{
-			new[i] = prev[i];
-			i++;
-		}
-		free(prev);
-	}
-	new[i] = word;
-	return (new);
-}
 
 static int	check_param(char *str)
 {

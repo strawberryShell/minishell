@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:08:48 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 17:50:43 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 18:47:58 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,31 +47,6 @@ static	char	*create_tmpfile(int *tmp_fd)
 		}
 	}
 	return (tmp_fname);
-}
-
-static char	*ft_realloc(char *prev, char word)
-{
-	char	*new;
-	int		len;
-	int		i;
-
-	if (!prev)
-		len = 0;
-	else
-		len = ft_strlen(prev);
-	new = ft_calloc(len + 2, 1);
-	i = 0;
-	if (prev)
-	{
-		while (prev[i])
-		{
-			new[i] = prev[i];
-			i++;
-		}
-		free(prev);
-	}
-	new[i] = word;
-	return (new);
 }
 
 static	char	*get_replaced_readline(char *line_read)
