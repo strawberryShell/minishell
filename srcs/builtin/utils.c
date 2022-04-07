@@ -6,20 +6,24 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:23:26 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/04 19:20:13 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 15:20:49 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// 환경변수(key)에 상응하는 value를 반환하는 함수 
-char	*get_env(t_list *env_list, char *key)
+char	*get_env(char *key)
 {
-	while (env_list)
+	t_list	*ptr;
+
+	ptr = g_box->env_list;
+	if (!ft_strncmp(key, "?", 2))
+		return (ft_itoa(g_box->exit_code));
+	while (ptr)
 	{
-		if (is_same_key(env_list->content, key))
-			return (ft_strchr(env_list->content, '=') + 1);
-		env_list = env_list->next;
+		if (is_same_key(ptr->content, key))
+			return (ft_strchr(ptr->content, '=') + 1);
+		ptr = ptr->next;
 	}
 	return (NULL);
 }

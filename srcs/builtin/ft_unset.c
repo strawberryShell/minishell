@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:21:08 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/04 19:20:27 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 00:59:09 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ static	void	free_node(t_list **ptr)
 	}
 }
 
-static	void	delete_node(t_list **env_list, char *key)
+static	void	delete_node(char *key)
 {
 	t_list	*curr;
 	t_list	*del_node;
 
-	curr = *env_list;
-	if (!*env_list)
+	curr = g_box->env_list;
+	if (!g_box->env_list)
 		return ;
 	if (is_same_key(curr->content, key))
 	{
-		*env_list = curr->next;
+		g_box->env_list = curr->next;
 		free_node(&curr);
 		return ;
 	}
@@ -51,7 +51,7 @@ static	void	delete_node(t_list **env_list, char *key)
 }
 
 // TODO 특수기호 $ 최종확인 필요
-int	ft_unset(t_list **env_list, char **argv)
+int	ft_unset(char **argv)
 {
 	int		exit_code;
 
@@ -67,7 +67,7 @@ int	ft_unset(t_list **env_list, char **argv)
 			exit_code = EXIT_FAILURE;
 		}
 		else
-			delete_node(env_list, *argv);
+			delete_node(*argv);
 		argv++;
 	}
 	return (exit_code);

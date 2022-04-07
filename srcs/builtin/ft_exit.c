@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:33:01 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/05 15:33:40 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 00:58:51 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static	int	is_number(char *str)
 	return (1);
 }
 
-int	ft_exit(t_box *box, char **argv, int *if_exit)
+int	ft_exit(char **argv, int *if_exit)
 {
 	int	exit_code;
 
 	exit_code = EXIT_SUCCESS;
 	argv++;
 	if (!*argv)
-		return (box->status);
+		return (g_box->exit_code);
 	if (!is_number(*argv))
 	{
 		print_err("exit", *argv, "numeric argument required");

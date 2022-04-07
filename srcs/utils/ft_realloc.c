@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 08:20:24 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 15:46:44 by sehhong          ###   ########.fr       */
+/*   Created: 2022/04/07 18:47:40 by sehhong           #+#    #+#             */
+/*   Updated: 2022/04/07 18:49:00 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_env(char **argv)
+char	*ft_realloc(char *prev, char word)
 {
-	t_list	*ptr;
+	char	*new;
+	int		len;
+	int		i;
 
-	ptr = g_box->env_list;
-	if (argv[1])
+	if (!prev)
+		len = 0;
+	else
+		len = ft_strlen(prev);
+	new = ft_calloc(len + 2, 1);
+	i = 0;
+	if (prev)
 	{
-		if (is_option(argv[1], "env"))
-			return (EXIT_FAILURE);
-		print_err("env", argv[1], strerror(ENOENT));
-		return (127);
+		while (prev[i])
+		{
+			new[i] = prev[i];
+			i++;
+		}
+		free(prev);
 	}
-	if (!ptr)
-		return (EXIT_SUCCESS);
-	while (ptr)
-	{
-		if (ft_strchr(ptr->content, '='))
-			ft_putendl_fd((char *)ptr->content, STDOUT_FILENO);
-		ptr = ptr->next;
-	}
-	return (EXIT_SUCCESS);
+	new[i] = word;
+	return (new);
 }

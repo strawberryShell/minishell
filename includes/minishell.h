@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 11:28:08 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 17:49:43 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <dirent.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include "libft.h"
@@ -53,5 +52,7 @@
 __/ | |\n|___/\\__|_|  \\__,_| \\_/\\_/ |_.__/ \\___|_|  |_|   \\__, | \
 |___/_| |_|\\___|_|_|\n                                                 \
 |___/                        \n\n"
+
+t_box	*g_box;
 
 #endif

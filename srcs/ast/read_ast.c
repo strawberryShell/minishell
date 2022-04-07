@@ -6,18 +6,18 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:45:00 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/04 14:32:26 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 00:58:46 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	t_cmd	*get_last_cmd(t_box *box)
+static	t_cmd	*get_last_cmd(void)
 {
 	t_list	*prev_list;
 	t_cmd	*last_cmd;
 
-	prev_list = ft_lstlast(box->cmd_list);
+	prev_list = ft_lstlast(g_box->cmd_list);
 	if (prev_list)
 		last_cmd = (t_cmd *)(prev_list->content);
 	else
@@ -25,42 +25,42 @@ static	t_cmd	*get_last_cmd(t_box *box)
 	return (last_cmd);
 }
 
-static	void	free_cmd_list(t_box *box)
+static	void	free_cmd_list(void)
 {
 	t_list	*curr_cmd;
 
-	if (!box->cmd_list)
+	if (!g_box->cmd_list)
 		return ;
-	while (box->cmd_list)
+	while (g_box->cmd_list)
 	{
-		curr_cmd = box->cmd_list;
-		box->cmd_list = (box->cmd_list)->next;
+		curr_cmd = g_box->cmd_list;
+		g_box->cmd_list = (g_box->cmd_list)->next;
 		free_ptr((void **)&(curr_cmd->content));
 		free_ptr((void **)&curr_cmd);
 	}
 }
 
-void	read_ast(t_box *box, t_ast *tree)
+void	read_ast(t_ast *tree)
 {	
 	t_cmd	*prev_cmd;
 	int		ret;
 
 	if (tree)
 	{
-		prev_cmd = get_last_cmd(box);
+		prev_cmd = get_last_cmd();
 		ret = need_fork(prev_cmd, tree);
 		if (ret != -1)
 		{	
-			run_without_fork(box, tree->left, (t_ctype)ret);
+			run_without_fork(tree->left, (t_ctype)ret);
 			return ;
 		}
-		fork_child(box, tree, prev_cmd);
-		read_ast(box, tree->right);
+		fork_child(tree, prev_cmd);
+		read_ast(tree->right);
 	}
 	else
 	{	
-		wait_children(box);
-		free_cmd_list(box);
+		wait_children();
+		free_cmd_list();
 		return ;
 	}
 }

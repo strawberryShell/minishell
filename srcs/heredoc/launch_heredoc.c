@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:08:48 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 09:21:20 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 18:47:58 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static	char	*get_tmpfile_name(char *tmp_dir, int i)
 	return (full_name);
 }
 
-static	char	*create_tmpfile(t_list *env_list, int *tmp_fd)
+static	char	*create_tmpfile(int *tmp_fd)
 {
 	static int	i;
 	char		*tmp_dir;
 	char		*tmp_fname;
 
-	tmp_dir = get_env(env_list, "TMPDIR");
+	tmp_dir = get_env("TMPDIR");
 	if (!tmp_dir)
 		tmp_dir = "/tmp/";
 	while (*tmp_fd < 0)
@@ -49,16 +49,46 @@ static	char	*create_tmpfile(t_list *env_list, int *tmp_fd)
 	return (tmp_fname);
 }
 
-char	*launch_heredoc(t_list *env_list, char *lim)
+static	char	*get_replaced_readline(char *line_read)
+{
+	char	*new_str;
+	char	*ptr;
+
+	if (!*line_read)
+		return (line_read);
+	ptr = line_read;
+	new_str = NULL;
+	while (*ptr)
+	{
+		if (*ptr == '$')
+			new_str = substitute_env(&ptr, new_str);
+		else
+			new_str = ft_realloc(new_str, *ptr);
+		ptr++;
+	}
+	free_ptr((void **)&line_read);
+	return (new_str);
+}
+
+static	void	write_on_tmp_file(char *str, int tmp_fd)
+{
+	char	*tmp_str;
+
+	tmp_str = ft_strjoin(str, "\n");
+	ft_putstr_fd(tmp_str, tmp_fd);
+	free(tmp_str);
+	tmp_str = NULL;
+}
+
+char	*launch_heredoc(char *lim)
 {
 	char	*tmp_fname;
 	int		tmp_fd;
 	char	*line_read;
-	char	*tmp_str;
 
 	tmp_fd = -1;
 	line_read = NULL;
-	tmp_fname = create_tmpfile(env_list, &tmp_fd);
+	tmp_fname = create_tmpfile(&tmp_fd);
 	while (1)
 	{
 		if (line_read)
@@ -66,11 +96,10 @@ char	*launch_heredoc(t_list *env_list, char *lim)
 		line_read = readline("> ");
 		if (line_read)
 		{
+			line_read = get_replaced_readline(line_read);
 			if (!ft_strncmp(line_read, lim, ft_strlen(lim) + 1))
 				break ;
-			tmp_str = ft_strjoin(line_read, "\n");
-			ft_putstr_fd(tmp_str, tmp_fd);
-			free_ptr((void **)&tmp_str);
+			write_on_tmp_file(line_read, tmp_fd);
 		}
 	}
 	free_ptr((void **)&line_read);

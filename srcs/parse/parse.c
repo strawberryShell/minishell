@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 11:19:18 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 18:14:06 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_ast	*syntax_analysis(t_list *env_list, t_token *list)
+t_ast	*syntax_analysis(t_token *list)
 {
 	t_ast	*root;
 	t_ast	*ptr;
@@ -21,7 +21,7 @@ t_ast	*syntax_analysis(t_list *env_list, t_token *list)
 	ptr = root;
 	while (list)
 	{
-		if (check_syntax(env_list, &list, &ptr) < 0)
+		if (check_syntax(&list, &ptr) < 0)
 		{
 			ft_putstr_fd("딸기쉘: syntax error near unexpected token `",
 				STDERR_FILENO);
@@ -89,7 +89,7 @@ t_token	*tokenization(char *line)
 	return (token_list);
 }
 
-void	parse(t_box *box, char *line)
+void	parse(char *line)
 {
 	t_token	*token_list;
 	t_ast	*root;
@@ -97,9 +97,9 @@ void	parse(t_box *box, char *line)
 	token_list = tokenization(line);
 	if (token_list)
 	{
-		root = syntax_analysis(box->env_list, token_list);
+		root = syntax_analysis(token_list);
 		if (root)
-			read_ast(box, root);
+			read_ast(root);
 		free_token_list(token_list);
 		free_ast(root);
 	}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/04/07 14:04:13 by jiskim           ###   ########.fr        #
+#    Updated: 2022/04/07 18:48:39 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
 
 SRCS_RDR	= $(addprefix $(SRCS_RDR_DIR), \
 				connect_pipes.c \
+				redirect_files_no_fork.c \
 				redirect_files.c \
 				)
 
@@ -76,6 +77,7 @@ SRCS_UTIL	= $(addprefix $(SRCS_UTIL_DIR), \
 				exit_with_err.c \
 				free_ptr.c \
 				system_calls.c \
+				ft_realloc.c \
 				substitute_env.c \
 				)
 

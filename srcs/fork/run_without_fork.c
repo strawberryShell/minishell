@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:32:27 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/04 14:07:33 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 15:40:00 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,46 @@ static	void	recover_std_fds(int stdin_fd, int stdout_fd)
 	ft_close(stdout_fd);
 }
 
-static	void	exit_without_fork(t_box *box, t_ast *rdr, char **argv)
+static	void	exit_without_fork(t_ast *rdr, char **argv)
 {
 	int	if_exit;
 
 	if_exit = 1;
 	ft_putendl_fd("exit", STDERR_FILENO);
-	box->status = ft_exit(box, argv, &if_exit);
+	g_box->exit_code = ft_exit(argv, &if_exit);
 	if (if_exit)
 	{
 		delete_tmpfile(rdr);
-		exit(box->status);
+		exit(g_box->exit_code);
 	}	
 }
 
-// builtin 한개일때 또는 cmd가 아예 없을때 처리 : 포크안뜨고 처리한다.
-void	run_without_fork(t_box *box, t_ast *cmd, t_ctype cmd_type)
+// 여기 들어왓다는 건, 아예 fork하지 않고 shell자체에서 해결한다는 뜻!
+void	run_without_fork(t_ast *cmd, t_ctype cmd_type)
 {
 	char	**argv;
 	int		stdin_backup;
 	int		stdout_backup;
 
 	backup_std_fds(&stdin_backup, &stdout_backup);
-	redirect_files(cmd->left);
+	if (redirect_files_no_fork(cmd->left) == -1)
+	{
+		recover_std_fds(stdin_backup, stdout_backup);
+		return ;
+	}
+	if (cmd_type == NONE)
+	{
+		g_box->exit_code = EXIT_SUCCESS;
+		recover_std_fds(stdin_backup, stdout_backup);
+		return ;
+	}
 	argv = (char **)ft_calloc(2, sizeof(char *));
 	argv[0] = cmd->right->left->data;
 	make_argv(&argv, cmd->right->right);
-	if (cmd_type == NONE)
-		box->status = EXIT_SUCCESS;
-	else if (cmd_type == EXIT)
-		exit_without_fork(box, cmd->left, argv);
+	if (cmd_type == EXIT)
+		exit_without_fork(cmd->left, argv);
 	else
-		box->status = execute_builtin(box, argv, cmd_type);
+		g_box->exit_code = execute_builtin(argv, cmd_type);
 	free_ptr((void **)&argv);
 	recover_std_fds(stdin_backup, stdout_backup);
 }
