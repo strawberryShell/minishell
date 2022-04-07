@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 03:27:04 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 11:19:18 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_ast	*syntax_analysis(t_list *env_list, t_token *list)
 		}
 		list = list->next;
 	}
-	// TODO 완성 시 삭제
 	preorder_ast(root, 1, 1);
 	return (root);
 }

@@ -6,7 +6,7 @@
 #    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/04/04 03:23:29 by jiskim           ###   ########.fr        #
+#    Updated: 2022/04/07 14:04:13 by jiskim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,24 +118,55 @@ endif
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCDIR) $(LIBINC) $(RDLN_INC) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(INCDIR) $(LIBINC) $(RDLN_INC) -o $@ -c $<
+	@echo $(CUT)$(BOLD)$(L_GREEN) Compiling with $(CFLAGS)...$(RESET)
+	@echo $(CUT)$(L_CYAN) [$(notdir $^)] to [$(notdir $@)] $(RESET)
+	@printf $(UP)$(UP)
 
 $(NAME) : $(OBJS) $(LIB)
-	$(CC) $(CFLAGS) $(RDLN_LFLAGS) $(LIB) $^ -o $@
+	@$(CC) $(CFLAGS) $(RDLN_LFLAGS) $(LIB) $^ -o $@
+	@printf $(CUT)$(DOWN)$(CUT)
+	@echo $(BOLD)$(L_PURPLE) 🍓 strawberry shell is $(L_RED)ready!!$(RESET)
 
 $(LIB)	:
 	@make -C $(LIBDIR) bonus
 
 clean:
 	@make -C $(LIBDIR) fclean
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
+	@echo $(BOLD)$(YELLOW) 🗒 object files have been $(L_RED)cleaned....💫$(RESET)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
+	@echo $(BOLD)$(YELLOW) 🍓 strawberry shell has been $(L_RED)cleaned....💫$(RESET)
 
 re: fclean all
 
 debug : fclean
-	make DEBUG=1
+	@make DEBUG=1
 
 .PHONY: all clean fclean re debug
+
+######################### Color #########################
+GREEN="\033[32m"
+L_GREEN="\033[1;32m"
+YELLOW="\033[33m"
+RED="\033[31m"
+L_RED="\033[1;31m"
+BLUE="\033[34m"
+L_BLUE="\033[1;34m"
+MUTED="\033[130m"
+RESET="\033[0m"
+BOLD="\033[1m"
+L_PURPLE="\033[1;35m"
+L_CYAN="\033[1;36m"
+L_GRAY="\033[1;37m"
+L_WHITE="\033[1;38m"
+L_YELLOW="\033[1;93m"
+UP = "\033[A"
+DOWN = "\033[B"
+RIGHT = "\033[C"
+LEFT = "\033[D"
+CUT = "\033[K"
+SAVE = "\033[s"
+RESTORE = "\033[u"
