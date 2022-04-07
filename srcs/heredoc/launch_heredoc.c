@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:08:48 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 02:48:29 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 09:21:20 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static	char	*get_tmpfile_name(char *tmp_dir, int i)
 	char	*num_str;
 
 	num_str = ft_itoa(i);
-	// ANCHOR -는 지우기가 너무 힘들어서 _면 좋겠는데 혹시 일부러 지우기 힘들게 만들었는지 질문
-	tmp_name = ft_strjoin(tmp_dir, "tmp-");
+	tmp_name = ft_strjoin(tmp_dir, "tmp_");
 	full_name = ft_strjoin(tmp_name, num_str);
 	free_ptr((void **)&tmp_name);
 	free_ptr((void **)&num_str);
