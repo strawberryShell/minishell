@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/04/07 18:48:39 by sehhong          ###   ########.fr        #
+#    Updated: 2022/04/07 22:36:17 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS_HERE_DIR	= ./srcs/heredoc/
 SRCS_PARSE_DIR 	= ./srcs/parse/
 SRCS_RDR_DIR	= ./srcs/redirect/
 SRCS_AST_DIR	= ./srcs/ast/
+SRCS_SIG_DIR	= ./srcs/signal/
 SRCS_UTIL_DIR	= ./srcs/utils/
 
 SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
@@ -72,6 +73,11 @@ SRCS_AST	= $(addprefix $(SRCS_AST_DIR),\
 				subtree.c \
 				read_ast.c \
 				)
+SRCS_SIG	= $(addprefix $(SRCS_SIG_DIR), \
+				sigint.c \
+				tc_cursor.c \
+				tc_echoctl.c \
+				)
 
 SRCS_UTIL	= $(addprefix $(SRCS_UTIL_DIR), \
 				exit_with_err.c \
@@ -86,12 +92,13 @@ SRCS		= $(addprefix $(SRCS_DIR), \
 				)
 
 SRCS 		+= $(SRCS_BLTIN) $(SRCS_EXEC) $(SRCS_FORK) $(SRCS_HERE) \
-				$(SRCS_PARSE) $(SRCS_RDR) $(SRCS_AST) $(SRCS_UTIL)
+				$(SRCS_PARSE) $(SRCS_RDR) $(SRCS_AST) $(SRCS_SIG) \
+				$(SRCS_UTIL)
 
 OBJS 		= $(SRCS:.c=.o)
 
 ifdef DEBUG
-	CFLAGS = -g3 -fsanitize=address
+	CFLAGS = -g #3 -fsanitize=address
 else
 	CFLAGS = -Wall -Wextra -Werror
 endif
@@ -126,7 +133,7 @@ all: $(NAME)
 	@printf $(UP)$(UP)
 
 $(NAME) : $(OBJS) $(LIB)
-	@$(CC) $(CFLAGS) $(RDLN_LFLAGS) $(LIB) $^ -o $@
+	@$(CC) $(CFLAGS) $(RDLN_LFLAGS) -lcurses $(LIB) $^ -o $@
 	@printf $(CUT)$(DOWN)$(CUT)
 	@echo $(BOLD)$(L_PURPLE) 🍓 strawberry shell is $(L_RED)ready!!$(RESET)
 

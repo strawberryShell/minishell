@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 17:54:00 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 22:29:48 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,22 @@ int	main(int argc, char **argv, char **envp)
 	write(2, SH_IMG, 2039);
 	while (1)
 	{
+		off_echoctl();
+		signal(SIGINT, sigint_handler_p);
+		signal(SIGQUIT, SIG_IGN);
 		if (line_read)
 			free_ptr((void **)&line_read);
 		line_read = readline("딸기쉘🍓$ ");
+		if (!line_read)
+		{
+			// 커서이동(한줄 위, prompt뒤부터)
+			// ft_putendl_fd("\033[1A\033[10Cexit", STDERR_FILENO);
+			exit(g_box->exit_code);
+		}
 		if (line_read && *line_read)
 		{
 			add_history(line_read);
 			parse(line_read);
-			// printf("echo $? = %d\n", g_box->exit_code);
 		}
 	}
 	free_ptr((void **)&line_read);

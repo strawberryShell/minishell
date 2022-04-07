@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 00:07:04 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 22:11:20 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ typedef struct s_box
 	int		exit_code;
 	t_list	*env_list;
 	t_list	*cmd_list;
+	char	*cm;
+	char	*ce;
+	char	*up;
 }	t_box;
 
 enum	e_pipe
@@ -85,7 +88,7 @@ typedef struct s_cmd
 typedef enum s_ctype
 {
 	CD = 0,
-	ECHO,
+	EHCO,
 	ENV,
 	EXIT,
 	EXPORT,

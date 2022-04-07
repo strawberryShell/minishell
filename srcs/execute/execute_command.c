@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:37:42 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 01:55:00 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 22:31:26 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ static char	**make_envp(void)
 
 static void	execute_general(char *abs_path, char **argv)
 {
-	int		i;
+	// int		i;
 	char	**new_envp;
 
-	ft_putendl_fd(abs_path, 2);
-	i = 0;
-	while (argv[i])
-		ft_putendl_fd(argv[i++], 2);
-	ft_putendl_fd("-------------", 2);
+	// ft_putendl_fd(abs_path, 2);
+	// i = 0;
+	// while (argv[i])
+	// 	ft_putendl_fd(argv[i++], 2);
+	// ft_putendl_fd("-------------", 2);
 	new_envp = make_envp();
 	execve(abs_path, argv, new_envp);
 	if (errno == ENOENT)

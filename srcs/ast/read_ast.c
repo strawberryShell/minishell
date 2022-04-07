@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:45:00 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 00:58:46 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 22:27:43 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ void	read_ast(t_ast *tree)
 	}
 	else
 	{	
+		on_echoctl();
+		signal(SIGINT, sigint_handler_c);
+		// signal(SIGQUIT, sigquit_handler_c);
 		wait_children();
 		free_cmd_list();
 		return ;
