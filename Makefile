@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/04/07 15:11:37 by sehhong          ###   ########.fr        #
+#    Updated: 2022/04/07 17:19:41 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ SRCS 		+= $(SRCS_BLTIN) $(SRCS_EXEC) $(SRCS_FORK) $(SRCS_HERE) \
 OBJS 		= $(SRCS:.c=.o)
 
 ifdef DEBUG
-	CFLAGS = -g #3 -fsanitize=address
+	CFLAGS = -g3 -fsanitize=address
 else
 	CFLAGS = -Wall -Wextra -Werror
 endif

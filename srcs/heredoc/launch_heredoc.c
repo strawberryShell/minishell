@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:08:48 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 09:12:26 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 17:28:21 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static	char	*get_tmpfile_name(char *tmp_dir, int i)
 	return (full_name);
 }
 
-// TODO line_read에서 $(환경변수) get_env로 바꿔야함.
 static	char	*create_tmpfile(int *tmp_fd)
 {
 	static int	i;
@@ -50,12 +49,67 @@ static	char	*create_tmpfile(int *tmp_fd)
 	return (tmp_fname);
 }
 
+static char	*ft_realloc(char *prev, char word)
+{
+	char	*new;
+	int		len;
+	int		i;
+
+	if (!prev)
+		len = 0;
+	else
+		len = ft_strlen(prev);
+	new = ft_calloc(len + 2, 1);
+	i = 0;
+	if (prev)
+	{
+		while (prev[i])
+		{
+			new[i] = prev[i];
+			i++;
+		}
+		free(prev);
+	}
+	new[i] = word;
+	return (new);
+}
+
+static	char	*get_replaced_readline(char *line_read)
+{
+	char	*new_str;
+	char	*ptr;
+
+	if (!*line_read)
+		return (line_read);
+	ptr = line_read;
+	new_str = NULL;
+	while (*ptr)
+	{
+		if (*ptr == '$')
+			new_str = substitute_env(&ptr, new_str);
+		else
+			new_str = ft_realloc(new_str, *ptr);
+		ptr++;
+	}
+	free_ptr((void **)&line_read);
+	return (new_str);
+}
+
+static	void	write_on_tmp_file(char *str, int tmp_fd)
+{
+	char	*tmp_str;
+
+	tmp_str = ft_strjoin(str, "\n");
+	ft_putstr_fd(tmp_str, tmp_fd);
+	free(tmp_str);
+	tmp_str = NULL;
+}
+
 char	*launch_heredoc(char *lim)
 {
 	char	*tmp_fname;
 	int		tmp_fd;
 	char	*line_read;
-	char	*tmp_str;
 
 	tmp_fd = -1;
 	line_read = NULL;
@@ -67,11 +121,10 @@ char	*launch_heredoc(char *lim)
 		line_read = readline("> ");
 		if (line_read)
 		{
+			line_read = get_replaced_readline(line_read);
 			if (!ft_strncmp(line_read, lim, ft_strlen(lim) + 1))
 				break ;
-			tmp_str = ft_strjoin(line_read, "\n");
-			ft_putstr_fd(tmp_str, tmp_fd);
-			free_ptr((void **)&tmp_str);
+			write_on_tmp_file(line_read, tmp_fd);
 		}
 	}
 	free_ptr((void **)&line_read);
