@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 00:58:27 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 01:13:10 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			add_history(line_read);
 			parse(line_read);
-			printf("echo $? = %d\n", g_box->exit_code);
+			// printf("echo $? = %d\n", g_box->exit_code);
 		}
 	}
 	free_ptr((void **)&line_read);

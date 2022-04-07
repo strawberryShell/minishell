@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:08:48 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 00:48:26 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 09:12:26 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static	char	*get_tmpfile_name(char *tmp_dir, int i)
 	char	*num_str;
 
 	num_str = ft_itoa(i);
-	tmp_name = ft_strjoin(tmp_dir, "tmp-");
+	tmp_name = ft_strjoin(tmp_dir, "tmp_");
 	full_name = ft_strjoin(tmp_name, num_str);
 	free_ptr((void **)&tmp_name);
 	free_ptr((void **)&num_str);

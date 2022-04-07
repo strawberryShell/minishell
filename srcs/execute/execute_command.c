@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:37:42 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 00:59:39 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 01:55:00 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 static char	**make_envp(void)
 {
 	int		i;
+	t_list	*ptr;
 	char	**new_envp;
 
-	new_envp = (char **)ft_calloc(ft_lstsize(g_box->env_list) + 1, sizeof(char *));
+	ptr = g_box->env_list;
+	new_envp = (char **)ft_calloc(ft_lstsize(ptr) + 1, sizeof(char *));
 	i = 0;
-	while (g_box->env_list)
+	while (ptr)
 	{
-		new_envp[i] = (char *)(g_box->env_list->content);
+		new_envp[i] = (char *)(ptr->content);
 		i++;
-		g_box->env_list = g_box->env_list->next;
+		ptr = ptr->next;
 	}
 	return (new_envp);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/04/04 03:23:29 by jiskim           ###   ########.fr        #
+#    Updated: 2022/04/07 15:11:37 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ SRCS_PARSE	= $(addprefix $(SRCS_PARSE_DIR), \
 
 SRCS_RDR	= $(addprefix $(SRCS_RDR_DIR), \
 				connect_pipes.c \
+				redirect_files_no_fork.c \
 				redirect_files.c \
 				)
 
@@ -89,7 +90,7 @@ SRCS 		+= $(SRCS_BLTIN) $(SRCS_EXEC) $(SRCS_FORK) $(SRCS_HERE) \
 OBJS 		= $(SRCS:.c=.o)
 
 ifdef DEBUG
-	CFLAGS = -g3 -fsanitize=address
+	CFLAGS = -g #3 -fsanitize=address
 else
 	CFLAGS = -Wall -Wextra -Werror
 endif

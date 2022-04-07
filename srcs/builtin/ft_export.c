@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:20:06 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 00:59:04 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 01:59:51 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,28 @@
 static void	export_no_arg(void)
 {
 	char	*equal_ptr;
-	char	*ptr;
+	char	*key_val;
+	t_list	*ptr;
 
-	while (g_box->env_list)
+	ptr = g_box->env_list;
+	while (ptr)
 	{
-		ptr = (char *)g_box->env_list->content;
-		equal_ptr = ft_strchr(ptr, '=');
-		while (*ptr && *ptr != '=')
+		key_val = (char *)ptr->content;
+		equal_ptr = ft_strchr(key_val, '=');
+		while (*key_val && *key_val != '=')
 		{	
-			write(STDOUT_FILENO, ptr, 1);
-			ptr++;
+			write(STDOUT_FILENO, key_val, 1);
+			key_val++;
 		}
 		if (equal_ptr)
 		{
-			ptr++;
+			key_val++;
 			write(STDOUT_FILENO, "=\"", 2);
-			write(STDOUT_FILENO, ptr, ft_strlen(ptr));
+			write(STDOUT_FILENO, key_val, ft_strlen(key_val));
 			write(STDOUT_FILENO, "\"", 1);
 		}
 		write(STDOUT_FILENO, "\n", 1);
-		g_box->env_list = g_box->env_list->next;
+		ptr = ptr->next;
 	}
 }
 
