@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 01:13:10 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 17:54:00 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv, char **envp)
 	line_read = NULL;
 	if (argc > 1)
 		exit_with_err(argv[1], strerror(ENOENT), 127);
+	write(2, SH_IMG, 2039);
 	while (1)
 	{
 		if (line_read)
