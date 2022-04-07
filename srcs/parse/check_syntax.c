@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:36:55 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/06 16:58:07 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 02:17:51 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	check_pipe(t_token *token, t_ast *ptr)
 {
 	if (!(token->next) || token->next->type == PIPE
-		|| !(ptr->left || ptr->right))
+		|| !(ptr->left->left || ptr->left->right))
 		return (-1);
 	ptr->right = subtree_pipeseq();
 	return (0);
