@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:45:00 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 00:58:46 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 20:07:11 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static	void	free_cmd_list(void)
 }
 
 void	read_ast(t_ast *tree)
-{	
+{
 	t_cmd	*prev_cmd;
 	int		ret;
 
@@ -50,7 +50,7 @@ void	read_ast(t_ast *tree)
 		prev_cmd = get_last_cmd();
 		ret = need_fork(prev_cmd, tree);
 		if (ret != -1)
-		{	
+		{
 			run_without_fork(tree->left, (t_ctype)ret);
 			return ;
 		}
@@ -58,7 +58,7 @@ void	read_ast(t_ast *tree)
 		read_ast(tree->right);
 	}
 	else
-	{	
+	{
 		wait_children();
 		free_cmd_list();
 		return ;

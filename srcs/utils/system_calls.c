@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 17:04:57 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 01:49:50 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/07 20:08:30 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	ft_open(char *fname, int oflag, int mode)
 	fd = open(fname, oflag, mode);
 	if (fd < 0)
 		exit_with_err(fname, strerror(errno), EXIT_FAILURE);
-	//FIXME open 실패하면 exit하면 안됨........!
 	return (fd);
 }
 

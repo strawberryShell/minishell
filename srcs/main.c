@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 17:54:00 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 21:24:42 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_box	*g_box;
 
 void	initiate_box(char **envp)
 {
@@ -35,12 +37,11 @@ int	main(int argc, char **argv, char **envp)
 	{
 		if (line_read)
 			free_ptr((void **)&line_read);
-		line_read = readline("딸기쉘🍓$ ");
+		line_read = readline("\033[1;35m딸기쉘🍓$\033[0m ");
 		if (line_read && *line_read)
 		{
 			add_history(line_read);
 			parse(line_read);
-			// printf("echo $? = %d\n", g_box->exit_code);
 		}
 	}
 	free_ptr((void **)&line_read);
