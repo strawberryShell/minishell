@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 22:03:48 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 22:08:57 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/08 01:22:14 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void	initial_config(void)
 	g_box->cm = tgetstr("cm", NULL);
 	g_box->ce = tgetstr("ce", NULL);
 	g_box->up = tgetstr("up", NULL);
-	// box->row = tgetnum("li");
-	// box->col = tgetnum("co");
-	// printf("row = %d\ncol = %d\n", box->row, box->col);
 }
 
 static	int	get_coordinate(char delimiter)
@@ -48,27 +45,36 @@ static	int	get_coordinate(char delimiter)
 	return (ft_atoi(buf) - 1);
 }
 
-//커서 위치 가져오기
 void	get_cursor_pos(int *x, int *y)
 {
 	struct termios	term_attr;
 	struct termios	restore;
+	char			*x_int;
+	char			*y_int;
 
 	tcgetattr(STDIN_FILENO, &term_attr);
 	tcgetattr(STDIN_FILENO, &restore);
 	term_attr.c_lflag &= ~(ICANON | ECHO);
-	tcsetattr(STDIN_FILENO, TCSANOW, &term_attr);;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term_attr);
 	write(STDIN_FILENO, "\033[6n", 4);
 	*x = get_coordinate(';');
 	*y = get_coordinate('R');
 	tcsetattr(0, TCSANOW, &restore);
-	printf("row = %d, col = %d\n", *x, *y);
+	x_int = ft_itoa(*x);
+	y_int = ft_itoa(*y);
+	write(1, x_int, ft_strlen(x_int));
+	write(1, ",",1);
+	write(1, y_int, ft_strlen(y_int));
 }
 
-//커서 한줄 위로 이동 -> up
+void	action_for_eof(void)
+{
+	int	x;
+	int	y;
 
-//커서 얼마만큼 뒤로 이동 -> cm
-
-//커서 맨앞으로 이동하고 그 이후 지움 -> cm, ce
-
-//커서 지우기 -> cm, ce
+	get_cursor_pos(&x, &y);
+	x--;
+	y += 10;
+	tputs(tgoto(g_box->cm, y, x), 1, NULL);
+	// printf("row = %d, col = %d\n", x, y);
+}

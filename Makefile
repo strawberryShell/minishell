@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/04/07 22:36:17 by sehhong          ###   ########.fr        #
+#    Updated: 2022/04/08 01:12:00 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRCS_AST	= $(addprefix $(SRCS_AST_DIR),\
 				)
 SRCS_SIG	= $(addprefix $(SRCS_SIG_DIR), \
 				sigint.c \
+				sigquit.c \
 				tc_cursor.c \
 				tc_echoctl.c \
 				)
@@ -98,7 +99,7 @@ SRCS 		+= $(SRCS_BLTIN) $(SRCS_EXEC) $(SRCS_FORK) $(SRCS_HERE) \
 OBJS 		= $(SRCS:.c=.o)
 
 ifdef DEBUG
-	CFLAGS = -g #3 -fsanitize=address
+	CFLAGS = -g3 -fsanitize=address
 else
 	CFLAGS = -Wall -Wextra -Werror
 endif

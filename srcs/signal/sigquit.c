@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tc_signal.h                                        :+:      :+:    :+:   */
+/*   sigquit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 22:07:41 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/08 03:28:21 by sehhong          ###   ########.fr       */
+/*   Created: 2022/04/07 22:54:54 by sehhong           #+#    #+#             */
+/*   Updated: 2022/04/08 03:28:52 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TC_SIGNAL_H
-# define TC_SIGNAL_H
+#include "minishell.h"
 
-void	sigint_handler_p(int signum);
-void	sigint_handler_c(int signum);
+void	sigquit_handler(int signum)
+{
+	pid_t	pid;
+	t_list	*ptr;
 
-// void	sigquit_handler(int signum);
-
-/* 커서 제어 관련 함수 -> 안쓸것같음...ㅠㅠ
-void	initial_config(void);
-void	get_cursor_pos(int *x, int *y);
-void	action_for_eof(void);
-*/
-
-void	off_echoctl(void);
-void	on_echoctl(void);
-
-#endif
+	if (signum != SIGQUIT)
+		return ;
+	ptr = g_box->cmd_list;
+	while (ptr)
+	{
+		pid = ((t_cmd *)(ptr->content))->pid;
+		kill(pid, SIGQUIT);
+		ptr = ptr->next;
+	}
+	if (g_box->exit_code == 131)
+		ft_putstr_fd("Quit: 3\n", STDERR_FILENO);
+}

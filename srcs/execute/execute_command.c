@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:37:42 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 22:31:26 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 22:53:11 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static char	**make_envp(void)
 
 static void	execute_general(char *abs_path, char **argv)
 {
-	// int		i;
 	char	**new_envp;
+	// int		i;
 
 	// ft_putendl_fd(abs_path, 2);
 	// i = 0;
