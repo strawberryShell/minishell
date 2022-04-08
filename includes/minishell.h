@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 22:19:50 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/08 15:24:07 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <termios.h>
-# include <termcap.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include "libft.h"

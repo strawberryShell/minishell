@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/08 03:13:58 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/08 15:19:08 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ void	initiate_box(char **envp)
 	}
 }
 
+void	initiate_signal_setting(void)
+{
+	off_echoctl();
+	signal(SIGINT, sigint_handler_p);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	handle_eof(char *line_read)
+{
+	if (!line_read)
+	{
+		ft_putendl_fd("exit", STDERR_FILENO);
+		exit(g_box->exit_code);
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line_read;
@@ -33,17 +49,11 @@ int	main(int argc, char **argv, char **envp)
 	write(2, SH_IMG, 2039);
 	while (1)
 	{
-		off_echoctl();
-		signal(SIGINT, sigint_handler_p);
-		signal(SIGQUIT, SIG_IGN);
+		initiate_signal_setting();
 		if (line_read)
 			free_ptr((void **)&line_read);
 		line_read = readline("딸기쉘🍓$ ");
-		if (!line_read)
-		{
-			ft_putendl_fd("exit", STDERR_FILENO);
-			exit(g_box->exit_code);
-		}
+		handle_eof(line_read);
 		if (line_read && *line_read)
 		{
 			add_history(line_read);

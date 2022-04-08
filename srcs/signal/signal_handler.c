@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sigquit.c                                          :+:      :+:    :+:   */
+/*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 22:54:54 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/08 03:28:52 by sehhong          ###   ########.fr       */
+/*   Created: 2022/04/07 22:04:17 by sehhong           #+#    #+#             */
+/*   Updated: 2022/04/08 15:01:00 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sigquit_handler(int signum)
+void	sigint_handler_p(int signum)
 {
-	pid_t	pid;
-	t_list	*ptr;
+	if (signum != SIGINT)
+		return ;
+	g_box->exit_code = EXIT_FAILURE;
+	write(STDOUT_FILENO, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 1);
+	rl_redisplay();
+}
 
+void	sigint_handler_c(int signum)
+{
+	if (signum != SIGINT)
+		return ;
+	write(STDOUT_FILENO, "\n", 1);
+	return ;
+}
+
+void	sigquit_handler(int signum)
+{	
 	if (signum != SIGQUIT)
 		return ;
-	ptr = g_box->cmd_list;
-	while (ptr)
-	{
-		pid = ((t_cmd *)(ptr->content))->pid;
-		kill(pid, SIGQUIT);
-		ptr = ptr->next;
-	}
-	if (g_box->exit_code == 131)
-		ft_putstr_fd("Quit: 3\n", STDERR_FILENO);
 }

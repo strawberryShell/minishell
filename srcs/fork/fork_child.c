@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:51:54 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 00:59:20 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/08 14:57:12 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	fork_child(t_ast *tree, t_cmd *prev_cmd)
 	ft_lstadd_back(&(g_box->cmd_list), ft_lstnew(curr_cmd));
 	if (tree->right)
 		ft_pipe(curr_cmd->fds);
+	signal(SIGQUIT, sigquit_handler);
 	curr_cmd->pid = ft_fork();
 	if (!curr_cmd->pid)
 	{
