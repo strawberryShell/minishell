@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait_children.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:34:04 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/08 14:59:44 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/08 22:21:34 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	wait_children(void)
 		if (child_pid == last_pid)
 			last_status = status;
 	}
-	if (WIFEXITED(last_status))
+	if (WIFEXITED(last_status)) // exit했는지 여부 검사
 		g_box->exit_code = WEXITSTATUS(last_status);
 	else if (WIFSIGNALED(last_status))
 	{
-		g_box->exit_code = 128 + WTERMSIG(last_status);
+		g_box->exit_code = 128 + WTERMSIG(last_status); //원인 SIGNAL
 		if (g_box->exit_code == 131)
-			ft_putendl_fd("Quit: 3", STDERR_FILENO);
-	}	
+			ft_putendl_fd("Quit: 3", STDERR_FILENO); // sigquit
+	}
 	else
 		g_box->exit_code = EXIT_FAILURE;
 }

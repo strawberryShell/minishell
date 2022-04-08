@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 22:04:17 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/08 15:01:00 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/08 22:21:46 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// readline 하는 중
 void	sigint_handler_p(int signum)
 {
 	if (signum != SIGINT)
@@ -23,6 +24,7 @@ void	sigint_handler_p(int signum)
 	rl_redisplay();
 }
 
+// 자식들이 일하는 중
 void	sigint_handler_c(int signum)
 {
 	if (signum != SIGINT)
@@ -32,7 +34,7 @@ void	sigint_handler_c(int signum)
 }
 
 void	sigquit_handler(int signum)
-{	
+{
 	if (signum != SIGQUIT)
 		return ;
 }

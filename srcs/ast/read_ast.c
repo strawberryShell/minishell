@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:45:00 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/08 14:37:46 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/08 22:14:00 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,17 @@ static	void	free_cmd_list(void)
 }
 
 void	read_ast(t_ast *tree)
-{	
+{
 	t_cmd	*prev_cmd;
 	int		ret;
 
 	if (tree)
 	{
-		prev_cmd = get_last_cmd();
-		ret = need_fork(prev_cmd, tree);
+		prev_cmd = get_last_cmd(); // 첫번째 커맨드인지 확인한다.-> 첫번째일
+		ret = need_fork(prev_cmd, tree); // builtincmd, none
+		//general이면 fork_child
 		if (ret != -1)
-		{	
+		{
 			run_without_fork(tree->left, (t_ctype)ret);
 			return ;
 		}
@@ -58,7 +59,7 @@ void	read_ast(t_ast *tree)
 		read_ast(tree->right);
 	}
 	else
-	{	
+	{
 		on_echoctl();
 		signal(SIGINT, sigint_handler_c);
 		wait_children();

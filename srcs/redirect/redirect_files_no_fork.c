@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_files_no_fork.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 13:04:46 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 15:12:15 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/08 21:05:22 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,13 @@ static	int	redirect_w_file(t_type symbol, char *fname)
 {
 	int	f_fd;
 	int	ret;
-	int	oflag;	
+	int	oflag;
 
+	//파일 없으면 생성 - O_CREATE
 	if (symbol == SYMBOL_DG)
-		oflag = O_WRONLY | O_CREAT | O_APPEND;
+		oflag = O_WRONLY | O_CREAT | O_APPEND; // 기존 파일에 append
 	else
-		oflag = O_WRONLY | O_CREAT | O_TRUNC;
+		oflag = O_WRONLY | O_CREAT | O_TRUNC; // 기존 내용 삭제
 	f_fd = open(fname, oflag, 0644);
 	if (check_sys_err(f_fd, fname) < 0)
 		return (-1);
@@ -62,6 +63,7 @@ static	int	redirect_w_file(t_type symbol, char *fname)
 	return (0);
 }
 
+//처음엔 RDR, 의 subtree들은 순회함.
 int	redirect_files_no_fork(t_ast *rdr)
 {
 	t_type	symbol;
