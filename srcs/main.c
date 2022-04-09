@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/09 20:51:02 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/09 21:49:10 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 		initiate_signal_setting();
 		if (line_read)
 			free_ptr((void **)&line_read);
-		line_read = readline("딸기쉘🍓$ ");
+		line_read = readline("\033[1;35m딸기쉘🍓$\033[0m ");
 		handle_eof(line_read);
 		if (line_read && *line_read)
 		{

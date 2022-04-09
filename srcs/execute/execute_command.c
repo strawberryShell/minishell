@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:37:42 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 22:53:11 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/09 21:49:41 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,10 @@ static void	execute_general(char *abs_path, char **argv)
 	char	**new_envp;
 	// int		i;
 
-	// ft_putendl_fd(abs_path, 2);
 	// i = 0;
-	// while (argv[i])
-	// 	ft_putendl_fd(argv[i++], 2);
-	// ft_putendl_fd("-------------", 2);
+	//while (argv[i])
+	//	ft_putendl_fd(argv[i++], 2);
+	//ft_putendl_fd("-------------", 2);
 	new_envp = make_envp();
 	execve(abs_path, argv, new_envp);
 	if (errno == ENOENT)
@@ -66,7 +65,7 @@ void	execute_command(t_ast *scmd)
 	else if (cmd_type == NONE)
 		exit(EXIT_SUCCESS);
 	else
-	{	
+	{
 		exit_code = execute_builtin(argv, cmd_type);
 		exit(exit_code);
 	}

@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:32:27 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/09 21:06:48 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/09 21:46:37 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static	void	exit_without_fork(t_ast *rdr, char **argv)
 	{
 		delete_tmpfile(rdr);
 		exit(g_box->exit_code);
-	}	
+	}
 }
 
 void	run_without_fork(t_ast *cmd, t_ctype cmd_type)
