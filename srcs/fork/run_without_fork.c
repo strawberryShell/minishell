@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_without_fork.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:32:27 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 15:40:00 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 22:12:44 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ static	void	exit_without_fork(t_ast *rdr, char **argv)
 	{
 		delete_tmpfile(rdr);
 		exit(g_box->exit_code);
-	}	
+	}
 }
 
-// 여기 들어왓다는 건, 아예 fork하지 않고 shell자체에서 해결한다는 뜻!
 void	run_without_fork(t_ast *cmd, t_ctype cmd_type)
 {
 	char	**argv;

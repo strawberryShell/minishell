@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 18:14:06 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 20:53:25 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ t_ast	*syntax_analysis(t_token *list)
 				ft_putstr_fd("newline", 2);
 			ft_putendl_fd("'", 2);
 			free_ast(root);
+			g_box->exit_code = SYNTAX_ERR;
 			return (NULL);
 		}
 		list = list->next;
 	}
-	preorder_ast(root, 1, 1);
 	return (root);
 }
 
@@ -58,6 +58,8 @@ int	skip_quote(char **end, t_token *token_list)
 		STDERR_FILENO);
 	ft_putchar_fd(quote, STDERR_FILENO);
 	ft_putendl_fd("'", STDERR_FILENO);
+	ft_putendl_fd("딸기쉘: syntax error: unexpected end of file", STDERR_FILENO);
+	g_box->exit_code = SYNTAX_ERR;
 	return (-1);
 }
 
