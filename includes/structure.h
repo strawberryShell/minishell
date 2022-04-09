@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:31:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 22:11:20 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/08 18:29:43 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,9 @@ typedef struct s_token
 typedef struct s_box
 {
 	int		exit_code;
+	int		h_flag;
 	t_list	*env_list;
 	t_list	*cmd_list;
-	char	*cm;
-	char	*ce;
-	char	*up;
 }	t_box;
 
 enum	e_pipe

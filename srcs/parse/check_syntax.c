@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:36:55 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 17:51:05 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/08 18:42:20 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	check_rdr(t_token *token, t_ast *ptr)
 	{
 		filename = launch_heredoc(word);
 		free(word);
+		if (filename == NULL)
+			return (-2);
 		word = filename;
 	}
 	if (ptr->left)

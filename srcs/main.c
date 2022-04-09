@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/08 15:19:08 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/09 14:41:25 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	initiate_box(char **envp)
 void	initiate_signal_setting(void)
 {
 	off_echoctl();
-	signal(SIGINT, sigint_handler_p);
+	signal(SIGINT, control_sigint);
 	signal(SIGQUIT, SIG_IGN);
 }
 

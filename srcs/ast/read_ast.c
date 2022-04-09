@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:45:00 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/08 14:37:46 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/09 19:10:51 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static	void	free_cmd_list(void)
 }
 
 void	read_ast(t_ast *tree)
-{	
+{
 	t_cmd	*prev_cmd;
 	int		ret;
 
@@ -50,7 +50,7 @@ void	read_ast(t_ast *tree)
 		prev_cmd = get_last_cmd();
 		ret = need_fork(prev_cmd, tree);
 		if (ret != -1)
-		{	
+		{
 			run_without_fork(tree->left, (t_ctype)ret);
 			return ;
 		}
@@ -60,7 +60,7 @@ void	read_ast(t_ast *tree)
 	else
 	{	
 		on_echoctl();
-		signal(SIGINT, sigint_handler_c);
+		signal(SIGINT, ignore_signal);
 		wait_children();
 		free_cmd_list();
 		return ;
