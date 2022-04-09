@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/08 19:04:09 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/09 21:11:14 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_ast	*syntax_analysis(t_token *list)
 			if (result == -1)
 				print_syntax_err(list);
 			free_ast(root);
+			g_box->exit_code = SYNTAX_ERR;
 			return (NULL);
 		}
 		list = list->next;
@@ -64,6 +65,8 @@ int	skip_quote(char **end, t_token *token_list)
 		STDERR_FILENO);
 	ft_putchar_fd(quote, STDERR_FILENO);
 	ft_putendl_fd("'", STDERR_FILENO);
+	ft_putendl_fd("딸기쉘: syntax error: unexpected end of file", STDERR_FILENO);
+	g_box->exit_code = SYNTAX_ERR;
 	return (-1);
 }
 

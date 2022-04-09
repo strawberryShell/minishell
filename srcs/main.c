@@ -6,11 +6,13 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/09 14:41:25 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/09 20:51:02 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_box	*g_box;
 
 void	initiate_box(char **envp)
 {
