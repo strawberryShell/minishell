@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:50:49 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/08 21:20:49 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/10 18:20:58 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_pwd(char **argv)
 
 	if (argv[1] && is_option(argv[1], "pwd"))
 		return (EXIT_FAILURE);
-	cwd = getcwd(NULL, 0); // current working directory
+	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{
 		print_err("pwd", NULL, strerror(errno));

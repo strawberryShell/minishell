@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:21:08 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/08 21:39:05 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/10 18:21:01 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static	void	delete_node(char *key)
 	}
 }
 
-// TODO 특수기호 $ 최종확인 필요
 int	ft_unset(char **argv)
 {
 	int		exit_code;

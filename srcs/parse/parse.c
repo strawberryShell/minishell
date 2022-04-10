@@ -6,38 +6,45 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:13:15 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 22:32:20 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/09 21:47:51 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	print_syntax_err(t_token *list)
+{
+	ft_putstr_fd("딸기쉘: syntax error near unexpected token `", 2);
+	if (list->type == PIPE)
+		ft_putstr_fd(list->data, 2);
+	else if (list->next)
+		ft_putstr_fd(list->next->data, 2);
+	else
+		ft_putstr_fd("newline", 2);
+	ft_putendl_fd("'", 2);
+}
+
 t_ast	*syntax_analysis(t_token *list)
 {
 	t_ast	*root;
 	t_ast	*ptr;
+	int		result;
 
 	root = subtree_pipeseq();
 	ptr = root;
 	while (list)
 	{
-		if (check_syntax(&list, &ptr) < 0)
+		result = check_syntax(&list, &ptr);
+		if (result < 0)
 		{
-			ft_putstr_fd("딸기쉘: syntax error near unexpected token `",
-				STDERR_FILENO);
-			if (list->type == PIPE)
-				ft_putstr_fd(list->data, 2);
-			else if (list->next)
-				ft_putstr_fd(list->next->data, 2);
-			else
-				ft_putstr_fd("newline", 2);
-			ft_putendl_fd("'", 2);
+			if (result == -1)
+				print_syntax_err(list);
 			free_ast(root);
+			g_box->exit_code = SYNTAX_ERR;
 			return (NULL);
 		}
 		list = list->next;
 	}
-	preorder_ast(root, 1, 1);
 	return (root);
 }
 
@@ -58,6 +65,8 @@ int	skip_quote(char **end, t_token *token_list)
 		STDERR_FILENO);
 	ft_putchar_fd(quote, STDERR_FILENO);
 	ft_putendl_fd("'", STDERR_FILENO);
+	ft_putendl_fd("딸기쉘: syntax error: unexpected end of file", STDERR_FILENO);
+	g_box->exit_code = SYNTAX_ERR;
 	return (-1);
 }
 

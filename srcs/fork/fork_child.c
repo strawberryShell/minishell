@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:51:54 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/08 22:09:35 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/10 17:40:19 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,25 @@ static	void	close_pipes(t_cmd *prev_cmd)
 	}
 }
 
-// cmd 한 개 확정  -> ;를 구현 안하기 때문
-// 1.root로 출발
-// 2.prev_cmd로 만들어야 ?
+static	t_cmd	*get_new_cmd(void)
+{
+	t_cmd	*new_cmd;
+
+	new_cmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+	new_cmd->fds[RD_FD] = -1;
+	new_cmd->fds[WR_FD] = -1;
+	return (new_cmd);
+}
+
 void	fork_child(t_ast *tree, t_cmd *prev_cmd)
 {
 	t_cmd	*curr_cmd;
 
-	curr_cmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
-	curr_cmd->fds[RD_FD] = -1;
-	curr_cmd->fds[WR_FD] = -1;
+	curr_cmd = get_new_cmd();
 	ft_lstadd_back(&(g_box->cmd_list), ft_lstnew(curr_cmd));
 	if (tree->right)
 		ft_pipe(curr_cmd->fds);
-	signal(SIGQUIT, sigquit_handler);
+	signal(SIGQUIT, ignore_signal);
 	curr_cmd->pid = ft_fork();
 	if (!curr_cmd->pid)
 	{

@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:45:00 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/08 22:14:00 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/10 18:20:49 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ void	read_ast(t_ast *tree)
 
 	if (tree)
 	{
-		prev_cmd = get_last_cmd(); // 첫번째 커맨드인지 확인한다.-> 첫번째일
-		ret = need_fork(prev_cmd, tree); // builtincmd, none
-		//general이면 fork_child
+		prev_cmd = get_last_cmd();
+		ret = need_fork(prev_cmd, tree);
 		if (ret != -1)
 		{
 			run_without_fork(tree->left, (t_ctype)ret);
@@ -61,7 +60,7 @@ void	read_ast(t_ast *tree)
 	else
 	{
 		on_echoctl();
-		signal(SIGINT, sigint_handler_c);
+		signal(SIGINT, ignore_signal);
 		wait_children();
 		free_cmd_list();
 		return ;

@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:20:24 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 15:46:44 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/09 21:42:42 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@ int	ft_env(char **argv)
 	{
 		if (is_option(argv[1], "env"))
 			return (EXIT_FAILURE);
-		print_err("env", argv[1], strerror(ENOENT));
+		print_err("env", argv[1], strerror(EINVAL));
+		ft_putendl_fd("env: usage: env", STDERR_FILENO);
 		return (127);
 	}
-	if (!ptr)
-		return (EXIT_SUCCESS);
 	while (ptr)
 	{
 		if (ft_strchr(ptr->content, '='))

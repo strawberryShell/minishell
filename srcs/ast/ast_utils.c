@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:03:44 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 22:42:56 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/10 17:35:53 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	free_ast(t_ast *node)
 {
 	if (node == NULL)
 		return ;
-	free_ast(node->left);
-	free_ast(node->right);
 	if (node->type == IO_HERE)
 		unlink(node->right->data);
+	free_ast(node->left);
+	free_ast(node->right);
 	if (node->data && node->type != CMD)
 	{
 		free(node->data);
@@ -27,13 +27,4 @@ void	free_ast(t_ast *node)
 	}
 	free(node);
 	node = NULL;
-}
-
-void	preorder_ast(t_ast *node, int index, int height)
-{
-	if (node == NULL)
-		return ;
-	// printf("(%d, (%d, %s)\n", index, node->type, node->data);
-	preorder_ast(node->left, index * 2, height + 1);
-	preorder_ast(node->right, index * 2 + 1, height + 1);
 }

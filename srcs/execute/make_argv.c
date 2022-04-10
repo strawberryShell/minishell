@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:30:37 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/08 21:12:32 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/10 17:36:52 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static	int	count_arg(char **argv)
 	return (num_arg + 1);
 }
 
-//TODO right만 가고 left data를 확인해서 argv에 덧붙이는 형태로 만들기
 void	make_argv(char ***argv, t_ast *argv_tree)
 {
 	char	**new_argv;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:20:06 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 01:59:51 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/10 18:20:53 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	export_no_arg(void)
 		key_val = (char *)ptr->content;
 		equal_ptr = ft_strchr(key_val, '=');
 		while (*key_val && *key_val != '=')
-		{	
+		{
 			write(STDOUT_FILENO, key_val, 1);
 			key_val++;
 		}
@@ -96,7 +96,6 @@ static	void	export_with_arg(char *arg)
 		ft_lstadd_back(&(g_box->env_list), ft_lstnew(ft_strdup(arg)));
 }
 
-// TODO 특수기호 $ 최종확인 필요
 int	ft_export(char **argv)
 {
 	argv++;
@@ -110,7 +109,7 @@ int	ft_export(char **argv)
 	while (*argv)
 	{
 		if (!is_valid_key(*argv))
-		{	
+		{
 			print_err2("export", *argv, "not a valid identifier");
 			return (EXIT_FAILURE);
 		}

@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:32:27 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/08 21:06:06 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/10 18:24:06 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,14 @@ static	void	exit_without_fork(t_ast *rdr, char **argv)
 	}
 }
 
-// 여기 들어왓다는 건, 아예 fork하지 않고 shell자체에서 해결한다는 뜻!
 void	run_without_fork(t_ast *cmd, t_ctype cmd_type)
 {
 	char	**argv;
 	int		stdin_backup;
 	int		stdout_backup;
 
-	backup_std_fds(&stdin_backup, &stdout_backup); //ㄹㅇ 0 1 백업
-	if (redirect_files_no_fork(cmd->left) == -1) //CMD
+	backup_std_fds(&stdin_backup, &stdout_backup);
+	if (redirect_files_no_fork(cmd->left) == -1)
 	{
 		recover_std_fds(stdin_backup, stdout_backup);
 		return ;

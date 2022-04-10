@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 13:04:46 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/08 21:05:22 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/10 18:21:19 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,10 @@ static	int	redirect_w_file(t_type symbol, char *fname)
 	int	ret;
 	int	oflag;
 
-	//파일 없으면 생성 - O_CREATE
 	if (symbol == SYMBOL_DG)
-		oflag = O_WRONLY | O_CREAT | O_APPEND; // 기존 파일에 append
+		oflag = O_WRONLY | O_CREAT | O_APPEND;
 	else
-		oflag = O_WRONLY | O_CREAT | O_TRUNC; // 기존 내용 삭제
+		oflag = O_WRONLY | O_CREAT | O_TRUNC;
 	f_fd = open(fname, oflag, 0644);
 	if (check_sys_err(f_fd, fname) < 0)
 		return (-1);
@@ -63,7 +62,6 @@ static	int	redirect_w_file(t_type symbol, char *fname)
 	return (0);
 }
 
-//처음엔 RDR, 의 subtree들은 순회함.
 int	redirect_files_no_fork(t_ast *rdr)
 {
 	t_type	symbol;
