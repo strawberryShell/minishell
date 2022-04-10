@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:54:37 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 00:59:14 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 22:40:03 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	execute_builtin(char **argv, t_ctype cmd_type)
 
 	if (cmd_type == CD)
 		exit_code = ft_cd(argv);
-	else if (cmd_type == ECHO)
+	else if (cmd_type == EHCO)
 		exit_code = ft_echo(argv);
 	else if (cmd_type == ENV)
 		exit_code = ft_env(argv);

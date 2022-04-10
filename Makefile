@@ -6,7 +6,7 @@
 #    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/04/07 18:48:39 by sehhong          ###   ########.fr        #
+#    Updated: 2022/04/09 20:31:14 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS_HERE_DIR	= ./srcs/heredoc/
 SRCS_PARSE_DIR 	= ./srcs/parse/
 SRCS_RDR_DIR	= ./srcs/redirect/
 SRCS_AST_DIR	= ./srcs/ast/
+SRCS_SIG_DIR	= ./srcs/signal/
 SRCS_UTIL_DIR	= ./srcs/utils/
 
 SRCS_BLTIN	= $(addprefix $(SRCS_BLTIN_DIR), \
@@ -50,6 +51,7 @@ SRCS_FORK	= $(addprefix $(SRCS_FORK_DIR), \
 				)
 
 SRCS_HERE	= $(addprefix $(SRCS_HERE_DIR), \
+				create_tmpfile.c \
 				delete_tmpfile.c \
 				launch_heredoc.c \
 				)
@@ -72,6 +74,10 @@ SRCS_AST	= $(addprefix $(SRCS_AST_DIR),\
 				subtree.c \
 				read_ast.c \
 				)
+SRCS_SIG	= $(addprefix $(SRCS_SIG_DIR), \
+				signal_handler.c \
+				tc_echoctl.c \
+				)
 
 SRCS_UTIL	= $(addprefix $(SRCS_UTIL_DIR), \
 				exit_with_err.c \
@@ -86,7 +92,8 @@ SRCS		= $(addprefix $(SRCS_DIR), \
 				)
 
 SRCS 		+= $(SRCS_BLTIN) $(SRCS_EXEC) $(SRCS_FORK) $(SRCS_HERE) \
-				$(SRCS_PARSE) $(SRCS_RDR) $(SRCS_AST) $(SRCS_UTIL)
+				$(SRCS_PARSE) $(SRCS_RDR) $(SRCS_AST) $(SRCS_SIG) \
+				$(SRCS_UTIL)
 
 OBJS 		= $(SRCS:.c=.o)
 

@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*   tc_signal.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 18:47:40 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/09 21:48:03 by sehhong          ###   ########.fr       */
+/*   Created: 2022/04/07 22:07:41 by sehhong           #+#    #+#             */
+/*   Updated: 2022/04/09 14:52:51 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef TC_SIGNAL_H
+# define TC_SIGNAL_H
 
-char	*ft_realloc(char *prev, char word)
-{
-	char	*new;
-	int		len;
-	int		i;
+# include <sys/ioctl.h>
 
-	if (!prev)
-		len = 0;
-	else
-		len = ft_strlen(prev);
-	new = ft_calloc(len + 2, 1);
-	i = 0;
-	if (prev)
-	{
-		while (prev[i])
-		{
-			new[i] = prev[i];
-			i++;
-		}
-		free(prev);
-	}
-	new[i] = word;
-	return (new);
-}
+void	control_sigint(int signum);
+void	ignore_signal(int signum);
+
+void	off_echoctl(void);
+void	on_echoctl(void);
+
+#endif

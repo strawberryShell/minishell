@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:34:04 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 00:59:27 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/08 14:59:44 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ void	wait_children(void)
 	if (WIFEXITED(last_status))
 		g_box->exit_code = WEXITSTATUS(last_status);
 	else if (WIFSIGNALED(last_status))
-		g_box->exit_code = WTERMSIG(last_status);
+	{
+		g_box->exit_code = 128 + WTERMSIG(last_status);
+		if (g_box->exit_code == 131)
+			ft_putendl_fd("Quit: 3", STDERR_FILENO);
+	}	
 	else
 		g_box->exit_code = EXIT_FAILURE;
 }

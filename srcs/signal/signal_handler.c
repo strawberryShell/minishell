@@ -1,53 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/26 16:33:09 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 22:35:57 by sehhong          ###   ########.fr       */
+/*   Created: 2022/04/07 22:04:17 by sehhong           #+#    #+#             */
+/*   Updated: 2022/04/09 19:14:31 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	int	is_nflag(char *str)
+void	control_sigint(int signum)
 {
-	if (*str++ == '-')
+	if (signum != SIGINT)
+		return ;
+	g_box->exit_code = EXIT_FAILURE;
+	if (g_box->h_flag == 1)
 	{
-		if (!*str)
-			return (0);
-		while (*str == 'n')
-			str++;
-		if (!*str)
-			return (1);
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		write(STDOUT_FILENO, "\033[1A", 4);
+		g_box->h_flag = 0;
 	}
-	return (0);
+	else
+	{
+		write(STDOUT_FILENO, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 1);
+		rl_redisplay();
+	}
 }
 
-int	ft_echo(char **argv)
+void	ignore_signal(int signum)
 {
-	int	nflag;
-	int	i;
-
-	argv++;
-	nflag = 0;
-	if (*argv)
-	{
-		nflag = is_nflag(*argv);
-		if (nflag)
-			argv++;
-	}
-	i = 0;
-	while (argv[i])
-	{
-		ft_putstr_fd(argv[i], STDOUT_FILENO);
-		if (argv[i + 1])
-			ft_putchar_fd(' ', STDOUT_FILENO);
-		i++;
-	}
-	if (!nflag)
+	if (signum == SIGINT)
 		write(STDOUT_FILENO, "\n", 1);
-	return (EXIT_SUCCESS);
 }

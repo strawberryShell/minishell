@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*   tc_echoctl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 18:47:40 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/09 21:48:03 by sehhong          ###   ########.fr       */
+/*   Created: 2022/04/07 22:03:11 by sehhong           #+#    #+#             */
+/*   Updated: 2022/04/07 22:52:16 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_realloc(char *prev, char word)
+void	off_echoctl(void)
 {
-	char	*new;
-	int		len;
-	int		i;
+	struct termios	term_attr;
 
-	if (!prev)
-		len = 0;
-	else
-		len = ft_strlen(prev);
-	new = ft_calloc(len + 2, 1);
-	i = 0;
-	if (prev)
-	{
-		while (prev[i])
-		{
-			new[i] = prev[i];
-			i++;
-		}
-		free(prev);
-	}
-	new[i] = word;
-	return (new);
+	tcgetattr(STDIN_FILENO, &term_attr);
+	term_attr.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term_attr);
+}
+
+void	on_echoctl(void)
+{
+	struct termios	term_attr;	
+
+	tcgetattr(STDIN_FILENO, &term_attr);
+	term_attr.c_lflag |= ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term_attr);
 }

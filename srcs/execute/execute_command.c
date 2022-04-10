@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:37:42 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 21:19:57 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/09 21:49:41 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static char	**make_envp(void)
 
 static void	execute_general(char *abs_path, char **argv)
 {
-	int		i;
 	char	**new_envp;
+	// int		i;
 
-	i = 0;
+	// i = 0;
 	//while (argv[i])
 	//	ft_putendl_fd(argv[i++], 2);
 	//ft_putendl_fd("-------------", 2);

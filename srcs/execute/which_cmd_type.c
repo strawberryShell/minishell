@@ -6,7 +6,7 @@
 /*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:57:38 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/04 14:05:47 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/07 22:39:39 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_ctype	which_cmd_type(char *name)
 	else if (!ft_strncmp(name, "cd", 3))
 		ret = CD;
 	else if (!ft_strncmp(name, "echo", 5))
-		ret = ECHO;
+		ret = EHCO;
 	else if (!ft_strncmp(name, "env", 4))
 		ret = ENV;
 	else if (!ft_strncmp(name, "exit", 5))

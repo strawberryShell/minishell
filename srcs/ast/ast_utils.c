@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:03:44 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 21:32:59 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/09 21:38:15 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	free_ast(t_ast *node)
 {
 	if (node == NULL)
 		return ;
-	free_ast(node->left);
-	free_ast(node->right);
 	if (node->type == IO_HERE)
 		unlink(node->right->data);
+	free_ast(node->left);
+	free_ast(node->right);
 	if (node->data && node->type != CMD)
 	{
 		free(node->data);

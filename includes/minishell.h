@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:11:31 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 21:31:38 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/09 21:24:12 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ __/ | |\n|___/\\__|_|  \\__,_| \\_/\\_/ |_.__/ \\___|_|  |_|   \\__, | \
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <signal.h>
+# include <termios.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include "libft.h"
@@ -51,6 +53,7 @@ __/ | |\n|___/\\__|_|  \\__,_| \\_/\\_/ |_.__/ \\___|_|  |_|   \\__, | \
 # include "heredoc.h"
 # include "parse.h"
 # include "redirect.h"
+# include "tc_signal.h"
 # include "utils.h"
 
 extern t_box	*g_box;
