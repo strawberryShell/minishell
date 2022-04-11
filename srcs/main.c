@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/11 01:49:38 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/11 10:20:56 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	initiate_signal_setting(void)
 {
 	off_echoctl();
 	signal(SIGINT, control_sigint);
-	signal(SIGQUIT, ignore_signal);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	handle_eof(char *line_read)

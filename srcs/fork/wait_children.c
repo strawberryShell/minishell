@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait_children.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:34:04 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/10 17:37:55 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/11 10:17:27 by sehhong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	wait_children(void)
 		if (child_pid == last_pid)
 			last_status = status;
 	}
-	if (WIFEXITED(last_status))
-		g_box->exit_code = WEXITSTATUS(last_status);
-	else if (WIFSIGNALED(last_status))
+	if (wifexited(last_status))
+		g_box->exit_code = wexitstatus(last_status);
+	else if (wifsignaled(last_status))
 	{
-		g_box->exit_code = 128 + WTERMSIG(last_status);
+		g_box->exit_code = 128 + wtermsig(last_status);
 		if (g_box->exit_code == 131)
 			ft_putendl_fd("Quit: 3", STDERR_FILENO);
 	}
