@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/04/10 18:28:19 by jiskim           ###   ########.fr        #
+#    Updated: 2022/04/11 10:17:54 by sehhong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS_FORK	= $(addprefix $(SRCS_FORK_DIR), \
 				need_fork.c \
 				run_without_fork.c \
 				wait_children.c \
+				wait_macros.c \
 				)
 
 SRCS_HERE	= $(addprefix $(SRCS_HERE_DIR), \
