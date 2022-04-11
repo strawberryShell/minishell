@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:45:00 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/09 21:41:38 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/11 01:48:32 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	read_ast(t_ast *tree)
 		read_ast(tree->right);
 	}
 	else
-	{	
+	{
 		on_echoctl();
 		signal(SIGINT, ignore_signal);
 		wait_children();

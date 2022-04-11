@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:48:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/09 21:49:10 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/11 01:49:38 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	initiate_signal_setting(void)
 {
 	off_echoctl();
 	signal(SIGINT, control_sigint);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, ignore_signal);
 }
 
 void	handle_eof(char *line_read)
@@ -44,11 +44,11 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*line_read;
 
-	initiate_box(envp);
-	line_read = NULL;
 	if (argc > 1)
 		exit_with_err(argv[1], strerror(ENOENT), 127);
-	write(2, SH_IMG, 2039);
+	line_read = NULL;
+	initiate_box(envp);
+	write(2, SH_IMG, 2040);
 	while (1)
 	{
 		initiate_signal_setting();

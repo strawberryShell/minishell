@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 08:21:08 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 00:59:09 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/10 18:21:01 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static	void	delete_node(char *key)
 	}
 }
 
-// TODO 특수기호 $ 최종확인 필요
 int	ft_unset(char **argv)
 {
 	int		exit_code;
@@ -62,7 +61,7 @@ int	ft_unset(char **argv)
 	while (*argv)
 	{
 		if (!is_valid_key(*argv) || ft_strchr(*argv, '='))
-		{	
+		{
 			print_err2("unset", *argv, "not a valid identifier");
 			exit_code = EXIT_FAILURE;
 		}

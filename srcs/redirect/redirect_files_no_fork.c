@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_files_no_fork.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 13:04:46 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 15:12:15 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/10 18:21:19 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static	int	redirect_w_file(t_type symbol, char *fname)
 {
 	int	f_fd;
 	int	ret;
-	int	oflag;	
+	int	oflag;
 
 	if (symbol == SYMBOL_DG)
 		oflag = O_WRONLY | O_CREAT | O_APPEND;

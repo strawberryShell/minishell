@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 14:49:00 by jiskim            #+#    #+#              #
-#    Updated: 2022/04/09 20:31:14 by sehhong          ###   ########.fr        #
+#    Updated: 2022/04/10 18:28:19 by jiskim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,8 +134,8 @@ all: $(NAME)
 
 $(NAME) : $(OBJS) $(LIB)
 	@$(CC) $(CFLAGS) $(RDLN_LFLAGS) $(LIB) $^ -o $@
-	@printf $(CUT)$(DOWN)$(CUT)
-	@echo $(BOLD)$(L_PURPLE) 🍓 strawberry shell is $(L_RED)ready!!$(RESET)
+	@printf $(CUT)$(CUT)
+	@echo $(BOLD)$(L_PURPLE) 🍓strawberry shell is $(L_RED)ready!!$(RESET)
 
 $(LIB)	:
 	@make -C $(LIBDIR) bonus
@@ -147,7 +147,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo $(BOLD)$(YELLOW) 🍓 strawberry shell has been $(L_RED)cleaned....💫$(RESET)
+	@echo $(BOLD)$(YELLOW) 🍓strawberry shell has been $(L_RED)cleaned....💫$(RESET)
 
 re: fclean all
 
