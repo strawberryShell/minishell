@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_abs_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 22:22:17 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/07 00:53:09 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/13 18:02:11 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,7 @@ static	char	*find_in_env(char *name)
 
 char	*find_abs_path(char *name)
 {
-	int		fd;
-	char	*abs_path;
-
-	fd = open(name, O_RDONLY);
-	if (fd >= 0)
-	{
-		abs_path = name;
-		close(fd);
-	}
-	else
-		abs_path = find_in_env(name);
-	return (abs_path);
+	if (ft_strchr(name, '/'))
+		return (name);
+	return (find_in_env(name));
 }

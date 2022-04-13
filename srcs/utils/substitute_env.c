@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   substitute_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 03:16:44 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 18:15:35 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/13 15:21:04 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ char	*substitute_env(char **start, char *str)
 	if (!value)
 		value = "";
 	if (!str)
-		str = "";
+		str = ft_calloc(1, 1);
 	tmp = ft_strjoin(str, value);
 	if (!ft_strncmp(env, "?", 2))
 		free(value);
 	free(env);
-	if (ft_strncmp(str, "", 1))
-		free(str);
+	free(str);
 	return (tmp);
 }

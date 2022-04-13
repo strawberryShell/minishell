@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehhong <sehhong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 03:22:52 by jiskim            #+#    #+#             */
-/*   Updated: 2022/04/07 18:50:07 by sehhong          ###   ########.fr       */
+/*   Updated: 2022/04/13 17:24:16 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*remove_quote(t_ttype type, char *word)
 	char	*result;
 	char	quote;
 
-	result = NULL;
+	result = ft_calloc(1, 1);
 	quote = 0;
 	while (*word)
 	{

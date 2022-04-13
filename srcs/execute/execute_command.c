@@ -6,7 +6,7 @@
 /*   By: jiskim <jiskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:37:42 by sehhong           #+#    #+#             */
-/*   Updated: 2022/04/10 17:36:29 by jiskim           ###   ########.fr       */
+/*   Updated: 2022/04/13 18:00:35 by jiskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,25 @@ static char	**make_envp(void)
 	return (new_envp);
 }
 
-static void	execute_general(char *abs_path, char **argv)
+static void	execute_general(char *cmd, char **argv)
 {
 	char	**new_envp;
 
-	new_envp = make_envp();
-	execve(abs_path, argv, new_envp);
-	if (errno == ENOENT)
+	if (!ft_strncmp(".", cmd, 2) || !ft_strncmp("..", cmd, 3))
 		exit_with_err(argv[0], "command not found", 127);
-	exit_with_err(argv[0], strerror(errno), EXIT_FAILURE);
+	else
+	{
+		cmd = find_abs_path(cmd);
+		new_envp = make_envp();
+		execve(cmd, argv, new_envp);
+		if (errno == ENOENT)
+			exit_with_err(argv[0], "command not found", 127);
+		exit_with_err(argv[0], strerror(errno), EXIT_FAILURE);
+	}
 }
 
 void	execute_command(t_ast *scmd)
 {
-	char		*abs_path;
 	char		**argv;
 	t_ctype		cmd_type;
 	int			exit_code;
@@ -53,10 +58,7 @@ void	execute_command(t_ast *scmd)
 	make_argv(&argv, scmd->right);
 	cmd_type = which_cmd_type(argv[0]);
 	if (cmd_type == GENERAL)
-	{
-		abs_path = find_abs_path(scmd->left->data);
-		execute_general(abs_path, argv);
-	}
+		execute_general(scmd->left->data, argv);
 	else if (cmd_type == NONE)
 		exit(EXIT_SUCCESS);
 	else
